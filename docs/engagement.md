@@ -1,6 +1,6 @@
 # slackfmt Mac app engagement record                    (docs/engagement.md in muwusomkochi/slackfmt; ruling 157.1, 159)
 
-Phase: 3 Prove (G3 passed 2026-10-30 20:10; becomes 4 Build in the commit that records G3's sha below)
+Phase: 4 Build (G3 recorded at 260735399ccbf1582198d75f35ae6b0387e815e1, 2026-11-14)
 Binding: CLAUDE.md in this repo: the Checklist line and ruling 158's build-line stop (patterns/engagement.md, the owner's own product row: app code under a repo's CLAUDE.md with no chain domain, ruling 129); this record is the binding until muwuso-ops ships (ruling 159)
 Applies: patterns/engagement.md, small tool (1 to 3 weeks): Intake with Discover, Shape with Prove; G2 and G4 never merged away; G3 kept and passed line by line
 Gates:
@@ -8,8 +8,8 @@ Gates:
 |---|---|---|---|---|
 | G0 | 2026-10-24 | take on | n/a, no repo yet | his first message in the Skills & Automation hub chat (slackfmt), 2026-10-24 14:25 ADT; docs/intake-brief.md; recorded after the fact by his panel answer of 2026-10-30 20:10 ADT, card 1: "I record G0 take on 24 Oct and G1 shape 27 Oct as drafted (A)" |
 | G1 | 2026-10-27 | shape | n/a, no repo yet | findings: the hub's Discover read of upstream at 551c592 (2026-10-24) and the field read; docs/values-ledger.md, compiled 2026-10-30; recorded after the fact, same panel, card 1 |
-| G2 | 2026-10-30 | PRD rev 1 ratified | <commit 1 sha> | his panel answer, 2026-10-30 20:10 ADT, card 2: "I ratify PRD rev 1 as drafted and mark its build read as amended (A)"; the build read of rev 1 is PRD Appendix B |
-| G3 | 2026-10-30 | per line, below | <commit 1 sha> | his panel answer, 2026-10-30 20:10 ADT, card 3: "I pass G3 line by line as recorded with X1 to X7 carried into loop 1 (A)" |
+| G2 | 2026-10-30 | PRD rev 1 ratified | 260735399ccbf1582198d75f35ae6b0387e815e1 | his panel answer, 2026-10-30 20:10 ADT, card 2: "I ratify PRD rev 1 as drafted and mark its build read as amended (A)"; the build read of rev 1 is PRD Appendix B |
+| G3 | 2026-10-30 | per line, below | 260735399ccbf1582198d75f35ae6b0387e815e1 | his panel answer, 2026-10-30 20:10 ADT, card 3: "I pass G3 line by line as recorded with X1 to X7 carried into loop 1 (A)" |
 | G4 | | | | |
 
 G3, line by line:
@@ -31,7 +31,7 @@ G3, line by line:
 Seats: docs/intake-brief.md, seats card
 Values ledger: docs/values-ledger.md, closed at G1 (compiled retroactively, 2026-10-30)
 Design: docs/DS.md (mini DS, ratified 2026-10-30 19:51); docs/direction.md, whose board stills live in precedent at sessions/2026-10-27-slackfmt/board/ (private: Mobbin and Refero screenshots stay out of this public fork)
-Build-line check (ruling 158): no build line, paste line or dispatch that starts building before G3 is recorded above. Last checked: 2026-10-30 20:10 by the hub: G2 and G3 passed by his panel answer, not yet recorded at a sha; no build line written. The setup session (slackfmt list row m005) records the sha; the hub writes the build line (m010) only after that handback.
+Build-line check (ruling 158): no build line, paste line or dispatch that starts building before G3 is recorded above. Last checked: 2026-11-14 by the setup session (slackfmt · 2026-10-30 · setup): G2 and G3 recorded at 260735399ccbf1582198d75f35ae6b0387e815e1; no build line written yet; the hub writes it as slackfmt list row m010.
 Close: handback <link> · outcome-measure read 2026-11-24 · retro <link> · client confirmation n/a · archived <sha>
 
 Departures, named: G0 and G1 are recorded after the fact, because the lifecycle was ratified on 2026-10-29, after this project had started (rulings 156 to 160). The m010 build line written on 2026-10-27 before any PRD is the failure ruling 158 exists for; it was held by hand the same evening and has stayed blocked. The mockups as drawn on the 2026-10-30 19:51 panel live only in that chat; every value they decided is in PRD §6, the values table and docs/DS.md.

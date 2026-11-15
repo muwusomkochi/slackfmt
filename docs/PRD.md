@@ -1,6 +1,6 @@
 # slackfmt Mac app PRD
 
-Status: draft · rev 1 · owner Muwuso · SOW: none, by the small-change row · applies: the owner's own tooling; a small change (appetite one week, inside that row's 1 to 3); patterns/engagement.md, small tool · engagement record: docs/engagement.md
+Status: ratified 2026-10-30 @ 260735399ccbf1582198d75f35ae6b0387e815e1 · rev 1 · owner Muwuso · SOW: none, by the small-change row · applies: the owner's own tooling; a small change (appetite one week, inside that row's 1 to 3); patterns/engagement.md, small tool · engagement record: docs/engagement.md
 Rulings: hub panels 2026-10-24 (cards 1 to 5: engine, triggers, fixes, repo, signing); 2026-10-27 16:41 (the same five, answered); 19:27 (scope now with the existing pieces); 20:39 (rev 0 ratified); 21:06 (board align, cards 1 to 3); 2026-10-30 19:51 (mockups, Q1 and mini DS ratified)
 changed: prior rev 0, ratified 2026-10-27 20:39, never committed · sections header, 6, 7, 8, 11, 12, 14, Appendices · moved: R1, R3, R5, R6, R9, R11, R18 to R21, R25, R26, R30 changed; R32 to R36 new; T1 to T18 changed; X3 and X4 branches rewritten; X7 new; pending D1 new; Q1 closed
 Gate: the build starts only at G3, recorded in docs/engagement.md (ruling 158).
