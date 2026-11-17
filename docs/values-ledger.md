@@ -19,5 +19,3 @@ Every fact a PRD line may bind that Discover read, with its source, depth and re
 | L13 | Existing alternatives and what they write: Raycast Markdown Converter writes mrkdwn text; pandoc plus a pbcopy script writes HTML | raycast.com/ewilderj/markdown-converter; jvt.me/posts/2026/01/13/mac-slack-external-markdown | full | 2026-10-24 |
 
 Unread, carried as risk, not fact: whether Slack prefers HTML over its own format when both are on the pasteboard (X3); whether Slack's Delta carries list starts and quoted lists (X4).
-</content>
-</invoke>

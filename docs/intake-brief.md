@@ -22,5 +22,3 @@ Seats card:
 | verifier | a fresh agent that never builds; second reader of the build read too | acceptance rows; pre-checks, never signs |
 | reporter | the hub with standup-reports | handback report |
 G0: take on · 2026-10-24 · his words: "I need the #slackfmt https://slackfmt.labs.caue.dev/ turned to a macos apple silicon toolbar app/widget I can use" (recorded as take-on by the 2026-10-30 panel)
-</content>
-</invoke>

@@ -43,5 +43,3 @@ The mockups panel of 2026-10-27 is the specimen page. The build renders the same
 
 1. Row 7 (nothing-converted) has no still: look at the build's own specimen of the nosign state beside system extras before RP1.
 2. Confirm SF Symbols `number`, `checkmark` and `nosign` exist on macOS 14 (glyph.fallback covers it if not).
-</content>
-</invoke>

@@ -27,5 +27,3 @@ Precedent snapshot cited: 54fdad2 (no pattern covers a menu bar utility yet; pat
 Row 7 rests on a description only (the mini DS's check 1 looks again at the build's own specimen); row 10 closed with Q1 on 2026-10-30 19:51.
 
 Stills: precedent, sessions/2026-10-27-slackfmt/board/ (private). The Mobbin and Refero screenshots stay out of the public slackfmt fork, which carries this file as docs/direction.md.
-</content>
-</invoke>
