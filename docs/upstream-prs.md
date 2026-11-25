@@ -9,12 +9,12 @@ Four branches touch the list code (`fix/ordered-list-start`, `fix/task-lists`, `
 | Branch | Failing test | Fix | Requirement |
 |---|---|---|---|
 | `fix/hard-breaks` | f8257d0 | ba88e62 | R24 |
-| `fix/images` | 791732b | 7a6f16c | R25, R34 |
+| `fix/images` | 791732b, then d3a14f0 | 7a6f16c, then 3833ebe | R25, R34 |
 | `fix/thematic-breaks` | 1dd0f3f | 9b047c7 | R26 |
 | `fix/ordered-list-start` | 7ca4b1d | 6c53bd1 | R27 |
 | `fix/task-lists` | ad1e200 | f00e2d9 | R28 |
 | `fix/quoted-lists` | 07bd88c | 8ccfbfb | R29 |
-| `fix/html-strikethrough` | 9712f17 | a10c337 | R37 |
+| `fix/html-strikethrough` | 9712f17, then b789fe2 | a10c337, then 534ef4e | R37 |
 | `fix/bare-ops-array` | 3365f0b | 009fb87 | A18's second input |
 
 R30 is the regression guard above. R31 (HTML without a browser DOM) needed no converter change: core at `551c592` already converts HTML in a bare JavaScript engine when it's bundled with Turndown's own DOM.
@@ -36,7 +36,7 @@ It's now a newline, with the line's own block attributes, the same as a soft bre
 Title: fix(core): keep images as links
 
 ```
-Images were dropped. Slack's Delta can't hold one, so an image now becomes its alt text linked to its URL, or the URL linked to itself when there's no alt text. Reference-style images resolve to their definition first.
+Images were dropped. Slack's Delta can't hold one, so an image now becomes its alt text linked to its URL, or the URL linked to itself when there's no alt text. Reference-style images resolve to their definition first. In a table, which becomes a code block and so holds no links, an image keeps its alt text or URL.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
@@ -86,7 +86,7 @@ A list inside a blockquote lost the quote. Slack's own copy of a quoted list mar
 Title: fix(core): keep strikethrough from HTML
 
 ```
-Turndown has no rule for <del>, <s> or <strike>, so struck text from HTML came out plain. Each is now ~~struck~~.
+Turndown has no rule for <del>, <s> or <strike>, so struck text from HTML came out plain. Each is now ~~struck~~, with neighbouring and nested struck text sharing one pair of markers, spaces and breaks kept outside them, a tilde at an edge escaped, and each paragraph of a struck block struck on its own.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```

@@ -1,10 +1,10 @@
 V6 551c592: 101 tests, 101 passing
-main d5774ee: 184 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
+main 3a2ea3e: 193 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
 fix/hard-breaks ba88e62: 106 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
-fix/images 7a6f16c: 107 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
+fix/images 3833ebe: 108 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
 fix/thematic-breaks 9b047c7: 105 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
 fix/ordered-list-start 6c53bd1: 112 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
 fix/task-lists f00e2d9: 108 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
 fix/quoted-lists 8ccfbfb: 108 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
-fix/html-strikethrough a10c337: 106 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
+fix/html-strikethrough 534ef4e: 112 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
 fix/bare-ops-array 009fb87: 102 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
