@@ -3,7 +3,11 @@ A16: in progress. Judge: Muwuso.
 R22: VoiceOver reads "Copy for Slack" at the status item. He answered "Copy for Slack" (2026-11-25, about 1:09 am AST); VoiceOver's caption
 panel at that moment reads "Copy for Slack, status menu".
 
-R23: not passing as built. With VoiceOver on, each state showed (11 of 12 cases in the first run; --test-throw logged none with
-VoiceOver on) and no announcement was spoken: the caption panel showed none. Posting the announcement from the app, the status item's
-button or its window spoke nothing either, with VoiceOver resting on the status item. A hands-off retry of the capsule, a system
-dialog, a value change, a title change and an activated app is next.
+R23: not passing as first built. With VoiceOver on, no announcement was spoken for any state (first run, 1:02 am). Tried since, each with
+one conversion and VoiceOver's caption panel recorded:
+  announcementRequested from the app, the status item's button, its window, the capsule panel: nothing spoken
+  announcementRequested from the app while it was activated for a moment: nothing spoken (the app hands focus back at once)
+  the capsule panel as a system dialog, with a windowCreated notification: the caption reads "application Copied for Slack"
+  a value change and a title change on the status item: not tried, VoiceOver was off by then
+So announcements now go through the capsule panel as a system dialog, only while VoiceOver is on; for a refusal the panel is put up at
+alpha 0, unseen. To be run again with him.

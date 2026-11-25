@@ -105,7 +105,8 @@ func rowA16(hours: Double, folder: String) async {
         pause(0.5)
     }
     print("VoiceOver is on")
-    while Input.idle < 6 { pause(0.2) }
+    print("waiting for 20 s of stillness")
+    while Input.idle < 20 { pause(0.2) }
     let snapshot = ClipboardSnapshot()
     let image = NSImage(systemSymbolName: "photo", accessibilityDescription: nil)!.tiffRepresentation!
     let file = Data("file:///Applications/".utf8)
@@ -129,22 +130,26 @@ func rowA16(hours: Double, folder: String) async {
         }
         pause(0.6)
         guard let start = Trigger.hotkey.fire(app) else { return }
-        pause(1.6)
-        let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []
-        for window in windows where (window[kCGWindowOwnerName as String] as? String) == "VoiceOver" {
-            if let number = window[kCGWindowNumber as String] as? Int {
-                _ = output("/usr/sbin/screencapture", ["-x", "-o", "-l\(number)", "\(folder)/\(index)-\(number).png"])
+        var shots = 0
+        while now() - start < 4_500 {
+            let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []
+            for window in windows where (window[kCGWindowOwnerName as String] as? String) == "VoiceOver" {
+                guard let bounds = CGRect(dictionaryRepresentation: window[kCGWindowBounds as String] as! CFDictionary), bounds.width < 1_000,
+                      let number = window[kCGWindowNumber as String] as? Int else { continue }
+                shots += 1
+                _ = output("/usr/sbin/screencapture", ["-x", "-o", "-l\(number)", "\(folder)/\(index)-\(shots).png"])
             }
+            pause(0.3)
         }
         print("\(index). \(name): \(app.entries.filter { $0.time >= start && $0.text.hasPrefix("status") }.map(\.text).first ?? "no state")")
-        pause(2.6)
+        pause(1)
     }
     guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
     warmTheHarness()
-    pause(3)
+    pause(4)
     for (index, item) in cases.enumerated() { run(app, index + 1, item.0, item.1) }
     guard let throwing = App(["-hasRunBefore", "YES", "--test-throw"]) else { return print("the app didn't launch") }
-    pause(3)
+    pause(6)
     run(throwing, cases.count + 1, "A4 fixture.md with --test-throw", text(Fixtures.text("fixture.md")))
     _ = App(["-hasRunBefore", "YES"])
     snapshot.restore()

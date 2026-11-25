@@ -42,9 +42,11 @@ final class CapsuleView: NSVisualEffectView {
     }()
 }
 
-/// The done capsule (R32): no focus, no clicks, gone after V9's hold.
+/// The done capsule (R32): no focus, no clicks, gone after V9's hold. It also carries every announcement (R23): VoiceOver speaks a
+/// background app's system dialog and ignores its announcements.
 final class CapsulePanel: NSPanel {
     private var timer: ExactTimer?
+    private var announcement: ExactTimer?
 
     init() {
         let view = CapsuleView(text: Strings.done)
@@ -61,6 +63,26 @@ final class CapsulePanel: NSPanel {
         hasShadow = true
         animationBehavior = .none
         setAccessibilityElement(false)
+    }
+
+    /// Speaks `message` by VoiceOver, when it's on. With nothing converted there's no capsule to speak from, so the panel is put up
+    /// unseen for as long as it takes.
+    func announce(_ message: String) {
+        guard NSWorkspace.shared.isVoiceOverEnabled else { return }
+        setAccessibilityElement(true)
+        setAccessibilitySubrole(.systemDialog)
+        setAccessibilityTitle(message)
+        setAccessibilityLabel(message)
+        if !isVisible {
+            alphaValue = 0
+            orderFrontRegardless()
+            timer = ExactTimer(after: 1.5) { [weak self] in self?.orderOut(nil) }
+        }
+        announcement = ExactTimer(after: 0.4) { [weak self] in
+            guard let self else { return }
+            NSAccessibility.post(element: self, notification: .windowCreated)
+            NSAccessibility.post(element: self, notification: .layoutChanged)
+        }
     }
 
     override var canBecomeKey: Bool { false }

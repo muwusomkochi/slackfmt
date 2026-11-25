@@ -37,17 +37,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if !notifications.isAlerting { NSApp.hide(nil) }
     }
 
+    private func show(_ state: StatusState) {
+        statusItem.show(state)
+        if state == .done { capsule.present() }
+        if let announcement = state.announcement { capsule.announce(announcement) }
+    }
+
     /// AppKit's HTML reader can run the run loop, so a second trigger can arrive while one is being answered.
     private func convert(from source: NSPasteboard) {
         guard !isConverting else { return }
         isConverting = true
         defer { isConverting = false }
         switch service.convert(from: source, to: NSPasteboard.general) {
-        case .converted:
-            statusItem.show(.done)
-            capsule.present()
-        case .refused(let refusal):
-            statusItem.show(.nothing(refusal))
+        case .converted: show(.done)
+        case .refused(let refusal): show(.nothing(refusal))
         }
     }
 }

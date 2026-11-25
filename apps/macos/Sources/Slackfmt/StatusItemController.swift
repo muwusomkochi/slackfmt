@@ -78,17 +78,9 @@ final class StatusItemController: NSObject {
         item.button?.image = state.image
         item.button?.toolTip = state.toolTip
         StateLog.write(state.logLine)
-        if let announcement = state.announcement { announce(announcement) }
         if let hold = state.hold {
             returnToIdle = ExactTimer(after: hold) { [weak self] in self?.show(.idle) }
         }
-    }
-
-    private func announce(_ message: String) {
-        NSAccessibility.post(element: NSApp as Any, notification: .announcementRequested, userInfo: [
-            .announcement: message,
-            .priority: NSAccessibilityPriorityLevel.high.rawValue,
-        ])
     }
 
     /// A press by VoiceOver arrives with no mouse event of its own, and with VoiceOver's keys held (Option among them), so the
