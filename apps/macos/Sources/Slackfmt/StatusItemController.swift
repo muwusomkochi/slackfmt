@@ -92,8 +92,10 @@ final class StatusItemController: NSObject {
     }
 
     @objc private func clicked() {
-        guard let event = NSApp.currentEvent else { return onClick() }
-        if event.type == .rightMouseUp || event.modifierFlags.contains(.option) {
+        // macOS 27 hands a status item its event without modifier flags, so the keys held now are read too.
+        let event = NSApp.currentEvent
+        let flags = NSEvent.modifierFlags.union(event?.modifierFlags ?? [])
+        if event?.type == .rightMouseUp || flags.contains(.option) {
             openMenu()
         } else {
             onClick()

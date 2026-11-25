@@ -1,0 +1,12 @@
+== A10 focus, windows and the capsule, F1 to F4 with TextEdit in front
+ok   activationPolicy is accessory
+ok   the Dock shows no Slackfmt icon: 43 Dock items read
+ok   F1 click: TextEdit stays frontmost and key
+ok   F2 hotkey: TextEdit stays frontmost and key
+ok   F3 Services: TextEdit stays frontmost and key
+ok   the conversions ran: 3 done
+ok   the capsule was up to click: (863.5, 1027.0)
+ok   a click on the capsule lands on the window beneath: without the capsule it reaches Claude, with it Claude
+note the app's windows seen on screen: layer 25, 157 x 36
+ok   only R17's windows showed
+A10 focus, windows and the capsule, F1 to F4 with TextEdit in front PASSED: 9 of 9 checks

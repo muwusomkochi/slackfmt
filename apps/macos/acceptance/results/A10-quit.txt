@@ -1,0 +1,4 @@
+== A10 quitting
+ok   Quit Slackfmt ends the process
+ok   ⌘Q with the menu open ends the process
+A10 quitting PASSED: 2 of 2 checks

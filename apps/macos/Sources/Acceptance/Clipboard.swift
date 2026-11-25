@@ -41,6 +41,8 @@ enum Clipboard {
         let deadline = now() + timeout
         while now() < deadline {
             if NSPasteboard.general.changeCount != count { return now() }
+            // Polling flat out floods the pasteboard daemon, which then answers everyone late.
+            usleep(500)
         }
         return nil
     }
@@ -49,5 +51,14 @@ enum Clipboard {
         NSPasteboard.general.data(forType: PasteboardTypes.customData)
             .flatMap { try? Pickle.decode($0) }?
             .first { $0.type == PasteboardTypes.slackEntry }?.value
+    }
+}
+
+/// Waits with the run loop running. A pasteboard owner is asked for the types AppKit promises on its behalf (an RTF item's plain
+/// text), and one that never answers holds up its own next read.
+func pause(_ seconds: Double) {
+    let deadline = now() + seconds * 1000
+    while now() < deadline {
+        if CFRunLoopRunInMode(.defaultMode, 0.01, false) == .finished { usleep(1_000) }
     }
 }

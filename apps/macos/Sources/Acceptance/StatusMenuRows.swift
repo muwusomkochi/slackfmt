@@ -15,6 +15,7 @@ enum StatusMenuDriver {
         }
         for _ in 0..<30 {
             usleep(50_000)
+            guard app.windows.contains(where: { $0.isOnScreen && $0.layer == Int(CGWindowLevelForKey(.popUpMenuWindow)) }) else { continue }
             if let menu = StatusItem.element(app.pid).flatMap({ AX.children($0).first }) {
                 let items = AX.children(menu)
                 if !items.isEmpty { return items }
@@ -52,10 +53,12 @@ func rowA10Menu(_ app: App) async {
     let report = Report("A10 the menu")
     let order = ["Copy for Slack", "Hotkey (disabled) [⌃⌥⌘V]", "---", "Launch at login", "---", "Check Slack's format", "---", "Quit Slackfmt [⌘Q]"]
     for how in [StatusMenuDriver.Opening.rightClick, .optionClick] {
+        let entries = app.entries.count
         let items = StatusMenuDriver.open(app, how).map(StatusMenuDriver.describe) ?? []
         report.check(items.map { $0.replacingOccurrences(of: " ✓", with: "") } == order, "\(how.rawValue) opens the menu in §6's order", items.joined(separator: " · "))
-        report.check(app.entries.last?.text == "status idle", "\(how.rawValue) doesn't convert")
         Menus.cancel()
+        pause(2)
+        report.check(app.entries.last?.text == "status idle" && app.entries.count == entries, "\(how.rawValue) doesn't convert")
     }
     func tick() -> Bool? {
         defer { Menus.cancel() }
@@ -135,42 +138,29 @@ func rowA10Focus(_ app: App) {
     trial("F3 Services") { TextEdit.copyForSlack() }
     report.check(!app.entries.filter { $0.text == "status done" }.isEmpty, "the conversions ran", "\(app.entries.filter { $0.text == "status done" }.count) done")
 
-    if let finder = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.finder").first {
-        finder.activate()
-        usleep(600_000)
+    var reached: [String] = []
+    for shown in [false, true] {
+        textEdit.activate()
+        pause(1)
         Clipboard.put(plain: Fixtures.text("fixture.md"))
-        usleep(300_000)
-        _ = Trigger.hotkey.fire(app)
-        usleep(500_000)
-        if let capsule = app.capsule {
-            let point = CGPoint(x: capsule.bounds.midX, y: capsule.bounds.midY)
-            let beneath = windowBeneath(point, excluding: app.pid)
-            Input.move(to: point)
-            Input.click(point)
-            usleep(700_000)
-            let front = NSWorkspace.shared.frontmostApplication
-            report.check(beneath != nil && front?.processIdentifier == beneath?.pid, "a click on the capsule lands on the window beneath", "beneath: \(beneath?.name ?? "none"); front after: \(front?.localizedName ?? "?")")
-        } else {
-            report.check(false, "the capsule was up to click")
-        }
-        sleep(2)
+        pause(0.3)
+        if shown { _ = Trigger.hotkey.fire(app) }
+        pause(0.5)
+        let point = app.capsule.map { CGPoint(x: $0.bounds.midX, y: $0.bounds.midY) } ?? CGPoint(x: 864, y: 1027)
+        if shown { report.check(app.capsule != nil, "the capsule was up to click", "\(point)") }
+        Input.move(to: point)
+        Input.click(point)
+        pause(0.8)
+        reached.append(NSWorkspace.shared.frontmostApplication?.localizedName ?? "?")
+        pause(1.5)
     }
+    report.check(reached[0] == reached[1] && reached[0] != "TextEdit", "a click on the capsule lands on the window beneath", "without the capsule it reaches \(reached[0]), with it \(reached[1])")
     report.note("the app's windows seen on screen: \(seen.sorted().joined(separator: "; "))")
     report.check(seen.allSatisfy { $0.hasSuffix("x 36") || $0.hasPrefix("layer 25") || $0.hasPrefix("layer 24") }, "only R17's windows showed")
     textEdit.activate()
     usleep(500_000)
     TextEdit.close()
     report.finish()
-}
-
-private func windowBeneath(_ point: CGPoint, excluding pid: pid_t) -> (pid: pid_t, name: String)? {
-    let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] ?? []
-    for window in list {
-        guard let owner = window[kCGWindowOwnerPID as String] as? pid_t, owner != pid, window[kCGWindowLayer as String] as? Int == 0,
-              let bounds = CGRect(dictionaryRepresentation: window[kCGWindowBounds as String] as! CFDictionary), bounds.contains(point) else { continue }
-        return (owner, window[kCGWindowOwnerName as String] as? String ?? "?")
-    }
-    return nil
 }
 
 /// The banner Notification Center shows, or the app's alert, as text.

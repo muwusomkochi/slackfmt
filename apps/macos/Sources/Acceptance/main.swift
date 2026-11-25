@@ -73,6 +73,13 @@ func withHisMac(_ body: () async -> Void) async {
     }
     let snapshot = ClipboardSnapshot()
     let pointer = Input.pointer
+    let stopped = DispatchSource.makeSignalSource(signal: SIGTERM, queue: .global())
+    signal(SIGTERM, SIG_IGN)
+    stopped.setEventHandler {
+        snapshot.restore()
+        exit(143)
+    }
+    stopped.activate()
     await body()
     Input.move(to: pointer)
     snapshot.restore()
@@ -93,7 +100,7 @@ switch arguments.first {
 case "a1": await withApp { await rowA1($0, trigger); rowA2("A1 by \(trigger.rawValue)") }
 case "a4": await withApp { await rowA4($0, trigger) }
 case "a4-throw": await withApp(["--test-throw"]) { await rowA4Throw($0, trigger) }
-case "a15": await withApp { rowA15($0, trigger) }
+case "a15": await withApp { rowA15($0, trigger, only: arguments.dropFirst().first { $0.hasPrefix("fixture") }) }
 case "a17": await withApp { rowA17($0, trigger) }
 case "a18": await withApp { rowA18($0, trigger) }
 case "a9":
@@ -102,6 +109,43 @@ case "a9":
         await rowA9Refused(app, "200,001 code units selected", String(repeating: "plain words\n", count: 16_667).prefix(200_001).description, "Too long to convert")
     }
 case "a9-throw": await withApp(["--test-throw"]) { await rowA9Refused($0, "fixture.md with --test-throw", Fixtures.text("fixture.md"), "Couldn't convert this") }
+case "menu-probe":
+    await withApp { app in
+        Clipboard.put(plain: "made-up words")
+        for how in [StatusMenuDriver.Opening.rightClick, .optionClick, .optionClick, .rightClick] {
+            let start = now()
+            let opened = StatusMenuDriver.open(app, how) != nil
+            pause(0.5)
+            Menus.cancel()
+            pause(2.5)
+            print("\(how.rawValue): opened \(opened); \(app.entries.filter { $0.time >= start }.map { "\($0.text) +\(format($0.time - start))" }.joined(separator: "; "))")
+        }
+    }
+case "capsule-probe":
+    await withApp { app in
+        guard TextEdit.open("made-up words\n") != nil else { return print("no document") }
+        for shown in [false, true] {
+            TextEdit.running?.activate()
+            pause(1)
+            Clipboard.put(plain: "made-up words")
+            pause(0.3)
+            if shown {
+                _ = Trigger.hotkey.fire(app)
+                pause(0.5)
+                print("capsule up: \(app.capsule?.bounds ?? .zero)")
+            }
+            let point = CGPoint(x: 864, y: 1027)
+            let front = NSWorkspace.shared.frontmostApplication?.localizedName ?? "?"
+            Input.move(to: point)
+            Input.click(point)
+            pause(0.8)
+            print("capsule \(shown ? "shown" : "not shown"): front before \(front), after \(NSWorkspace.shared.frontmostApplication?.localizedName ?? "?")")
+            pause(1.5)
+        }
+        TextEdit.running?.activate()
+        pause(0.8)
+        TextEdit.close()
+    }
 case "a10-menu": await withApp { await rowA10Menu($0) }
 case "a10-focus": await withApp { rowA10Focus($0) }
 case "a10-quit": await withHisMac { rowA10Quit() }

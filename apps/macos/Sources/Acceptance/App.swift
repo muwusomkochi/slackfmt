@@ -73,5 +73,27 @@ final class App {
         }
     }
 
-    var capsule: Window? { windows.first { $0.isOnScreen && $0.bounds.height == 36 && $0.bounds.width > 60 } }
+    /// The capsule's window, found once: it exists off screen from launch, and asking for one window by number costs the
+    /// window server little enough not to slow the click being timed.
+    private(set) lazy var capsuleNumber: CGWindowID? = {
+        let list = CGWindowListCopyWindowInfo([.optionAll], kCGNullWindowID) as? [[String: Any]] ?? []
+        return list.first { window in
+            guard (window[kCGWindowOwnerPID as String] as? pid_t) == pid,
+                  let bounds = CGRect(dictionaryRepresentation: window[kCGWindowBounds as String] as! CFDictionary) else { return false }
+            return bounds.height == 36 && bounds.width > 60
+        }?[kCGWindowNumber as String] as? CGWindowID
+    }()
+
+    var capsule: Window? {
+        guard let capsuleNumber else { return nil }
+        var numbers: [UnsafeRawPointer?] = [UnsafeRawPointer(bitPattern: UInt(capsuleNumber))]
+        guard let array = CFArrayCreate(nil, &numbers, 1, nil),
+              let window = (CGWindowListCreateDescriptionFromArray(array) as? [[String: Any]])?.first,
+              window[kCGWindowIsOnscreen as String] as? Bool == true else { return nil }
+        return Window(
+            layer: window[kCGWindowLayer as String] as? Int ?? 0,
+            bounds: CGRect(dictionaryRepresentation: window[kCGWindowBounds as String] as! CFDictionary) ?? .zero,
+            alpha: window[kCGWindowAlpha as String] as? Double ?? 0,
+            isOnScreen: true)
+    }
 }

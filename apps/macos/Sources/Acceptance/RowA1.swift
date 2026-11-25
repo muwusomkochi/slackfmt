@@ -16,7 +16,7 @@ func checkDone(_ report: Report, _ app: App, start: Double, reduceMotion: Bool) 
     async let glyph = Task.detached { () -> CGImage? in
         let wait = 100 - (now() - start)
         if wait > 0 { try? await Task.sleep(nanoseconds: UInt64(wait * 1e6)) }
-        guard let frame = StatusItem.element(app.pid).flatMap(AX.frame) else { return nil }
+        guard let frame = lastFrame else { return nil }
         return await Glyph.capture(frame)
     }.value
     let samples = await Task.detached { watchCapsule(app, start: start, seconds: 2.0) }.value
@@ -66,7 +66,7 @@ func checkNothing(_ report: Report, _ app: App, start: Double, reason: String, b
         guard glyph else { return nil }
         let wait = 100 - (now() - start)
         if wait > 0 { try? await Task.sleep(nanoseconds: UInt64(wait * 1e6)) }
-        guard let frame = StatusItem.element(app.pid).flatMap(AX.frame) else { return nil }
+        guard let frame = lastFrame else { return nil }
         return await Glyph.capture(frame)
     }.value
     let shot = await image
@@ -95,6 +95,7 @@ func rowA1(_ app: App, _ trigger: Trigger) async {
     let report = Report("A1 by \(trigger.rawValue)")
     let before = Clipboard.put(plain: Fixtures.text("fixture.md"))
     usleep(300_000)
+    _ = app.capsuleNumber
     guard let start = trigger.fire(app) else { return }
     await checkDone(report, app, start: start, reduceMotion: NSWorkspace.shared.accessibilityDisplayShouldReduceMotion)
     report.check(NSPasteboard.general.changeCount > before, "changeCount moved")

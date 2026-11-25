@@ -1,0 +1,20 @@
+== A15 fixture-20k.md by click
+note runs (ms): 181.5, 174.7, 150.8, 191.3, 177.7, 173.0, 188.1, 161.8, 165.2, 167.0, 168.8, 157.8, 170.1, 151.6, 183.0, 169.7, 172.8, 178.2, 185.3, 175.1
+ok   median within 300 ms: median 172.9 ms, min 150.8, max 191.3
+ok   every output matches its V23 reference: 20 of 20
+A15 fixture-20k.md by click PASSED: 2 of 2 checks
+== A15 fixture-20k.html by click
+note runs (ms): 151.3, 151.5, 171.7, 165.2, 156.7, 144.3, 146.4, 153.2, 149.2, 118.1, 132.0, 162.9, 155.7, 126.4, 141.5, 142.4, 144.1, 148.3, 140.6, 151.6
+ok   median within 300 ms: median 148.8 ms, min 118.1, max 171.7
+ok   every output matches its V23 reference: 20 of 20
+A15 fixture-20k.html by click PASSED: 2 of 2 checks
+== A15 fixture-20k.rtf by click
+note runs (ms): 108.2, 82.6, 101.8, 90.6, 83.6, 109.8, 109.3, 109.5, 88.4, 90.2, 103.6, 96.8, 75.3, 102.1, 90.7, 107.3, 104.9, 104.9, 96.9, 60.2
+ok   median within 300 ms: median 99.3 ms, min 60.2, max 109.8
+ok   every output matches its V23 reference: 20 of 20
+A15 fixture-20k.rtf by click PASSED: 2 of 2 checks
+== A15 fixture-20k.delta.json by click
+note runs (ms): 131.4, 131.0, 135.3, 134.4, 116.1, 129.4, 130.1, 119.3, 129.6, 98.8, 131.4, 123.2, 123.6, 114.1, 123.9, 121.1, 139.7, 132.7, 127.9, 110.1
+ok   median within 300 ms: median 128.6 ms, min 98.8, max 139.7
+ok   every output matches its V23 reference: 20 of 20
+A15 fixture-20k.delta.json by click PASSED: 2 of 2 checks

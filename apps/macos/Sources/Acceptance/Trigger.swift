@@ -1,6 +1,9 @@
 import AppKit
 import Carbon.HIToolbox
 
+/// Where the status item was when it was last found, so nothing asks the app for it while a click is being timed.
+var lastFrame: CGRect?
+
 enum Trigger: String {
     case click, hotkey
 
@@ -8,12 +11,14 @@ enum Trigger: String {
     func fire(_ app: App) -> Double? {
         switch self {
         case .hotkey:
+            lastFrame = StatusItem.frame(app.pid)
             return Input.key(kVK_ANSI_V, flags: [.maskControl, .maskAlternate, .maskCommand])
         case .click:
             guard let frame = StatusItem.frame(app.pid) else {
                 print("the status item isn't on screen, so nothing was clicked")
                 return nil
             }
+            lastFrame = frame
             let point = CGPoint(x: frame.midX, y: frame.midY)
             Input.move(to: point)
             return Input.click(point)
