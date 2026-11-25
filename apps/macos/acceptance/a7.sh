@@ -9,9 +9,13 @@ two=$("$ACCEPT" a7-throw "$CANARY"); echo "$two"
 pkill -x Slackfmt; sleep 2
 outputs=$(printf '%s\n%s\n' "$one" "$two" | awk '/^output /{print $2; print $3}')
 found=0
+errors=$(mktemp)
 look() {
   if [ ! -e "$1" ]; then echo "ok   $1: not there"; return; fi
-  if hits=$(grep -rlaF -- "$CANARY" "$1" 2>/tmp/a7-errors); then echo "FAIL $1: $hits"; found=1; else echo "ok   $1: absent ($(find "$1" -type f 2>/dev/null | wc -l | tr -d ' ') files; $(wc -l < /tmp/a7-errors | tr -d ' ') unreadable)"; fi
+  # -type f: grep -r would wait for ever on a named pipe.
+  hits=$(find "$1" -type f -print0 2>/dev/null | xargs -0 -n 500 -P 6 grep -laF -- "$CANARY" 2>"$errors")
+  count=$(find "$1" -type f 2>/dev/null | wc -l | tr -d ' ')
+  if [ -n "$hits" ]; then echo "FAIL $1: $hits"; found=1; else echo "ok   $1: absent ($count files; $(wc -l < "$errors" | tr -d ' ') unreadable)"; fi
 }
 look "$HOME/Library/Containers/com.anoraq.slackfmt"
 look "$TMPDIR"
