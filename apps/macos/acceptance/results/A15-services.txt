@@ -1,0 +1,5 @@
+== A15 fixture-20k.md by Services
+note runs (ms): 589.7
+FAIL median within 300 ms: median 589.7 ms, min 589.7, max 589.7
+FAIL every output matches its V23 reference: 1 of 20
+A15 fixture-20k.md by Services FAILED: 0 of 2 checks

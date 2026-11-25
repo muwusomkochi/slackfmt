@@ -31,6 +31,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         DispatchQueue.main.async { [service] in service.warmUp() }
     }
 
+    /// macOS activates a Services provider when its call returns. The app has nothing to take focus for but R21's alert, so it
+    /// hands the focus straight back.
+    func applicationDidBecomeActive(_ notification: Notification) {
+        if !notifications.isAlerting { NSApp.hide(nil) }
+    }
+
     /// AppKit's HTML reader can run the run loop, so a second trigger can arrive while one is being answered.
     private func convert(from source: NSPasteboard) {
         guard !isConverting else { return }

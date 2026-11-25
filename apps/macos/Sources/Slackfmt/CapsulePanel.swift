@@ -54,6 +54,7 @@ final class CapsulePanel: NSPanel {
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         ignoresMouseEvents = true
         hidesOnDeactivate = false
+        canHide = false
         isReleasedWhenClosed = false
         isOpaque = false
         backgroundColor = .clear

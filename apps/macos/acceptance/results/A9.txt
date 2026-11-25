@@ -1,0 +1,55 @@
+== A9, F3 from TextEdit
+FAIL state log: done from +0.1 s through +0.75 s: done, idle
+FAIL state log: idle by +1.3 s: done
+note state log (ms after the trigger): status done +718.9; capsule shown +822.9; status idle +1722.3
+FAIL screenshot at +0.1 s: no image
+FAIL capsule shows at +0.2 s
+FAIL capsule is gone at +1.6 s
+note capsule last on screen at +1985.0 ms
+note fades: 4 of 75 capsule samples between 0 and 1
+note screens attached: 1
+ok   changeCount moved
+ok   pickle bytes equal the reference: 3084 bytes
+ok   decoded slack/texty deep-equals the reference
+ok   TextEdit is still frontmost
+A9, F3 from TextEdit FAILED: 4 of 9 checks
+== A2 after A9's Services conversion
+ok   plain text equals fixture.txt byte for byte
+ok   no "**" in the plain text
+ok   no "~~" in the plain text
+ok   no "](" in the plain text
+ok   no "- [" in the plain text
+ok   no "```" in the plain text
+ok   no "\" in the plain text
+ok   public.html bold <strong>
+ok   public.html italic <em>
+ok   public.html strikethrough <s>
+ok   public.html inline code <code>
+ok   public.html link <a href>
+ok   public.html image link
+ok   public.html image link with no alt
+ok   public.html bullet list <ul><li>
+ok   public.html nested list inside its <li>
+ok   public.html task items' text starts with V14
+ok   public.html ordered list past 1 as a paragraph starting "n. "
+ok   public.html no <ol> for it
+ok   public.html quote <blockquote>
+ok   public.html the quote's list as <ul>
+ok   public.html code block <pre><code>
+ok   public.rtf bold font trait
+ok   public.rtf plain text isn't bold
+ok   public.rtf italic font trait
+ok   public.rtf single strikethrough
+ok   public.rtf link to the URL
+ok   public.rtf image link
+ok   public.rtf fixed-pitch inline code
+ok   public.rtf fixed-pitch code block
+note public.rtf lists, tasks and quotes are judged in E2 (X8's branch)
+A2 after A9's Services conversion PASSED: 30 of 30 checks
+== A9 200,001 code units selected, from TextEdit
+FAIL state log: nothing ("Too long to convert") from +0.1 s through +1.25 s: idle, nothing Too long to convert
+FAIL state log: idle by +1.8 s: nothing Too long to convert
+FAIL tooltip: none
+ok   changeCount unchanged: 1252 -> 1252
+ok   no capsule
+A9 200,001 code units selected, from TextEdit FAILED: 2 of 5 checks

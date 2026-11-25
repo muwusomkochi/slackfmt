@@ -2,6 +2,7 @@ import AppKit
 import UserNotifications
 
 final class Notifications: NSObject, UNUserNotificationCenterDelegate {
+    private(set) var isAlerting = false
     private let center = UNUserNotificationCenter.current()
 
     override init() {
@@ -39,6 +40,8 @@ final class Notifications: NSObject, UNUserNotificationCenterDelegate {
         alert.messageText = "Slackfmt"
         alert.informativeText = body
         alert.addButton(withTitle: "OK")
+        isAlerting = true
+        defer { isAlerting = false }
         NSApp.activate()
         alert.runModal()
     }

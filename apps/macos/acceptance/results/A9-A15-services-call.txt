@@ -1,0 +1,10 @@
+== A9 and A15 supplement: the Services call itself (NSPerformService), without TextEdit's menu
+note fixture.md runs, call to changeCount (ms): 89.5, 64.8, 40.6, 40.3, 48.0
+note fixture.md done shown after the call (ms): 90.1, 65.6, 40.9, 40.7, 46.8
+ok   fixture.md median within 300 ms of the call: median 48.0 ms, max 89.5
+ok   fixture.md every output matches its reference: 5 of 5
+note fixture-20k.md runs, call to changeCount (ms): 138.4, 129.2, 136.8, 126.9, 127.1, 126.5, 128.5, 125.8, 117.6, 127.7, 137.3, 135.5, 115.9, 127.3, 128.2, 115.6, 120.6, 120.3, 116.8, 126.9
+note fixture-20k.md done shown after the call (ms): 138.8, 129.2, 137.2, 127.3, 127.5, 127.0, 129.0, 126.3, 118.0, 128.2, 137.8, 135.9, 116.3, 127.7, 128.7, 116.1, 121.1, 120.8, 116.9, 127.3
+ok   fixture-20k.md median within 300 ms of the call: median 127.0 ms, max 138.4
+ok   fixture-20k.md every output matches its reference: 20 of 20
+A9 and A15 supplement: the Services call itself (NSPerformService), without TextEdit's menu PASSED: 4 of 4 checks

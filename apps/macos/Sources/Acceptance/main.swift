@@ -66,8 +66,11 @@ func isX9OnTheClipboard() -> Bool { Clipboard.slackDelta?.contains("Packing for 
 
 /// Runs a row with his clipboard and pointer put back after, once he's left the Mac alone for a few seconds.
 func withHisMac(_ body: () async -> Void) async {
-    let deadline = now() + 120_000
-    while Input.idle < 4, now() < deadline { usleep(500_000) }
+    let deadline = now() + 240_000
+    while Input.idle < 8 {
+        if now() > deadline { return print("he's using the Mac, so nothing ran") }
+        usleep(500_000)
+    }
     let snapshot = ClipboardSnapshot()
     let pointer = Input.pointer
     await body()
@@ -93,6 +96,31 @@ case "a4-throw": await withApp(["--test-throw"]) { await rowA4Throw($0, trigger)
 case "a15": await withApp { rowA15($0, trigger) }
 case "a17": await withApp { rowA17($0, trigger) }
 case "a18": await withApp { rowA18($0, trigger) }
+case "a9":
+    await withApp { app in
+        await rowA9(app)
+        await rowA9Refused(app, "200,001 code units selected", String(repeating: "plain words\n", count: 16_667).prefix(200_001).description, "Too long to convert")
+    }
+case "a9-throw": await withApp(["--test-throw"]) { await rowA9Refused($0, "fixture.md with --test-throw", Fixtures.text("fixture.md"), "Couldn't convert this") }
+case "services-call": await withApp { rowServicesCall($0) }
+case "services-latency":
+    await withApp { app in
+        for run in 1...Int(arguments[1])! {
+            guard TextEdit.open("made-up words \(run)\n") != nil else { return print("no document") }
+            let before = Clipboard.put(plain: "not the selection")
+            guard let start = TextEdit.copyForSlack() else { return print("no Services item") }
+            let pressed = now()
+            let end = Clipboard.waitForChange(after: before, timeout: 5_000)
+            usleep(1_800_000)
+            let front = NSWorkspace.shared.frontmostApplication?.localizedName ?? "?"
+            let moments = app.entries.filter { $0.time >= start }.map { "\($0.text) +\(format($0.time - start))" }
+            print("run \(run): press returned +\(format(pressed - start)); change +\(end.map { format($0 - start) } ?? "none"); front after: \(front); \(moments.joined(separator: "; "))")
+            if let app = TextEdit.running { app.activate() }
+            usleep(500_000)
+            TextEdit.close()
+        }
+    }
+case "a15-services": await withApp { rowA15Services($0) }
 case "latency":
     await withApp { app in
         for run in 1...Int(arguments[1])! {

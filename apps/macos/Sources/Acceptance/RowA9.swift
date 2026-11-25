@@ -1,0 +1,85 @@
+import AppKit
+import SlackfmtKit
+
+func rowA9(_ app: App) async {
+    let report = Report("A9, F3 from TextEdit")
+    guard let textEdit = TextEdit.open(Fixtures.text("fixture.md")) else { return report.check(false, "TextEdit opened the document") }
+    let before = Clipboard.put(plain: "not the selection")
+    guard let start = TextEdit.copyForSlack() else {
+        TextEdit.close()
+        return report.check(false, "Services > Copy for Slack is in TextEdit's menu")
+    }
+    await checkDone(report, app, start: start, reduceMotion: NSWorkspace.shared.accessibilityDisplayShouldReduceMotion)
+    report.check(NSPasteboard.general.changeCount > before, "changeCount moved")
+    checkPasteboard(report, pickle: Fixtures.data("fixture.pickle"), delta: Fixtures.text("fixture.delta.json"))
+    report.check(NSWorkspace.shared.frontmostApplication?.processIdentifier == textEdit.processIdentifier, "TextEdit is still frontmost")
+    report.finish()
+    rowA2("A9's Services conversion")
+    TextEdit.close()
+}
+
+func rowA9Refused(_ app: App, _ name: String, _ text: String, _ reason: String) async {
+    let report = Report("A9 \(name), from TextEdit")
+    guard TextEdit.open(text) != nil else { return report.check(false, "TextEdit opened the document") }
+    let before = Clipboard.put(plain: "not the selection")
+    guard let start = TextEdit.copyForSlack() else {
+        TextEdit.close()
+        return report.check(false, "Services > Copy for Slack is in TextEdit's menu")
+    }
+    await checkNothing(report, app, start: start, reason: reason, before: before, glyph: false)
+    report.finish()
+    TextEdit.close()
+}
+
+func rowA15Services(_ app: App) {
+    let report = Report("A15 fixture-20k.md by Services")
+    guard TextEdit.open(Fixtures.text("fixture-20k.md")) != nil else { return report.check(false, "TextEdit opened the document") }
+    let reference = Fixtures.data("expected/fixture-20k-md.pickle")
+    var times: [Double] = []
+    var matches = 0
+    for _ in 1...20 {
+        let before = Clipboard.put(plain: "not the selection")
+        guard let start = TextEdit.copyForSlack(), let end = Clipboard.waitForChange(after: before, timeout: 5_000) else { break }
+        times.append(end - start)
+        usleep(300_000)
+        if NSPasteboard.general.data(forType: PasteboardTypes.customData) == reference { matches += 1 }
+        usleep(1_200_000)
+    }
+    report.note("runs (ms): \(times.map(format).joined(separator: ", "))")
+    report.check(times.count == 20 && median(times) <= 300, "median within 300 ms", times.isEmpty ? "no runs" : "median \(format(median(times))) ms, min \(format(times.min()!)), max \(format(times.max()!))")
+    report.check(matches == 20, "every output matches its V23 reference", "\(matches) of 20")
+    report.finish()
+    TextEdit.close()
+}
+
+/// The same conversion by NSPerformService: the Services call itself, without the time TextEdit's menu takes to close.
+func rowServicesCall(_ app: App) {
+    let report = Report("A9 and A15 supplement: the Services call itself (NSPerformService), without TextEdit's menu")
+    NSApplication.shared.setActivationPolicy(.accessory)
+    for (name, runs) in [("fixture.md", 5), ("fixture-20k.md", 20)] {
+        let reference = Fixtures.data(name == "fixture.md" ? "fixture.pickle" : "expected/fixture-20k-md.pickle")
+        var times: [Double] = []
+        var done: [Double] = []
+        var matches = 0
+        for _ in 1...runs {
+            let board = NSPasteboard.withUniqueName()
+            board.clearContents()
+            board.setString(Fixtures.text(name), forType: .string)
+            let before = Clipboard.put(plain: "not the selection")
+            usleep(250_000)
+            let start = now()
+            DispatchQueue.global().async { NSPerformService("Copy for Slack", board) }
+            guard let end = Clipboard.waitForChange(after: before, timeout: 5_000) else { break }
+            times.append(end - start)
+            usleep(1_500_000)
+            if NSPasteboard.general.data(forType: PasteboardTypes.customData) == reference { matches += 1 }
+            if let entry = app.entries.first(where: { $0.time >= start && $0.text == "status done" }) { done.append(entry.time - start) }
+            board.releaseGlobally()
+        }
+        report.note("\(name) runs, call to changeCount (ms): \(times.map(format).joined(separator: ", "))")
+        report.note("\(name) done shown after the call (ms): \(done.map(format).joined(separator: ", "))")
+        report.check(times.count == runs && median(times) <= 300, "\(name) median within 300 ms of the call", times.isEmpty ? "no runs" : "median \(format(median(times))) ms, max \(format(times.max()!))")
+        report.check(matches == runs, "\(name) every output matches its reference", "\(matches) of \(runs)")
+    }
+    report.finish()
+}
