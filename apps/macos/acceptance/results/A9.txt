@@ -1,12 +1,12 @@
 == A9, F3 from TextEdit
 FAIL state log: done from +0.1 s through +0.75 s: done, idle
 FAIL state log: idle by +1.3 s: done
-note state log (ms after the trigger): status done +718.9; capsule shown +822.9; status idle +1722.3
+note state log (ms after the trigger): status done +453.0; capsule shown +454.0; status idle +1459.9; capsule hidden +1789.6
 FAIL screenshot at +0.1 s: no image
 FAIL capsule shows at +0.2 s
 FAIL capsule is gone at +1.6 s
-note capsule last on screen at +1985.0 ms
-note fades: 4 of 75 capsule samples between 0 and 1
+note capsule last on screen at +1796.7 ms
+note fades: 26 of 173 capsule samples between 0 and 1
 note screens attached: 1
 ok   changeCount moved
 ok   pickle bytes equal the reference: 3084 bytes
@@ -50,6 +50,6 @@ A2 after A9's Services conversion PASSED: 30 of 30 checks
 FAIL state log: nothing ("Too long to convert") from +0.1 s through +1.25 s: idle, nothing Too long to convert
 FAIL state log: idle by +1.8 s: nothing Too long to convert
 FAIL tooltip: none
-ok   changeCount unchanged: 1252 -> 1252
+ok   changeCount unchanged: 2236 -> 2236
 ok   no capsule
 A9 200,001 code units selected, from TextEdit FAILED: 2 of 5 checks

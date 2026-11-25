@@ -175,11 +175,18 @@ func shownMessage(_ app: App, timeout: Double) -> (how: String, text: String)? {
         if let center = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.notificationcenterui").first {
             let banners = AX.attribute(AXUIElementCreateApplication(center.processIdentifier), "AXWindows") as? [AXUIElement] ?? []
             let text = banners.flatMap(allText).joined(separator: " | ")
-            if text.contains("Slackfmt") { return ("notification", text) }
+            if text.contains("Slackfmt"), text.contains("Slack's format") || text.contains("No Slack format") { return ("notification", text) }
         }
         usleep(100_000)
     }
     return nil
+}
+
+func dismissAlert(_ app: App) {
+    let windows = AX.attribute(AXUIElementCreateApplication(app.pid), "AXWindows") as? [AXUIElement] ?? []
+    guard let button = windows.first.flatMap({ AX.element($0, "AXDefaultButton") }) else { return }
+    AX.press(button)
+    usleep(500_000)
 }
 
 private func allText(_ element: AXUIElement) -> [String] {
@@ -210,8 +217,8 @@ func rowA11(_ app: App, notificationsOn: Bool) {
         }
         let shown = shownMessage(app, timeout: 4)
         report.check(shown?.how == how && shown?.text.contains(expected.message) == true, "\(name): \(how)", shown.map { "\($0.how): \($0.text)" } ?? "nothing shown")
-        if shown?.how == "alert" { Input.key(kVK_Return, flags: []) }
-        sleep(notificationsOn ? 6 : 1)
+        dismissAlert(app)
+        sleep(notificationsOn ? 7 : 1)
     }
     report.finish()
 }

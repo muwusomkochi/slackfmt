@@ -1,0 +1,10 @@
+A12: each line's test was committed failing before its fix. All pass on main and on their own branch (A13.txt).
+
+R24 hard breaks              test f8257d0, fix ba88e62, packages/core/tests/hard-breaks.test.ts (a backslash, two spaces, <br>)
+R25, R34 images              test 791732b, fix 7a6f16c, packages/core/tests/images.test.ts (with alt, without)
+R26 thematic breaks          test 1dd0f3f, fix 9b047c7, packages/core/tests/thematic-breaks.test.ts (---, ***, <hr>)
+R27 ordered list start       test 7ca4b1d, fix 6c53bd1, packages/core/tests/ordered-list-start.test.ts (from 3)
+R28 task lists               test ad1e200, fix f00e2d9, packages/core/tests/task-lists.test.ts (open, done)
+R29 lists inside quotes      test 07bd88c, fix 8ccfbfb, packages/core/tests/quoted-lists.test.ts
+R37 HTML strikethrough       test 9712f17, fix a10c337, packages/core/tests/html-strikethrough.test.ts (<del>, <s>, <strike>)
+A18's second input           test 3365f0b, fix 009fb87, packages/core/tests/bare-ops-array.test.ts

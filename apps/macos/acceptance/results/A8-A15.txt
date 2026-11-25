@@ -1,20 +1,20 @@
 == A15 fixture-20k.md by hotkey
-note runs (ms): 172.9, 114.8, 109.1, 111.8, 115.5, 158.4, 188.0, 107.7, 122.8, 122.7, 115.4, 206.2, 122.9, 121.7, 116.6, 111.1, 110.9, 113.6, 111.2, 97.8
-ok   median within 300 ms: median 115.5 ms, min 97.8, max 206.2
+note runs (ms): 123.5, 114.1, 108.3, 119.3, 124.8, 118.7, 109.3, 108.4, 116.7, 119.4, 123.0, 112.4, 116.1, 114.9, 103.9, 105.0, 117.9, 115.6, 118.1, 98.3
+ok   median within 300 ms: median 115.8 ms, min 98.3, max 124.8
 ok   every output matches its V23 reference: 20 of 20
 A15 fixture-20k.md by hotkey PASSED: 2 of 2 checks
 == A15 fixture-20k.html by hotkey
-note runs (ms): 95.9, 124.2, 89.9, 83.8, 137.7, 117.6, 188.1, 83.1, 1358.0
-FAIL median within 300 ms: median 117.6 ms, min 83.1, max 1358.0
-FAIL every output matches its V23 reference: 9 of 20
-A15 fixture-20k.html by hotkey FAILED: 0 of 2 checks
+note runs (ms): 96.6, 98.4, 79.6, 95.0, 82.8, 89.0, 93.7, 91.6, 97.3, 87.9, 103.4, 83.6, 94.0, 92.1, 104.8, 89.9, 89.7, 94.2, 97.9, 86.1
+ok   median within 300 ms: median 92.9 ms, min 79.6, max 104.8
+ok   every output matches its V23 reference: 20 of 20
+A15 fixture-20k.html by hotkey PASSED: 2 of 2 checks
 == A15 fixture-20k.rtf by hotkey
-note runs (ms): 48.6, 37.6, 43.5, 156.6, 53.3, 36.4, 46.0, 144.9, 43.9, 45.0, 25.5, 38.5, 58.3, 39.8, 272.6, 162.0, 32.6, 41.0, 148.1, 142.8
-ok   median within 300 ms: median 45.5 ms, min 25.5, max 272.6
+note runs (ms): 45.9, 45.0, 42.8, 42.2, 42.9, 35.9, 43.7, 47.4, 42.4, 45.3, 40.2, 37.4, 59.4, 44.9, 41.8, 45.5, 39.9, 42.3, 45.3, 39.0
+ok   median within 300 ms: median 42.9 ms, min 35.9, max 59.4
 ok   every output matches its V23 reference: 20 of 20
 A15 fixture-20k.rtf by hotkey PASSED: 2 of 2 checks
 == A15 fixture-20k.delta.json by hotkey
-note runs (ms): 56.4, 61.3, 53.0, 72.6, 48.3, 84.4, 68.9, 54.3, 69.3, 49.0, 388.1, 259.6, 154.5, 170.5, 230.5, 214.7, 210.9, 319.1, 63.9, 58.0
-ok   median within 300 ms: median 71.0 ms, min 48.3, max 388.1
+note runs (ms): 55.9, 64.6, 67.3, 62.7, 47.7, 55.1, 56.9, 68.5, 71.7, 59.4, 67.4, 67.1, 79.0, 66.1, 69.3, 64.8, 58.1, 55.4, 69.2, 58.7
+ok   median within 300 ms: median 64.7 ms, min 47.7, max 79.0
 ok   every output matches its V23 reference: 20 of 20
 A15 fixture-20k.delta.json by hotkey PASSED: 2 of 2 checks

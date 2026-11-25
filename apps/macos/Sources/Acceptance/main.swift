@@ -99,6 +99,7 @@ func withApp(_ flags: [String] = [], _ body: (App) async -> Void) async {
 switch arguments.first {
 case "a1": await withApp { await rowA1($0, trigger); rowA2("A1 by \(trigger.rawValue)") }
 case "a4": await withApp { await rowA4($0, trigger) }
+case "a4-apps": await withApp { await rowA4Apps($0, trigger, only: arguments[1]) }
 case "a4-throw": await withApp(["--test-throw"]) { await rowA4Throw($0, trigger) }
 case "a15": await withApp { rowA15($0, trigger, only: arguments.dropFirst().first { $0.hasPrefix("fixture") }) }
 case "a17": await withApp { rowA17($0, trigger) }
@@ -155,6 +156,7 @@ case "a3": await withApp { await rowRefusedAsCopied($0, trigger, row: "A3 a Slac
 case "a4-copied": await withApp { await rowRefusedAsCopied($0, trigger, row: "A4 \(arguments[1])", reason: arguments[2], glyph: false) }
 case "a5": await withApp { rowA5($0) }
 case "a5-signing": rowA5Signing()
+case "hooks": await withHisMac { rowHooks() }
 case "a7": await withApp { rowA7($0, canary: arguments[1]) }
 case "a7-throw": await withApp(["--test-throw"]) { rowA7Throw($0, canary: arguments[1]) }
 case "services-call": await withApp { rowServicesCall($0) }

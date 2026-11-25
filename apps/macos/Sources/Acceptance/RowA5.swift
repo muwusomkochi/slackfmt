@@ -33,11 +33,11 @@ func rowA5(_ app: App) {
         if let items = StatusMenuDriver.open(app, .rightClick), StatusMenuDriver.choose(items, "Check Slack's format") != nil {
             if let shown = shownMessage(app, timeout: 4) {
                 ran[3] += 1
-                if shown.how == "alert" { Input.key(kVK_Return, flags: []) }
+                if shown.how == "alert" { dismissAlert(app) }
             }
             usleep(800_000)
         }
-        sockets += output("/usr/sbin/lsof", ["-nP", "-a", "-i", "-p", "\(app.pid)"]).split(separator: "\n").map(String.init).filter { !$0.hasPrefix("COMMAND") }
+        sockets += output("/usr/sbin/lsof", ["-w", "-nP", "-a", "-i", "-p", "\(app.pid)"]).split(separator: "\n").map(String.init).filter { !$0.hasPrefix("COMMAND") }
     }
     nettop.terminate()
     textEdit.activate()

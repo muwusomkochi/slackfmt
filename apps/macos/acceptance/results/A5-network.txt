@@ -1,0 +1,5 @@
+== A5 no socket in F1 to F4, ten times
+ok   F1, F2, F3 and F4 ran ten times each: [10, 10, 10, 10]
+ok   lsof shows no internet socket
+ok   nettop shows no connection: 67 lines read, 0 naming the app; flows: []
+A5 no socket in F1 to F4, ten times PASSED: 3 of 3 checks

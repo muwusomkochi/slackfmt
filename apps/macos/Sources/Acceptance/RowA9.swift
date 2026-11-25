@@ -41,9 +41,9 @@ func rowA15Services(_ app: App) {
         let before = Clipboard.put(plain: "not the selection")
         guard let start = TextEdit.copyForSlack(), let end = Clipboard.waitForChange(after: before, timeout: 5_000) else { break }
         times.append(end - start)
-        usleep(300_000)
+        pause(0.3)
         if NSPasteboard.general.data(forType: PasteboardTypes.customData) == reference { matches += 1 }
-        usleep(1_200_000)
+        pause(1.2)
     }
     report.note("runs (ms): \(times.map(format).joined(separator: ", "))")
     report.check(times.count == 20 && median(times) <= 300, "median within 300 ms", times.isEmpty ? "no runs" : "median \(format(median(times))) ms, min \(format(times.min()!)), max \(format(times.max()!))")
@@ -66,12 +66,12 @@ func rowServicesCall(_ app: App) {
             board.clearContents()
             board.setString(Fixtures.text(name), forType: .string)
             let before = Clipboard.put(plain: "not the selection")
-            usleep(250_000)
+            pause(0.25)
             let start = now()
             DispatchQueue.global().async { NSPerformService("Copy for Slack", board) }
             guard let end = Clipboard.waitForChange(after: before, timeout: 5_000) else { break }
             times.append(end - start)
-            usleep(1_500_000)
+            pause(1.5)
             if NSPasteboard.general.data(forType: PasteboardTypes.customData) == reference { matches += 1 }
             if let entry = app.entries.first(where: { $0.time >= start && $0.text == "status done" }) { done.append(entry.time - start) }
             board.releaseGlobally()

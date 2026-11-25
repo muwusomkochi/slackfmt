@@ -140,3 +140,26 @@ func rowA7Throw(_ app: App, canary: String) {
     print("throw case: changeCount unchanged \(NSPasteboard.general.changeCount == before); \(app.entries.last { $0.text.hasPrefix("status nothing") }?.text ?? "no refusal")")
     print("output \(app.log) \(app.errors)")
 }
+
+/// V21's hooks that exit: --convert-now's three codes, and --reset-first-run.
+func rowHooks() {
+    let report = Report("V21 hooks")
+    func exitCode(_ flags: [String]) -> Int32 {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/Applications/Slackfmt.app/Contents/MacOS/Slackfmt")
+        process.arguments = flags
+        try? process.run()
+        process.waitUntilExit()
+        return process.terminationStatus
+    }
+    Clipboard.put(plain: Fixtures.text("fixture.md"))
+    report.check(exitCode(["--convert-now"]) == 0, "--convert-now exits 0 when it converts")
+    report.check(sameJSON(Clipboard.slackDelta, Fixtures.text("fixture.delta.json")), "and the Delta is fixture.md's")
+    let converted = NSPasteboard.general.changeCount
+    report.check(exitCode(["--convert-now"]) == 2, "exits 2 on Slack's format")
+    report.check(NSPasteboard.general.changeCount == converted, "and leaves the clipboard")
+    Clipboard.put(plain: "made-up words")
+    report.check(exitCode(["--convert-now", "--test-throw"]) == 1, "exits 1 with --test-throw")
+    report.check(NSPasteboard.general.string(forType: .string) == "made-up words", "and leaves the clipboard")
+    report.finish()
+}

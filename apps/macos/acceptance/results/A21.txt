@@ -1,0 +1,5 @@
+A21: macOS 27.2.1 (26B131). No "Paste from other apps" prompt showed.
+
+Fresh install (Slackfmt first installed to /Applications on 2026-11-24 at about 10:05 pm AST). Its first conversion read the general
+pasteboard on a posted click at about 10:07 pm, finished in 797.2 ms with no prompt and no answer from anyone, and wrote Slack's
+format (X10's first trial click). No prompt has shown in any run since. Rows A1, A8, A9 and A17 ran after it.

@@ -1,0 +1,8 @@
+== V21 hooks
+ok   --convert-now exits 0 when it converts
+ok   and the Delta is fixture.md's
+ok   exits 2 on Slack's format
+ok   and leaves the clipboard
+ok   exits 1 with --test-throw
+ok   and leaves the clipboard
+V21 hooks PASSED: 6 of 6 checks
