@@ -22,6 +22,17 @@ func rowA3(hours: Double) async {
     guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
     warmTheHarness()
     guard waitForCopy("a Slack copy", hours: hours, { Clipboard.slackDelta != nil }) else { return print("no Slack copy came") }
+    await checkSlackCopy(app)
+}
+
+/// The same on the Slack copy already on the clipboard, which the rows leave as it is.
+func rowA3Now() async {
+    guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
+    warmTheHarness()
+    await checkSlackCopy(app)
+}
+
+private func checkSlackCopy(_ app: App) async {
     let pointer = Input.pointer
     for trigger in [Trigger.click, .hotkey] {
         await rowRefusedAsCopied(app, trigger, row: "A3 a Slack desktop copy", reason: "Already Slack format", glyph: true)

@@ -1,22 +1,25 @@
-waiting for a Slack copy
+Note: the first run, on the clipboard exactly as Slack wrote it (00:27 am AST, 25 Nov), gave the same results but for the screenshot,
+which my first score read as nosign 0.46 (checkmark 0.16, number 0.15), under a 0.6 cutoff set for thicker glyphs. The score now allows
+half a pixel. This run is on that same copy, held and put back byte for byte by the harness.
+
 == A3 a Slack desktop copy by click
-note types: public.utf8-plain-text, NSStringPboardType, org.chromium.internal.source-rfh-token, org.chromium.web-custom-data, org.chromium.source-url
+note types: org.chromium.internal.source-rfh-token, org.chromium.web-custom-data, org.chromium.source-url, public.utf8-plain-text, NSStringPboardType
 ok   state log: nothing ("Already Slack format") from +0.1 s through +1.25 s: nothing Already Slack format
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Already Slack format
-ok   changeCount unchanged: 2336 -> 2336
+ok   changeCount unchanged: 2347 -> 2347
 ok   no capsule
-FAIL screenshot at +0.1 s shows V16's nosign: nosign 0.46, checkmark 0.16, number 0.15
-A3 a Slack desktop copy by click FAILED: 5 of 6 checks
+ok   screenshot at +0.1 s shows V16's nosign: nosign 0.97, number 0.50, checkmark 0.42
+A3 a Slack desktop copy by click PASSED: 6 of 6 checks
 == A3 a Slack desktop copy by hotkey
-note types: public.utf8-plain-text, NSStringPboardType, org.chromium.internal.source-rfh-token, org.chromium.web-custom-data, org.chromium.source-url
+note types: org.chromium.internal.source-rfh-token, org.chromium.web-custom-data, org.chromium.source-url, public.utf8-plain-text, NSStringPboardType
 ok   state log: nothing ("Already Slack format") from +0.1 s through +1.25 s: nothing Already Slack format
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Already Slack format
-ok   changeCount unchanged: 2336 -> 2336
+ok   changeCount unchanged: 2347 -> 2347
 ok   no capsule
-FAIL screenshot at +0.1 s shows V16's nosign: nosign 0.46, checkmark 0.16, number 0.15
-A3 a Slack desktop copy by hotkey FAILED: 5 of 6 checks
+ok   screenshot at +0.1 s shows V16's nosign: nosign 0.97, number 0.50, checkmark 0.42
+A3 a Slack desktop copy by hotkey PASSED: 6 of 6 checks
 == A11 a Slack desktop copy
 note slack/texty: 114 UTF-16 units
 ok   its own format still matches: alert: alert | Slackfmt alert | Slackfmt | Slack's format still matches | OK

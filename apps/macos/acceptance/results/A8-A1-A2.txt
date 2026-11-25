@@ -1,15 +1,15 @@
 == A1 by hotkey
 ok   state log: done from +0.1 s through +0.75 s: done
 ok   state log: idle by +1.3 s: idle
-note state log (ms after the trigger): status done +18.0; capsule shown +33.8; status idle +1024.3; capsule hidden +1364.5
-ok   screenshot at +0.1 s shows V16's checkmark: checkmark 0.73, number 0.17, nosign 0.13
+note state log (ms after the trigger): status done +15.7; capsule shown +17.0; status idle +1021.8; capsule hidden +1348.2
+ok   screenshot at +0.1 s shows V16's checkmark: checkmark 0.98, number 0.50, nosign 0.37
 ok   capsule shows at +0.2 s
 ok   capsule is gone at +1.6 s
 ok   capsule is 36 pt high: 36.0
 ok   capsule is centred on the pointer's screen: 863.5 on a screen centred at 864.0
 ok   capsule's bottom edge is 72 pt above the visible frame's bottom: 72.0
-note capsule last on screen at +1377.5 ms
-note fades: 36 of 174 capsule samples between 0 and 1
+note capsule last on screen at +1353.5 ms
+note fades: 42 of 208 capsule samples between 0 and 1
 note screens attached: 1
 ok   changeCount moved
 ok   pickle bytes equal the reference: 3084 bytes
@@ -33,7 +33,7 @@ ok   public.html image link with no alt
 ok   public.html bullet list <ul><li>
 ok   public.html nested list inside its <li>
 ok   public.html task items' text starts with V14
-ok   public.html ordered list past 1 as a paragraph starting "n. "
+ok   public.html ordered list past 1 as paragraphs starting "n. "
 ok   public.html no <ol> for it
 ok   public.html quote <blockquote>
 ok   public.html the quote's list as <ul>
