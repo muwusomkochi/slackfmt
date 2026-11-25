@@ -91,13 +91,13 @@ func checkPasteboard(_ report: Report, pickle: Data, delta: String) {
     report.check(sameJSON(Clipboard.slackDelta, delta), "decoded slack/texty deep-equals the reference")
 }
 
-func rowA1(_ app: App, _ trigger: Trigger) async {
-    let report = Report("A1 by \(trigger.rawValue)")
+func rowA1(_ app: App, _ trigger: Trigger, reduceMotion: Bool = false) async {
+    let report = Report("A1 by \(trigger.rawValue)\(reduceMotion ? " with Reduce Motion" : "")")
     let before = Clipboard.put(plain: Fixtures.text("fixture.md"))
     usleep(300_000)
     _ = app.capsuleNumber
     guard let start = trigger.fire(app) else { return }
-    await checkDone(report, app, start: start, reduceMotion: NSWorkspace.shared.accessibilityDisplayShouldReduceMotion)
+    await checkDone(report, app, start: start, reduceMotion: reduceMotion)
     report.check(NSPasteboard.general.changeCount > before, "changeCount moved")
     checkPasteboard(report, pickle: Fixtures.data("fixture.pickle"), delta: Fixtures.text("fixture.delta.json"))
     report.finish()

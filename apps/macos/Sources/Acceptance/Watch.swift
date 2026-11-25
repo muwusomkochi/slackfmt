@@ -70,16 +70,24 @@ func rowA4Safari(hours: Double) async {
 func rowA1ReduceMotion(hours: Double) async {
     let deadline = now() + hours * 3_600_000
     print("waiting for Reduce Motion")
-    while !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion {
+    while !reduceMotionIsOn() {
         guard now() < deadline else { return print("Reduce Motion stayed off") }
         pause(0.5)
     }
+    print("Reduce Motion is on")
     while Input.idle < 3 { pause(0.2) }
     let snapshot = ClipboardSnapshot()
     let pointer = Input.pointer
     guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
     warmTheHarness()
-    for trigger in [Trigger.click, .hotkey] { await rowA1(app, trigger) }
+    for trigger in [Trigger.click, .hotkey] { await rowA1(app, trigger, reduceMotion: true) }
     Input.move(to: pointer)
     snapshot.restore()
+    print("Reduce Motion \(reduceMotionIsOn() ? "was still on" : "had been turned off") when the runs ended")
+}
+
+/// The setting as it stands, read by a process of its own: NSWorkspace's copy never changes in one with no NSApplication running.
+func reduceMotionIsOn() -> Bool {
+    output("/usr/bin/osascript", ["-l", "JavaScript", "-e", "ObjC.import('AppKit'); $.NSWorkspace.sharedWorkspace.accessibilityDisplayShouldReduceMotion"])
+        .trimmingCharacters(in: .whitespacesAndNewlines) == "true"
 }
