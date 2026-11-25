@@ -145,6 +145,20 @@ case "press-probe":
             Menus.cancel()
         }
     }
+case "notify-probe":
+    await withApp { app in
+        Clipboard.put(plain: "plain")
+        pause(0.4)
+        guard let items = StatusMenuDriver.open(app, .rightClick), StatusMenuDriver.choose(items, "Check Slack's format") != nil else { return print("no menu") }
+        let start = now()
+        while now() - start < 8_000 {
+            pause(0.25)
+            let center = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.notificationcenterui").first
+            let windows = center.map { AX.attribute(AXUIElementCreateApplication($0.processIdentifier), "AXWindows") as? [AXUIElement] ?? [] } ?? []
+            let mine = AX.attribute(AXUIElementCreateApplication(app.pid), "AXWindows") as? [AXUIElement] ?? []
+            if !windows.isEmpty || !mine.isEmpty { print("+\(format(now() - start)): center windows \(windows.count) \(windows.map { AX.string($0, "AXTitle") ?? "?" }), app windows \(mine.count)") }
+        }
+    }
 case "menu-probe":
     await withApp { app in
         Clipboard.put(plain: "made-up words")

@@ -1,0 +1,7 @@
+A19: run by Muwuso, 2026-11-25 (12:37 am AST onwards), on the build at 993405e installed in /Applications, after --reset-first-run.
+
+He opened Slackfmt from Applications and answered "Allowed and saw it": macOS asked about notifications, he clicked Allow, and the
+first-run notification showed with §6's string. The registration (A10) is read below from the menu's Launch at login tick, which shows
+SMAppService.mainApp.status == .enabled.
+
+Read at 12:42 and 12:51 am AST: the menu shows Launch at login ticked, so SMAppService.mainApp.status is .enabled after the first run (A10).
