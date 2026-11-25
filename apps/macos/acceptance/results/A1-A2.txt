@@ -1,0 +1,50 @@
+== A1 by click
+FAIL state log: done from +0.1 s through +0.75 s: done, idle
+ok   state log: idle by +1.3 s: idle
+note state log (ms after the trigger): status done +102.6; capsule shown +110.7; status idle +1108.1; capsule hidden +1441.3
+ok   screenshot at +0.1 s shows V16's checkmark: checkmark 0.73, number 0.17, nosign 0.13
+ok   capsule shows at +0.2 s
+ok   capsule is gone at +1.6 s
+ok   capsule is 36 pt high: 36.0
+ok   capsule is centred on the pointer's screen: 863.5 on a screen centred at 864.0
+ok   capsule's bottom edge is 72 pt above the visible frame's bottom: 72.0
+note capsule last on screen at +1430.5 ms
+note fades: 20 of 99 capsule samples between 0 and 1
+note screens attached: 1
+ok   changeCount moved
+ok   pickle bytes equal the reference: 3084 bytes
+ok   decoded slack/texty deep-equals the reference
+A1 by click FAILED: 10 of 11 checks
+== A2 after A1 by click
+ok   plain text equals fixture.txt byte for byte
+ok   no "**" in the plain text
+ok   no "~~" in the plain text
+ok   no "](" in the plain text
+ok   no "- [" in the plain text
+ok   no "```" in the plain text
+ok   no "\" in the plain text
+ok   public.html bold <strong>
+ok   public.html italic <em>
+ok   public.html strikethrough <s>
+ok   public.html inline code <code>
+ok   public.html link <a href>
+ok   public.html image link
+ok   public.html image link with no alt
+ok   public.html bullet list <ul><li>
+ok   public.html nested list inside its <li>
+ok   public.html task items' text starts with V14
+ok   public.html ordered list past 1 as a paragraph starting "n. "
+ok   public.html no <ol> for it
+ok   public.html quote <blockquote>
+ok   public.html the quote's list as <ul>
+ok   public.html code block <pre><code>
+ok   public.rtf bold font trait
+ok   public.rtf plain text isn't bold
+ok   public.rtf italic font trait
+ok   public.rtf single strikethrough
+ok   public.rtf link to the URL
+ok   public.rtf image link
+ok   public.rtf fixed-pitch inline code
+ok   public.rtf fixed-pitch code block
+note public.rtf lists, tasks and quotes are judged in E2 (X8's branch)
+A2 after A1 by click PASSED: 30 of 30 checks
