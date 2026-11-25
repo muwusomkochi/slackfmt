@@ -15,10 +15,14 @@ def run(*command, **options):
 
 def tests(branch):
     run("git", "switch", "-q", "--detach", branch, check=True)
+    run("npx", "--yes", "pnpm@10.30.1", "install", "--frozen-lockfile", "--ignore-scripts", check=True)
     with tempfile.NamedTemporaryFile(suffix=".json") as out:
         run("npx", "--yes", "pnpm@10.30.1", "exec", "vitest", "run", "--project", "@slackfmt/core",
             "--reporter=json", f"--outputFile={out.name}")
         report = json.load(open(out.name))
+    broken = [pathlib.Path(file["name"]).name for file in report["testResults"] if not file["assertionResults"]]
+    if broken:
+        sys.exit(f"{branch}: these test files didn't run: {broken}")
     return {
         " > ".join([pathlib.Path(file["name"]).name, *test["ancestorTitles"], test["title"]]): test["status"]
         for file in report["testResults"] for test in file["assertionResults"]

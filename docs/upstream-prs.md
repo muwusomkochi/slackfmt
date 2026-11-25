@@ -14,20 +14,20 @@ This fork's `main` carries all of them merged: its merge commits show the resolu
 
 | Branch | Failing test | Fix | Requirement |
 |---|---|---|---|
-| `fix/hard-breaks` | f8257d0 | ba88e62, with more cases in 6e8c2f4 | R24 |
+| `fix/hard-breaks` | f8257d0, then 7d88581 | ba88e62, then c9d9e6b (more cases in 6e8c2f4) | R24 |
 | `fix/images` | 791732b, then d3a14f0 | 7a6f16c, then 3833ebe | R25, R34 |
 | `fix/thematic-breaks` | 1dd0f3f | 9b047c7 | R26 |
 | `fix/ordered-list-start` | 7ca4b1d | 6c53bd1 | R27 |
 | `fix/task-lists` | ad1e200 | f00e2d9 | R28 |
 | `fix/quoted-lists` | 07bd88c | 8ccfbfb | R29 |
-| `fix/html-strikethrough` | 9712f17, then b789fe2 | a10c337, then 534ef4e | R37 |
-| `fix/css-marks` | 641547d, then a8c7833 | 0ad674a, then 3bcdee4 | R38 |
+| `fix/html-strikethrough` | 9712f17, then b789fe2, then 97c9851 | a10c337, then 534ef4e, then fd9b94c | R37 |
+| `fix/css-marks` | 641547d, then a8c7833, then 06db508 | 0ad674a, then 3bcdee4, then 52ba8a8 | R38 |
 | `fix/html-head-text` | d94b01f | 652a1e6 | R39 |
-| `fix/raw-html-blocks` | d03efa5 | 8f0e013 | R40 |
+| `fix/raw-html-blocks` | d03efa5, then 71fed16 | 8f0e013, then 1162b26 | R40 |
 | `fix/html-italics` | cc03c6b | 979b4b9 | R41 |
 | `fix/bare-ops-array` | 3365f0b | 009fb87 | R42 |
 | `fix/split-ordered-lists` | f244e3e | 8cdaf39 | R43 |
-| `fix/plain-pre` | bfb54d5 | 5ed8811 | R44 |
+| `fix/plain-pre` | bfb54d5, then 2c1eb63 | 5ed8811, then 7412476 | R44 |
 
 R30 is the regression guard above. R31 (HTML without a browser DOM) needed no converter change: core at `551c592` already converts HTML in a bare JavaScript engine when it's bundled with Turndown's own DOM.
 
@@ -38,7 +38,7 @@ Title: fix(core): keep hard breaks as line breaks
 ```
 A hard break (a backslash or two spaces at a line's end, or an HTML <br>) was dropped, so the two lines ran together: "first line\⏎second line" came out as "first linesecond line".
 
-It's now a newline, with the line's own block attributes, the same as a soft break gets. Inside a quote, both lines stay quoted.
+It's now a newline, with the line's own block attributes, the same as a soft break gets. Inside a quote, both lines stay quoted. A break before an inline tag is kept too: remark-stringify swaps a line end there for a space.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
@@ -98,7 +98,7 @@ A list inside a blockquote lost the quote. Slack's own copy of a quoted list mar
 Title: fix(core): keep strikethrough from HTML
 
 ```
-Turndown has no rule for <del>, <s> or <strike>, so struck text from HTML came out plain. Each is now ~~struck~~, with neighbouring and nested struck text sharing one pair of markers, spaces and breaks kept outside them, a tilde at an edge escaped, and each paragraph of a struck block struck on its own.
+Turndown has no rule for <del>, <s> or <strike>, so struck text from HTML came out plain. Each is now ~~struck~~, with neighbouring and nested struck text sharing one pair of markers, spaces and breaks kept outside them, a tilde at an edge escaped, each paragraph of a struck block struck on its own, and an empty <wbr> between a word and struck punctuation, where Markdown would read no marker.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
@@ -120,7 +120,7 @@ Title: fix(core): keep marks set in CSS
 ```
 Google Docs, and other editors, set marks in CSS rather than tags, so their bold, italic and strikethrough were lost. Google Docs also wraps a whole copy in <b style="font-weight:normal">, so all of it came out bold.
 
-Text whose style sets a font weight of bold or 600 and up, an italic or oblique font style, or a line-through is now bold, italic or struck. An element whose style sets a lighter weight adds no bold, whatever its tag.
+Text whose style sets a font weight of bold or 600 and up, an italic or oblique font style, or a line-through is now bold, italic or struck. An element whose style sets a lighter weight adds no bold, whatever its tag, and one that inherits keeps what's around it. Marks in a <style> sheet aren't read.
 
 This adds rehype-stringify, the counterpart of the rehype-parse core already has: the marks are worked out on the parsed HTML, then handed to Turndown. HTML with no style attribute skips the step.
 
@@ -142,7 +142,7 @@ HTML with a <head> (Word copies one) put its title and its stylesheet's text in 
 Title: fix(core): keep a raw HTML block's text
 
 ```
-A raw HTML block in Markdown was dropped, text and all. Its text is now kept as plain paragraphs, with the tags stripped. Inline HTML is unchanged: its tags are dropped and its text was already kept.
+A raw HTML block in Markdown was dropped, text and all. Its text is now kept as plain paragraphs, with the tags stripped, in a list item, a quote or a footnote too. Inline HTML is unchanged: its tags are dropped and its text was already kept.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
@@ -174,7 +174,7 @@ Slack's Delta can't hold a code block inside a list item, so an ordered list wit
 Title: fix(core): keep the text around a plain pre
 
 ```
-HTML with a <pre> that has no <code> was converted to that <pre>'s text alone, and the rest of the copy was lost. It's now read that way only when the <pre> holds all of the copy's text. Otherwise the whole copy is converted, and the <pre> becomes a code block among the rest.
+HTML with a <pre> that has no <code> was converted to that <pre>'s text alone, and the rest of the copy was lost. It's now read that way only when the <pre> holds all of the copy's text. Otherwise the whole copy is converted, and the <pre> becomes a code block among the rest. An image or a rule beside it counts as more than its text.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
