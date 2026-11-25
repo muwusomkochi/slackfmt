@@ -1,0 +1,18 @@
+X10: does JavaScriptCore keep its JIT in the sandboxed app? Passed, 2026-11-24 10:08 pm AST.
+
+App: apps/macos at the commit that adds this file, built by scripts/build.sh and installed to /Applications by scripts/install.sh.
+  codesign -d --entitlements: com.apple.security.app-sandbox true, com.apple.security.cs.allow-jit true
+  codesign -dv: CodeDirectory flags=0x10000(runtime); Authority=Apple Development: hello@muwuso.com (F7GB63XQ29); arm64
+  vmmap: "JS JIT Generated Code" regions present
+Machine: macOS 27.2.1 (26B131), Apple Silicon, one screen (1728 x 1117).
+Input: fixture-20k.md, Appendix A at precedent 28c01f7 repeated and cut at a line end, 19,985 characters.
+  Loop 1's fixtures.py cuts one character past the bound when a line ends exactly there (20,001 on this fixture), so it was recut.
+Converter: core at V6 (551c592), with loop 1's stand-ins for the HTML and plain text, as X2's loop used.
+Method: 20 runs; each puts the fixture on the general pasteboard as plain text, posts a left mouse click (CGEvent) on the status
+  item's frame, and times from just before the mouse-down is posted to the general pasteboard's changeCount moving, measured in
+  another process (slackfmt-accept time-clicks). Two trial clicks ran first: 797.2 ms (the first since launch) and 135.0 ms.
+
+runs (ms): 156.9, 143.9, 165.5, 149.6, 145.8, 155.8, 147.2, 146.4, 141.4, 144.1, 160.5, 143.2, 143.8, 144.4, 142.4, 159.2, 130.9, 137.7, 150.2, 140.7
+median of 20: 145.1 ms, min 130.9 ms, max 165.5 ms; budget 300 ms (V7)
+
+Seen: his menu bar is full, so macOS puts the new status item behind its overflow arrow. The run expanded the arrow before each click.
