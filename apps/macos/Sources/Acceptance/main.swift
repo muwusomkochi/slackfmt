@@ -102,6 +102,17 @@ case "a9":
         await rowA9Refused(app, "200,001 code units selected", String(repeating: "plain words\n", count: 16_667).prefix(200_001).description, "Too long to convert")
     }
 case "a9-throw": await withApp(["--test-throw"]) { await rowA9Refused($0, "fixture.md with --test-throw", Fixtures.text("fixture.md"), "Couldn't convert this") }
+case "a10-menu": await withApp { await rowA10Menu($0) }
+case "a10-focus": await withApp { rowA10Focus($0) }
+case "a10-quit": await withHisMac { rowA10Quit() }
+case "a11-on": await withApp { rowA11($0, notificationsOn: true) }
+case "a11-off": await withApp { rowA11($0, notificationsOn: false) }
+case "a3": await withApp { await rowRefusedAsCopied($0, trigger, row: "A3 a Slack desktop copy", reason: "Already Slack format", glyph: true) }
+case "a4-copied": await withApp { await rowRefusedAsCopied($0, trigger, row: "A4 \(arguments[1])", reason: arguments[2], glyph: false) }
+case "a5": await withApp { rowA5($0) }
+case "a5-signing": rowA5Signing()
+case "a7": await withApp { rowA7($0, canary: arguments[1]) }
+case "a7-throw": await withApp(["--test-throw"]) { rowA7Throw($0, canary: arguments[1]) }
 case "services-call": await withApp { rowServicesCall($0) }
 case "services-latency":
     await withApp { app in

@@ -116,3 +116,27 @@ func rowA18(_ app: App, _ trigger: Trigger) {
     }
     report.finish()
 }
+
+/// A7's conversions: fixture.md with a canary line, ten by the hotkey. The files it prints are the app's captured output.
+func rowA7(_ app: App, canary: String) {
+    var converted = 0
+    for _ in 1...10 {
+        let before = Clipboard.put(plain: "\(canary)\n\n\(Fixtures.text("fixture.md"))")
+        usleep(300_000)
+        guard Trigger.hotkey.fire(app) != nil, Clipboard.waitForChange(after: before, timeout: 5_000) != nil else { continue }
+        usleep(300_000)
+        if Clipboard.slackDelta?.contains(canary) == true { converted += 1 }
+        usleep(1_200_000)
+    }
+    print("\(converted) of 10 conversions carried the canary")
+    print("output \(app.log) \(app.errors)")
+}
+
+func rowA7Throw(_ app: App, canary: String) {
+    let before = Clipboard.put(plain: "\(canary)\n\n\(Fixtures.text("fixture.md"))")
+    usleep(300_000)
+    _ = Trigger.hotkey.fire(app)
+    sleep(2)
+    print("throw case: changeCount unchanged \(NSPasteboard.general.changeCount == before); \(app.entries.last { $0.text.hasPrefix("status nothing") }?.text ?? "no refusal")")
+    print("output \(app.log) \(app.errors)")
+}

@@ -1,0 +1,12 @@
+== A5 signing and Info.plist (V12)
+ok   App Sandbox on
+ok   com.apple.security.cs.allow-jit
+ok   no network client entitlement
+ok   those two entitlements and no other: [Key] com.apple.security.app-sandbox, [Key] com.apple.security.cs.allow-jit
+ok   hardened runtime flag: CodeDirectory v=20500 size=1087 flags=0x10000(runtime) hashes=23+7 location=embedded
+ok   an Apple Development authority
+ok   arm64
+ok   CFBundleIdentifier is com.anoraq.slackfmt: com.anoraq.slackfmt
+ok   CFBundleExecutable is Slackfmt: Slackfmt
+ok   LSMinimumSystemVersion is 14.0: 14.0
+A5 signing and Info.plist (V12) PASSED: 10 of 10 checks
