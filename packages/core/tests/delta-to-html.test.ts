@@ -89,8 +89,22 @@ describe("toHtml", () => {
     );
   });
 
-  it("writes an ordered list starting past 1 as paragraphs", () => {
-    expect(html({ insert: "3. third\n4. fourth\n" })).toBe("<p>3. third<br>4. fourth</p>");
+  it("writes an ordered list starting past 1 as paragraphs, one for each item", () => {
+    expect(html({ insert: "before\n3. third\nmore of it\n4. fourth\n" })).toBe(
+      "<p>before</p><p>3. third<br>more of it</p><p>4. fourth</p>",
+    );
+  });
+
+  it("writes a quoted ordered list starting past 1 the same way", () => {
+    expect(html({ insert: "3. third" }, quote, { insert: "4. fourth" }, quote)).toBe(
+      "<blockquote><p>3. third</p><p>4. fourth</p></blockquote>",
+    );
+  });
+
+  it("keeps a list's levels when its first line is the deeper one", () => {
+    expect(html({ insert: "a" }, bullet({ indent: 1 }), { insert: "b" }, bullet())).toBe(
+      "<ul><li><ul><li>a</li></ul></li><li>b</li></ul>",
+    );
   });
 
   it("writes a list that opens nested", () => {
