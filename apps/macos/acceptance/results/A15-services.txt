@@ -1,5 +1,6 @@
 == A15 fixture-20k.md by Services
-note runs (ms): 518.3, 494.8, 490.6, 498.2, 493.1, 485.0, 490.3, 491.7, 470.1, 482.1, 481.3, 492.8, 486.5, 493.7, 480.5, 497.2, 481.0, 483.7, 481.7, 478.2
-FAIL median within 300 ms: median 488.4 ms, min 470.1, max 518.3
+note runs, Services call to changeCount (ms): 111.1, 106.7, 106.7, 106.6, 102.7, 102.3, 105.2, 100.1, 98.8, 118.2, 101.0, 102.7, 98.1, 103.6, 101.4, 100.1, 99.9, 101.8, 93.4, 99.5
+note menu close before each call (ms): 402.0, 391.5, 393.1, 391.0, 387.4, 392.3, 406.9, 379.4, 398.5, 392.7, 379.2, 386.7, 381.5, 379.1, 388.6, 377.9, 383.8, 387.9, 391.6, 386.8
+ok   median within 300 ms of the call: median 102.1 ms, min 93.4, max 118.2
 ok   every output matches its V23 reference: 20 of 20
-A15 fixture-20k.md by Services FAILED: 1 of 2 checks
+A15 fixture-20k.md by Services PASSED: 2 of 2 checks
