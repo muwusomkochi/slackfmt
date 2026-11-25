@@ -58,6 +58,7 @@ final class CapsulePanel: NSPanel {
         isOpaque = false
         backgroundColor = .clear
         hasShadow = true
+        animationBehavior = .none
         setAccessibilityElement(false)
     }
 

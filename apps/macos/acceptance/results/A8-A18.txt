@@ -1,0 +1,12 @@
+== A18 by hotkey
+ok   01-delta: expected/a18-01-delta.delta.json
+ok   02-ops-array: expected/a18-02-ops-array.delta.json
+ok   03-json-not-delta: expected/a18-03-json-not-delta.delta.json
+ok   04-html: expected/a18-04-html.delta.json
+ok   05-html-uppercase: expected/a18-05-html-uppercase.delta.json
+ok   06-words-then-html: expected/a18-06-words-then-html.delta.json
+ok   07-markdown: expected/a18-07-markdown.delta.json
+ok   08-opens-with-a-link: expected/a18-08-opens-with-a-link.delta.json
+ok   09-tag-within-200: expected/a18-09-tag-within-200.delta.json
+ok   10-tag-past-200: expected/a18-10-tag-past-200.delta.json
+A18 by hotkey PASSED: 10 of 10 checks

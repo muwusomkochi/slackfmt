@@ -40,13 +40,26 @@ enum StatusItem {
         AX.element(AXUIElementCreateApplication(pid), "AXExtrasMenuBar").flatMap { AX.children($0).first }
     }
 
+    /// The item's frame, only when the item is really on screen there: a hidden item still reports a stale frame, and a
+    /// click on one would land on something else.
     static func frame(_ pid: pid_t) -> CGRect? {
         expandOverflow()
-        for _ in 0..<40 {
-            if let frame = element(pid).flatMap(AX.frame), frame.width > 0 { return frame }
+        for _ in 0..<20 {
+            if let frame = element(pid).flatMap(AX.frame), frame.width > 0, frame.maxY < 60, isHit(CGPoint(x: frame.midX, y: frame.midY), pid) {
+                return frame
+            }
             usleep(50_000)
         }
         return nil
+    }
+
+    private static func isHit(_ point: CGPoint, _ pid: pid_t) -> Bool {
+        var found: AXUIElement?
+        AXUIElementCopyElementAtPosition(AXUIElementCreateSystemWide(), Float(point.x), Float(point.y), &found)
+        guard let found else { return false }
+        var owner: pid_t = 0
+        AXUIElementGetPid(found, &owner)
+        return owner == pid || AX.string(found, "AXDescription") == "Copy for Slack" || AX.string(found, "AXTitle") == "Copy for Slack"
     }
 
     private static func expandOverflow() {

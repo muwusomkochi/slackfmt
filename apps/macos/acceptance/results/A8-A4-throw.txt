@@ -1,0 +1,7 @@
+== A4 fixture.md with --test-throw by hotkey
+ok   state log: nothing ("Couldn't convert this") from +0.1 s through +1.25 s: nothing Couldn't convert this
+ok   state log: idle by +1.8 s: idle
+FAIL tooltip: none
+ok   changeCount unchanged: 1010 -> 1010
+ok   no capsule
+A4 fixture.md with --test-throw by hotkey FAILED: 4 of 5 checks

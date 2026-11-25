@@ -9,6 +9,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var hotKey: HotKey!
     private var servicesProvider: ServicesProvider!
     private var isConverting = false
+    /// App Nap slows a click's answer and stretches V9's holds.
+    private let activity = ProcessInfo.processInfo.beginActivity(options: .userInitiatedAllowingIdleSystemSleep, reason: "ready for a click")
 
     init(service: ConversionService) {
         self.service = service

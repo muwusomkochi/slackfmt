@@ -48,9 +48,42 @@ public final class ConversionService {
 }
 
 extension ConversionService {
-    /// Loads AppKit's HTML reader and lets JavaScriptCore compile the converter, so his first click doesn't pay for either.
-    public func warmUp() {
-        guard let conversion = try? converter.convert("**warm**\n\n- [ ] up", format: .detect) else { return }
-        _ = try? RichText.rtf(fromHTML: conversion.html)
+    /// Runs the whole path a few times, a turn of the run loop apart, so AppKit's HTML reader is loaded and JavaScriptCore has
+    /// compiled the converter before his first click.
+    public func warmUp(_ rounds: Int = 12) {
+        guard rounds > 0 else { return }
+        if let conversion = try? converter.convert(Self.sample, format: .detect) {
+            _ = try? RichText.rtf(fromHTML: conversion.html)
+            _ = try? converter.convert(conversion.html, format: .html)
+        }
+        DispatchQueue.main.async { [self] in warmUp(rounds - 1) }
     }
+
+    private static let sample = """
+        # Title
+
+        Some **bold**, _italic_, ~~struck~~ and `inline code`, with a [link](https://example.com).\\
+        A second line, then ![an image](https://example.com/a.png).
+
+        - one
+          - nested
+        - [ ] open
+        - [x] done
+
+        3. third
+        4. fourth
+
+        > A quote:
+        > - with a list
+
+        ---
+
+        ```sh
+        echo code
+        ```
+
+        | a | b |
+        |---|---|
+        | 1 | 2 |
+        """
 }

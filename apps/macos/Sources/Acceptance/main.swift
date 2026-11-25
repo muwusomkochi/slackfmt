@@ -1,16 +1,9 @@
 import AppKit
+import Carbon.HIToolbox
 import SlackfmtKit
 
 setvbuf(stdout, nil, _IOLBF, 0)
 let arguments = Array(CommandLine.arguments.dropFirst())
-
-func median(_ values: [Double]) -> Double {
-    let sorted = values.sorted()
-    let middle = sorted.count / 2
-    return sorted.count % 2 == 1 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2
-}
-
-func format(_ value: Double) -> String { String(format: "%.1f", value) }
 
 func runningApp() -> pid_t {
     guard let app = NSRunningApplication.runningApplications(withBundleIdentifier: "com.anoraq.slackfmt").first else {
@@ -71,7 +64,46 @@ func writeX9() {
 
 func isX9OnTheClipboard() -> Bool { Clipboard.slackDelta?.contains("Packing for the lake") == true }
 
+/// Runs a row with his clipboard and pointer put back after, once he's left the Mac alone for a few seconds.
+func withHisMac(_ body: () async -> Void) async {
+    let deadline = now() + 120_000
+    while Input.idle < 4, now() < deadline { usleep(500_000) }
+    let snapshot = ClipboardSnapshot()
+    let pointer = Input.pointer
+    await body()
+    Input.move(to: pointer)
+    snapshot.restore()
+}
+
+let trigger: Trigger = arguments.contains("--hotkey") ? .hotkey : .click
+
+/// Launches the app (its first run already claimed, so it asks for nothing) and runs a row against it.
+func withApp(_ flags: [String] = [], _ body: (App) async -> Void) async {
+    await withHisMac {
+        guard let app = App(["-hasRunBefore", "YES"] + flags) else { return print("the app didn't launch") }
+        warmTheHarness()
+        await body(app)
+    }
+}
+
 switch arguments.first {
+case "a1": await withApp { await rowA1($0, trigger); rowA2("A1 by \(trigger.rawValue)") }
+case "a4": await withApp { await rowA4($0, trigger) }
+case "a4-throw": await withApp(["--test-throw"]) { await rowA4Throw($0, trigger) }
+case "a15": await withApp { rowA15($0, trigger) }
+case "a17": await withApp { rowA17($0, trigger) }
+case "a18": await withApp { rowA18($0, trigger) }
+case "latency":
+    await withApp { app in
+        for run in 1...Int(arguments[1])! {
+            Clipboard.put(plain: Fixtures.text("fixture.md"))
+            usleep(300_000)
+            guard let start = trigger.fire(app) else { return }
+            usleep(1_800_000)
+            let moments = app.entries.filter { $0.time >= start }.map { "\($0.text) +\(format($0.time - start))" }
+            print("run \(run): \(moments.joined(separator: "; "))")
+        }
+    }
 case "x9-write":
     writeX9()
 case "x9-check":
@@ -81,6 +113,6 @@ case "time-clicks":
 case "idle":
     print(format(Input.idle))
 default:
-    print("usage: slackfmt-accept time-clicks <file> <runs> | x9-write | x9-check | idle")
+    print("usage: slackfmt-accept a1|a4|a4-throw|a15|a17|a18|latency <runs> [--hotkey] | time-clicks <file> <runs> | x9-write | x9-check | idle")
     exit(64)
 }
