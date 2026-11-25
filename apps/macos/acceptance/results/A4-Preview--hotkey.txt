@@ -3,6 +3,6 @@ note types: public.png, Apple PNG pasteboard type, dyn.ah62d4rv4gu8zazwuqm10c6xe
 ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Images can't be converted
-ok   changeCount unchanged: 2232 -> 2232
+ok   changeCount unchanged: 3318 -> 3318
 ok   no capsule
 A4 an image copied from Preview by hotkey PASSED: 5 of 5 checks

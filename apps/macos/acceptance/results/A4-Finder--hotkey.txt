@@ -4,6 +4,6 @@ note types: public.file-url, CorePasteboardFlavorType 0x6675726C, dyn.ah62d4rv4g
 ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Images can't be converted
-ok   changeCount unchanged: 2230 -> 2230
+ok   changeCount unchanged: 3314 -> 3314
 ok   no capsule
 A4 a text file copied in Finder by hotkey PASSED: 5 of 5 checks

@@ -1,16 +1,16 @@
 == A9, F3 from TextEdit
-note menu close, from the choice to the Services call: 904.8 ms
+note menu close, from the choice to the Services call: 473.9 ms
 ok   state log: done from +0.1 s through +0.75 s: done
 ok   state log: idle by +1.3 s: idle
-note state log (ms after the trigger): services called +0.0; status done +27.5; capsule shown +52.9; status idle +1034.1; capsule hidden +1393.7
+note state log (ms after the trigger): services called +0.0; status done +50.3; capsule shown +54.8; status idle +1056.5; capsule hidden +1384.7
 ok   screenshot at +0.1 s shows V16's checkmark: checkmark 0.98, number 0.50, nosign 0.37
 ok   capsule shows at +0.2 s
 ok   capsule is gone at +1.6 s
 ok   capsule is 36 pt high: 36.0
 ok   capsule is centred on the pointer's screen: 863.5 on a screen centred at 864.0
 ok   capsule's bottom edge is 72 pt above the visible frame's bottom: 72.0
-note capsule last on screen at +1398.9 ms
-note fades: 21 of 111 capsule samples between 0 and 1
+note capsule last on screen at +1390.7 ms
+note fades: 26 of 148 capsule samples between 0 and 1
 note screens attached: 1
 ok   changeCount moved
 ok   pickle bytes equal the reference: 3084 bytes
@@ -51,10 +51,10 @@ ok   public.rtf fixed-pitch code block
 note public.rtf lists, tasks and quotes are judged in E2 (X8's branch)
 A2 after A9's Services conversion PASSED: 30 of 30 checks
 == A9 200,001 code units selected, from TextEdit
-note menu close, from the choice to the Services call: 451.8 ms
+note menu close, from the choice to the Services call: 433.5 ms
 ok   state log: nothing ("Too long to convert") from +0.1 s through +1.25 s: nothing Too long to convert
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Too long to convert
-ok   changeCount unchanged: 2531 -> 2531
+ok   changeCount unchanged: 2761 -> 2761
 ok   no capsule
 A9 200,001 code units selected, from TextEdit PASSED: 5 of 5 checks

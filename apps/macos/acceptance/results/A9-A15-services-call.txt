@@ -1,10 +1,10 @@
 == A9 and A15 supplement: the Services call itself (NSPerformService), without TextEdit's menu
-note fixture.md runs, call to changeCount (ms): 91.2, 31.7, 32.8, 34.4, 38.5
-note fixture.md done shown after the call (ms): 90.9, 30.2, 33.2, 34.1, 38.2
-ok   fixture.md median within 300 ms of the call: median 34.4 ms, max 91.2
+note fixture.md runs, call to changeCount (ms): 94.1, 40.1, 36.4, 60.4, 37.6
+note fixture.md done shown after the call (ms): 93.6, 39.8, 36.9, 60.0, 38.0
+ok   fixture.md median within 300 ms of the call: median 40.1 ms, max 94.1
 ok   fixture.md every output matches its reference: 5 of 5
-note fixture-20k.md runs, call to changeCount (ms): 124.0, 118.4, 126.1, 135.0, 131.5, 132.6, 149.3, 122.6, 149.4, 149.6, 117.4, 133.1, 123.7, 143.2, 140.2, 125.5, 126.7, 130.6, 139.0, 125.6
-note fixture-20k.md done shown after the call (ms): 123.6, 118.1, 125.8, 134.4, 131.2, 132.0, 148.9, 122.3, 148.7, 144.8, 117.0, 122.9, 123.4, 142.8, 140.0, 124.4, 127.2, 130.2, 138.7, 125.3
-ok   fixture-20k.md median within 300 ms of the call: median 131.1 ms, max 149.6
+note fixture-20k.md runs, call to changeCount (ms): 115.2, 129.3, 126.2, 123.1, 129.5, 137.4, 124.8, 137.9, 124.6, 139.0, 131.1, 150.4, 140.9, 138.0, 124.5, 135.1, 135.3, 126.5, 115.0, 141.2
+note fixture-20k.md done shown after the call (ms): 114.7, 129.0, 126.0, 122.7, 129.2, 137.1, 125.3, 137.5, 124.3, 138.7, 130.5, 150.2, 140.6, 137.3, 124.0, 134.7, 135.4, 126.3, 114.6, 141.0
+ok   fixture-20k.md median within 300 ms of the call: median 130.3 ms, max 150.4
 ok   fixture-20k.md every output matches its reference: 20 of 20
 A9 and A15 supplement: the Services call itself (NSPerformService), without TextEdit's menu PASSED: 4 of 4 checks

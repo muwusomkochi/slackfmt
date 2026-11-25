@@ -2,37 +2,37 @@
 ok   state log: nothing ("Clipboard is empty") from +0.1 s through +1.25 s: nothing Clipboard is empty
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Clipboard is empty
-ok   changeCount unchanged: 1394 -> 1394
+ok   changeCount unchanged: 2579 -> 2579
 ok   no capsule
 A4 a pasteboard with no types by click PASSED: 5 of 5 checks
 == A4 spaces and newlines only by click
 ok   state log: nothing ("Clipboard is empty") from +0.1 s through +1.25 s: nothing Clipboard is empty
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Clipboard is empty
-ok   changeCount unchanged: 1395 -> 1395
+ok   changeCount unchanged: 2580 -> 2580
 ok   no capsule
 A4 spaces and newlines only by click PASSED: 5 of 5 checks
 == A4 HTML and image types, as Safari's Copy Image writes by click
 ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Images can't be converted
-ok   changeCount unchanged: 1396 -> 1396
+ok   changeCount unchanged: 2581 -> 2581
 ok   no capsule
 A4 HTML and image types, as Safari's Copy Image writes by click PASSED: 5 of 5 checks
 == A4 an image and a file URL together by click
 ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Images can't be converted
-ok   changeCount unchanged: 1397 -> 1397
+ok   changeCount unchanged: 2582 -> 2582
 ok   no capsule
 A4 an image and a file URL together by click PASSED: 5 of 5 checks
 == A4 200,001 code units by click
 ok   state log: nothing ("Too long to convert") from +0.1 s through +1.25 s: nothing Too long to convert
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Too long to convert
-ok   changeCount unchanged: 1398 -> 1398
+ok   changeCount unchanged: 2583 -> 2583
 ok   no capsule
 A4 200,001 code units by click PASSED: 5 of 5 checks
 == A4 exactly 200,000 code units by click
-ok   converts: 200000 code units in 973.0 ms
+ok   converts: 200000 code units in 991.2 ms
 A4 exactly 200,000 code units by click PASSED: 1 of 1 checks

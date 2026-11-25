@@ -1,15 +1,15 @@
 10 of 10 conversions carried the canary
-output /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/6F2CAD3F-6FDB-4628-A442-C41A993C88A2.out /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/7C8589E1-F4F1-48ED-AAAD-03201F44D32C.err
+output /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/CBB437D1-F70C-49B5-9BBD-06A642399314.out /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/8C712638-B634-40DC-9F25-BB4AEA7DB0A3.err
 throw case: changeCount unchanged true; status nothing Couldn't convert this
-output /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/73138F77-F864-4953-A993-BB5355811992.out /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/1110223B-341D-426A-9EFD-D6E87287811C.err
+output /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/79BE96CD-FB78-4BC2-9435-B91502AD68F6.out /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/0C3D98F0-23F2-42CD-8C52-B36031BDF23D.err
 ok   /Users/muwusomkochi/Library/Containers/com.anoraq.slackfmt: absent (0 files written since; 0 unreadable)
 ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/: absent (15 files written since; 0 unreadable)
-ok   /Users/muwusomkochi/Library/Caches: absent (6 files written since; 0 unreadable)
+ok   /Users/muwusomkochi/Library/Caches: absent (53 files written since; 0 unreadable)
 FAIL /Users/muwusomkochi/Library/Application Support: /Users/muwusomkochi/Library/Application Support/com.wiheads.paste-setapp/db.sqlite-wal
 ok   /Users/muwusomkochi/Library/Logs: absent (3 files written since; 0 unreadable)
-ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/6F2CAD3F-6FDB-4628-A442-C41A993C88A2.out: absent (1 files written since; 0 unreadable)
-ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/7C8589E1-F4F1-48ED-AAAD-03201F44D32C.err: absent (1 files written since; 0 unreadable)
-ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/73138F77-F864-4953-A993-BB5355811992.out: absent (1 files written since; 0 unreadable)
-ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/1110223B-341D-426A-9EFD-D6E87287811C.err: absent (1 files written since; 0 unreadable)
-ok   unified log: absent (12163 lines)
+ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/CBB437D1-F70C-49B5-9BBD-06A642399314.out: absent (1 files written since; 0 unreadable)
+ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/8C712638-B634-40DC-9F25-BB4AEA7DB0A3.err: absent (1 files written since; 0 unreadable)
+ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/79BE96CD-FB78-4BC2-9435-B91502AD68F6.out: absent (1 files written since; 0 unreadable)
+ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/0C3D98F0-23F2-42CD-8C52-B36031BDF23D.err: absent (1 files written since; 0 unreadable)
+ok   unified log: absent (11020 lines)
 A7 FAILED
