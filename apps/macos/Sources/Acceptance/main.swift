@@ -283,6 +283,8 @@ case "x9-check":
     print("changeCount \(NSPasteboard.general.changeCount); X9's pickle still on the clipboard: \(isX9OnTheClipboard())")
 case "time-clicks":
     timeClicks(arguments[1], runs: Int(arguments[2])!)
+case "toggle-voiceover":
+    Input.key(kVK_F5, flags: [.maskCommand, .maskSecondaryFn])
 case "idle":
     print(format(Input.idle))
 default:

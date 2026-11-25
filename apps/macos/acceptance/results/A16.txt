@@ -1,4 +1,4 @@
-A16: not passed yet. Judge: Muwuso.
+A16: every state is spoken by the captions; his own word on the last run is still open. Judge: Muwuso.
 
 R22: passes. VoiceOver reads "Copy for Slack" at the status item. He answered "Copy for Slack" (2026-11-25, about 1:09 am AST); VoiceOver's
 caption panel at that moment reads "Copy for Slack, status menu".
@@ -21,3 +21,9 @@ row says. To be run again with him.
    cases 1 to 6 spoken, each with its own string ("application, Nothing converted: Images can't be converted, system dialogue"), and no
    refusal saying "Copied for Slack". Case 7's only caption is "VoiceOver off", so VoiceOver was off for 7 to 12. Those six are to be run
    again with him.
+6. 4:37 pm, 25 Nov, cases 7 to 12 by click, at his word ("run all six now as fast as you can"), same build. All six states showed with
+   VoiceOver on. The captions show 7 to 11 spoken with their own strings; in 12 VoiceOver was following his keys ("status menus ...").
+7. 4:39 pm, case 12 again by click, VoiceOver on: spoken, caption "Nothing converted: Couldn't convert this, system dialogue".
+
+So by VoiceOver's captions all 12 are spoken with their own string on the build at b04f249 (1 to 6 in run 5, 7 to 11 in run 6, 12 in run
+7), some with "application" in front and all with "system dialogue" after, and no refusal says "Copied for Slack".

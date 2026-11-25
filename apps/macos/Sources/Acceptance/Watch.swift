@@ -105,8 +105,9 @@ func rowA16(hours: Double, folder: String, from first: Int = 1) async {
         pause(0.5)
     }
     print("VoiceOver is on")
-    print("waiting for 20 s of stillness")
-    while Input.idle < 20 { pause(0.2) }
+    let still = first == 1 ? 20.0 : 4.0
+    print("waiting for \(still) s of stillness")
+    while Input.idle < still { pause(0.2) }
     let snapshot = ClipboardSnapshot()
     let image = NSImage(systemSymbolName: "photo", accessibilityDescription: nil)!.tiffRepresentation!
     let file = Data("file:///Applications/".utf8)
@@ -132,7 +133,7 @@ func rowA16(hours: Double, folder: String, from first: Int = 1) async {
         // By click, as A16 says (F1 stands for F2 and F3): the hotkey holds VoiceOver's own keys, and VoiceOver takes it.
         guard let start = Trigger.click.fire(app) else { return print("\(index). \(name): not run, the status item wasn't on screen") }
         var shots = 0
-        while now() - start < 4_500 {
+        while now() - start < (first == 1 ? 4_500 : 3_600) {
             let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []
             for window in windows where (window[kCGWindowOwnerName as String] as? String) == "VoiceOver" {
                 guard let bounds = CGRect(dictionaryRepresentation: window[kCGWindowBounds as String] as! CFDictionary), bounds.width < 1_000,
