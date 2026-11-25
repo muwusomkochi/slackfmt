@@ -1,4 +1,4 @@
-import type { Root, RootContent } from "mdast";
+import type { ListItem, Root, RootContent } from "mdast";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import { unified } from "unified";
@@ -164,7 +164,8 @@ function processNode(
     case "list": {
       const start = node.ordered ? (node.start ?? 1) : 1;
       // Slack's Delta has no start number, and Slack itself copies such a list as numbered text.
-      const numbered = start !== 1;
+      // So do the items after a block that ends the list, which Slack would count from 1 again.
+      let numbered = start !== 1;
       node.children.forEach((item, index) => {
         const box = item.checked == null ? "" : item.checked ? "☑ " : "☐ ";
         if (numbered) {
@@ -182,6 +183,7 @@ function processNode(
           itemBlockAttrs.border = 1;
         }
         processListItem(item.children, ops, itemBlockAttrs, listDepth, box);
+        numbered = !!node.ordered && splitsList(item);
       });
       break;
     }
@@ -214,6 +216,18 @@ function processNode(
       }
       break;
   }
+}
+
+const SPLITTING_BLOCKS = new Set(["code", "blockquote", "heading", "thematicBreak", "table"]);
+
+/** Whether an item holds a block whose lines end the list it's in. */
+function splitsList(item: ListItem): boolean {
+  return item.children.some(
+    (child) =>
+      SPLITTING_BLOCKS.has(child.type) ||
+      (child.type === "list" &&
+        ((child.ordered && (child.start ?? 1) !== 1) || child.children.some(splitsList))),
+  );
 }
 
 /**
