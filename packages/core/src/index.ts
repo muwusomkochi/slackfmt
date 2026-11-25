@@ -9,4 +9,6 @@ export {
   formats,
   type InputFormat,
 } from "./pipeline.js";
+export { toHtml } from "./serializers/delta-to-html.js";
+export { toPlainText } from "./serializers/delta-to-text.js";
 export { markdownToDelta } from "./serializers/markdown-to-delta.js";
