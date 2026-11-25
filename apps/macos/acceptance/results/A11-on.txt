@@ -1,0 +1,7 @@
+== A11 with notifications on
+ok   a Slack copy's format: notification: notification: Notification Centre | Slackfmt, Slackfmt, Slack's format still matches | Slackfmt | Slack's format still matches
+ok   a slack/texty that isn't a Delta: notification: notification: Notification Centre | Slackfmt, Slackfmt, Slack's format changed: formatted pastes may break | Slackfmt | Slack's format changed: formatted pastes may break
+ok   a pickle with no slack/texty: notification: notification: Notification Centre | Slackfmt, Slackfmt, Slack's format changed: formatted pastes may break | Slackfmt | Slack's format changed: formatted pastes may break
+ok   bytes that don't decode: notification: notification: Notification Centre | Slackfmt, Slackfmt, Slack's format changed: formatted pastes may break | Slackfmt | Slack's format changed: formatted pastes may break
+ok   plain text: notification: notification: Notification Centre | Slackfmt, Slackfmt, No Slack format on the clipboard. Copy a formatted message in Slack first | Slackfmt | No Slack format on the clipboard. Copy a formatted message in Slack first
+A11 with notifications on PASSED: 5 of 5 checks

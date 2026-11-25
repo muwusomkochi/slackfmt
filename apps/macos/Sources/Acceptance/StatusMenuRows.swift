@@ -218,7 +218,10 @@ func rowA11(_ app: App, notificationsOn: Bool) {
         let shown = shownMessage(app, timeout: 4)
         report.check(shown?.how == how && shown?.text.contains(expected.message) == true, "\(name): \(how)", shown.map { "\($0.how): \($0.text)" } ?? "nothing shown")
         dismissAlert(app)
-        sleep(notificationsOn ? 7 : 1)
+        // The banner has to leave before the next check, or its text is read again.
+        let cleared = now() + 15_000
+        pause(1)
+        while now() < cleared, shownMessage(app, timeout: 0.2) != nil { pause(0.3) }
     }
     report.finish()
 }
