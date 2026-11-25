@@ -55,7 +55,10 @@ func rowA4Safari(hours: Double) async {
     guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
     warmTheHarness()
     let images: Set<NSPasteboard.PasteboardType> = PasteboardTypes.images
-    guard waitForCopy("an image copied in Safari", hours: hours, { !images.isDisjoint(with: NSPasteboard.general.types ?? []) }) else { return print("no image came") }
+    guard waitForCopy("an image copied in Safari", hours: hours, {
+        let types = NSPasteboard.general.types ?? []
+        return !images.isDisjoint(with: types) && !types.contains { $0.rawValue.hasPrefix("org.chromium") }
+    }) else { return print("no image came") }
     let pointer = Input.pointer
     for trigger in [Trigger.click, .hotkey] {
         await rowRefusedAsCopied(app, trigger, row: "A4 an image copied from Safari", reason: "Images can't be converted", glyph: false)
