@@ -91,3 +91,62 @@ func reduceMotionIsOn() -> Bool {
     output("/usr/bin/osascript", ["-l", "JavaScript", "-e", "ObjC.import('AppKit'); $.NSWorkspace.sharedWorkspace.accessibilityDisplayShouldReduceMotion"])
         .trimmingCharacters(in: .whitespacesAndNewlines) == "true"
 }
+
+/// A16: each state's announcement, by the hotkey, once he has VoiceOver on. He listens; a picture of VoiceOver's caption panel is kept.
+func rowA16(hours: Double, folder: String) async {
+    func voiceOverIsOn() -> Bool {
+        output("/usr/bin/osascript", ["-l", "JavaScript", "-e", "ObjC.import('AppKit'); $.NSWorkspace.sharedWorkspace.voiceOverEnabled"])
+            .trimmingCharacters(in: .whitespacesAndNewlines) == "true"
+    }
+    let deadline = now() + hours * 3_600_000
+    print("waiting for VoiceOver")
+    while !voiceOverIsOn() {
+        guard now() < deadline else { return print("VoiceOver stayed off") }
+        pause(0.5)
+    }
+    print("VoiceOver is on")
+    while Input.idle < 6 { pause(0.2) }
+    let snapshot = ClipboardSnapshot()
+    let image = NSImage(systemSymbolName: "photo", accessibilityDescription: nil)!.tiffRepresentation!
+    let file = Data("file:///Applications/".utf8)
+    let text: (String) -> [NSPasteboard.PasteboardType: Data] = { [.string: Data($0.utf8)] }
+    let cases: [(String, [NSPasteboard.PasteboardType: Data]?)] = [
+        ("A1 fixture.md", text(Fixtures.text("fixture.md"))),
+        ("A3 Slack's format", nil),
+        ("A4 no types", [:]),
+        ("A4 spaces and newlines", text(" \n \n")),
+        ("A4 an image", [.png: image]),
+        ("A4 a file, as Finder copies one", [.fileURL: file, .tiff: image, .string: Data("a name".utf8)]),
+        ("A4 a file URL alone", [.fileURL: file]),
+        ("A4 an image as Safari copies one", [.tiff: image, .html: Data("<img src=x>".utf8)]),
+        ("A4 an image and a file URL", [.png: image, .fileURL: file]),
+        ("A4 200,000 code units", text(String(String(repeating: "plain words\n", count: 20_000).prefix(200_000)))),
+        ("A4 200,001 code units", text(String(repeating: "a", count: 200_001))),
+    ]
+    func run(_ app: App, _ index: Int, _ name: String, _ contents: [NSPasteboard.PasteboardType: Data]?) {
+        if let contents {
+            if contents.isEmpty { NSPasteboard.general.clearContents() } else { Clipboard.put(contents) }
+        }
+        pause(0.6)
+        guard let start = Trigger.hotkey.fire(app) else { return }
+        pause(1.6)
+        let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []
+        for window in windows where (window[kCGWindowOwnerName as String] as? String) == "VoiceOver" {
+            if let number = window[kCGWindowNumber as String] as? Int {
+                _ = output("/usr/sbin/screencapture", ["-x", "-o", "-l\(number)", "\(folder)/\(index)-\(number).png"])
+            }
+        }
+        print("\(index). \(name): \(app.entries.filter { $0.time >= start && $0.text.hasPrefix("status") }.map(\.text).first ?? "no state")")
+        pause(2.6)
+    }
+    guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
+    warmTheHarness()
+    pause(3)
+    for (index, item) in cases.enumerated() { run(app, index + 1, item.0, item.1) }
+    guard let throwing = App(["-hasRunBefore", "YES", "--test-throw"]) else { return print("the app didn't launch") }
+    pause(3)
+    run(throwing, cases.count + 1, "A4 fixture.md with --test-throw", text(Fixtures.text("fixture.md")))
+    _ = App(["-hasRunBefore", "YES"])
+    snapshot.restore()
+    print("finished")
+}

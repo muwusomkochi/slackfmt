@@ -1,1 +1,40 @@
+Note: an earlier try at 12:59 am AST clicked nothing (the status item was off screen with System Settings in front) and its hotkey half
+didn't find the capsule's window; its state log showed the capsule for 1,012.6 ms. This is the next run, with the setting still on.
+
 waiting for Reduce Motion
+Reduce Motion is on
+== A1 by click with Reduce Motion
+ok   state log: done from +0.1 s through +0.75 s: done
+ok   state log: idle by +1.3 s: idle
+note state log (ms after the trigger): status done +78.2; capsule shown +79.5; status idle +1083.8; capsule hidden +1094.8
+ok   screenshot at +0.1 s shows V16's checkmark: checkmark 0.98, number 0.50, nosign 0.37
+ok   capsule shows at +0.2 s
+ok   capsule is gone at +1.6 s
+ok   capsule is 36 pt high: 36.0
+ok   capsule is centred on the pointer's screen: 863.5 on a screen centred at 864.0
+ok   capsule's bottom edge is 72 pt above the visible frame's bottom: 72.0
+note capsule last on screen at +1104.6 ms
+ok   Reduce Motion: alpha has no value between 0 and 1: 132 samples, between: []
+note screens attached: 1
+ok   changeCount moved
+ok   pickle bytes equal the reference: 3084 bytes
+ok   decoded slack/texty deep-equals the reference
+A1 by click with Reduce Motion PASSED: 12 of 12 checks
+== A1 by hotkey with Reduce Motion
+ok   state log: done from +0.1 s through +0.75 s: done
+ok   state log: idle by +1.3 s: idle
+note state log (ms after the trigger): status done +28.7; capsule shown +29.2; status idle +1030.9; capsule hidden +1043.0
+ok   screenshot at +0.1 s shows V16's checkmark: checkmark 0.98, number 0.50, nosign 0.37
+ok   capsule shows at +0.2 s
+ok   capsule is gone at +1.6 s
+ok   capsule is 36 pt high: 36.0
+ok   capsule is centred on the pointer's screen: 863.5 on a screen centred at 864.0
+ok   capsule's bottom edge is 72 pt above the visible frame's bottom: 72.0
+note capsule last on screen at +1055.2 ms
+ok   Reduce Motion: alpha has no value between 0 and 1: 130 samples, between: []
+note screens attached: 1
+ok   changeCount moved
+ok   pickle bytes equal the reference: 3084 bytes
+ok   decoded slack/texty deep-equals the reference
+A1 by hotkey with Reduce Motion PASSED: 12 of 12 checks
+Reduce Motion was still on when the runs ended
