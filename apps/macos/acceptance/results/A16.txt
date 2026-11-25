@@ -1,4 +1,5 @@
-A16: every state is spoken by the captions; his own word on the last run is still open. Judge: Muwuso.
+A16: passed. Judge: Muwuso. His word, 25 Nov, about 4:41 pm AST, after runs 5 to 7: "I heard them". R23's approach (the capsule speaks, at
+alpha 0 for a refusal) is ratified on his card of 25 Nov 3:45 pm AST, in the hub's paste.
 
 R22: passes. VoiceOver reads "Copy for Slack" at the status item. He answered "Copy for Slack" (2026-11-25, about 1:09 am AST); VoiceOver's
 caption panel at that moment reads "Copy for Slack, status menu".
