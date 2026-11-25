@@ -4,6 +4,7 @@ import {
   isList,
   isQuoted,
   type Line,
+  lineText,
   linkRuns,
   type Segment,
 } from "./delta-lines.js";
@@ -32,7 +33,7 @@ const render: Record<Block, (lines: Line[]) => string> = {
   list: lists,
   heading: (lines) => lines.map(heading).join(""),
   blank: () => "",
-  paragraph: (lines) => `<p>${lines.map(inline).join("<br>")}</p>`,
+  paragraph: paragraphs,
 };
 
 function blocks(lines: Line[]): string {
@@ -41,24 +42,35 @@ function blocks(lines: Line[]): string {
     .join("");
 }
 
+/** Lines that run on from each other, apart from one that opens with its number (a list that starts past 1). */
+function paragraphs(lines: Line[]): string {
+  const result: Line[][] = [];
+  for (const line of lines) {
+    if (result.length === 0 || /^\d+\. /.test(lineText(line))) result.push([line]);
+    else result[result.length - 1].push(line);
+  }
+  return result.map((paragraph) => `<p>${paragraph.map(inline).join("<br>")}</p>`).join("");
+}
+
 function heading(line: Line): string {
   const tag = `h${line.attributes.header}`;
   return `<${tag}>${inline(line)}</${tag}>`;
 }
 
-/** Consecutive list lines: those at the first line's level are items, deeper ones nest in the item before. */
+/** Consecutive list lines: those at the shallowest level are items, deeper ones nest in the item before. */
 function lists(lines: Line[]): string {
-  const level = indentOf(lines[0]);
+  const level = Math.min(...lines.map(indentOf));
   let html = "";
   let open: "ul" | "ol" | undefined;
   for (let i = 0; i < lines.length; ) {
-    const tag = lines[i].attributes.list === "ordered" ? "ol" : "ul";
+    const own = indentOf(lines[i]) === level ? lines[i] : undefined;
+    let next = own ? i + 1 : i;
+    while (next < lines.length && indentOf(lines[next]) > level) next++;
+    const nested = lines.slice(own ? i + 1 : i, next);
+    const tag = (own ?? nested[0]).attributes.list === "ordered" ? "ol" : "ul";
     if (tag !== open) html += `${open ? `</${open}>` : ""}<${tag}>`;
     open = tag;
-    let next = i + 1;
-    while (next < lines.length && indentOf(lines[next]) > level) next++;
-    const nested = next > i + 1 ? lists(lines.slice(i + 1, next)) : "";
-    html += `<li>${inline(lines[i])}${nested}</li>`;
+    html += `<li>${own ? inline(own) : ""}${nested.length > 0 ? lists(nested) : ""}</li>`;
     i = next;
   }
   return `${html}</${open}>`;
