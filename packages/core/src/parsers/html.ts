@@ -26,7 +26,7 @@ turndown.addRule("brInPre", {
 const STRUCK_TAGS = ["DEL", "S", "STRIKE"];
 
 function isStruck(node: Node | null): boolean {
-  return !!node && STRUCK_TAGS.includes(node.nodeName);
+  return !!node && STRUCK_TAGS.includes(node.nodeName) && !!node.textContent?.trim();
 }
 
 turndown.addRule("strikethrough", {
@@ -38,10 +38,13 @@ turndown.addRule("strikethrough", {
     if ((node.parentNode as HTMLElement | null)?.closest("del, s, strike")) return content;
     const open = isStruck(node.previousSibling) ? "" : "~~";
     const close = isStruck(node.nextSibling) ? "" : "~~";
-    return content
+    const struck = content
       .split(/(\n\s*\n)/)
       .map((block) => strike(block, open, close))
       .join("");
+    const before = open && seam(node, "previousSibling", content[0]);
+    const after = close && seam(node, "nextSibling", content[content.length - 1]);
+    return before + struck + after;
   },
 });
 

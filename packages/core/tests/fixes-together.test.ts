@@ -132,4 +132,48 @@ describe("fixes that meet", () => {
       ),
     );
   });
+
+  it("keeps a bold task's box out of its bold", async () => {
+    const html =
+      '<ul><li style="font-weight:700"><input type="checkbox" checked> done</li>' +
+      '<li><input type="checkbox"><span style="font-weight:700"> open</span></li></ul>';
+    expect(await convert(html, { format: "html" })).toBe(
+      delta(
+        { insert: "☑ " },
+        { insert: "done", attributes: { bold: true } },
+        { insert: "\n", attributes: { list: "bullet" } },
+        { insert: "☐ " },
+        { insert: "open", attributes: { bold: true } },
+        { insert: "\n", attributes: { list: "bullet" } },
+      ),
+    );
+  });
+
+  it("keeps marks apart where struck and marked text meet", async () => {
+    const html =
+      '<p><del>(a)</del><span style="font-weight:700">b</span><s>c.</s>d<b><del>(e)</del></b> f</p>';
+    expect(await convert(html, { format: "html" })).toBe(
+      delta(
+        { insert: "(a)", attributes: strike },
+        { insert: "b", attributes: { bold: true } },
+        { insert: "c.", attributes: strike },
+        { insert: "d" },
+        { insert: "(e)", attributes: { bold: true, strike: true } },
+        { insert: " f\n" },
+      ),
+    );
+  });
+
+  it("keeps an image beside a plain pre", async () => {
+    const html = '<pre>one</pre><p><img src="https://example.com/p.png" alt="pic"></p>';
+    expect(await convert(html, { format: "html" })).toBe(
+      delta(
+        { insert: "one" },
+        { insert: "\n", attributes: { "code-block": true } },
+        { insert: "\n" },
+        { insert: "pic", attributes: { link: "https://example.com/p.png" } },
+        { insert: "\n" },
+      ),
+    );
+  });
 });
