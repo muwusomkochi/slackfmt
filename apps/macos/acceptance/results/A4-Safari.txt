@@ -1,0 +1,19 @@
+waiting for an image copied in Safari
+== A4 an image copied from Safari by click
+note types: public.tiff, NeXT TIFF v4.0 pasteboard type, com.apple.flat-rtfd, NeXT RTFD pasteboard type, com.apple.webarchive, Apple Web Archive pasteboard type, public.html, Apple HTML pasteboard type
+ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
+ok   state log: idle by +1.8 s: idle
+ok   tooltip: Images can't be converted
+ok   changeCount unchanged: 2395 -> 2395
+ok   no capsule
+A4 an image copied from Safari by click PASSED: 5 of 5 checks
+note The hotkey half first ran with Safari in front and the status item off screen, so the tooltip couldn't be read (4 of 5 checks). This is
+note that half again on the same copy:
+== A4 an image copied from Safari by hotkey
+note types: public.tiff, NeXT TIFF v4.0 pasteboard type, com.apple.flat-rtfd, NeXT RTFD pasteboard type, com.apple.webarchive, Apple Web Archive pasteboard type, public.html, Apple HTML pasteboard type
+ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
+ok   state log: idle by +1.8 s: idle
+ok   tooltip: Images can't be converted
+ok   changeCount unchanged: 2396 -> 2396
+ok   no capsule
+A4 an image copied from Safari by hotkey PASSED: 5 of 5 checks

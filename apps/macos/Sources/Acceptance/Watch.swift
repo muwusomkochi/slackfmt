@@ -65,3 +65,21 @@ func rowA4Safari(hours: Double) async {
     }
     Input.move(to: pointer)
 }
+
+/// A1 with Reduce Motion, once he has turned it on.
+func rowA1ReduceMotion(hours: Double) async {
+    let deadline = now() + hours * 3_600_000
+    print("waiting for Reduce Motion")
+    while !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion {
+        guard now() < deadline else { return print("Reduce Motion stayed off") }
+        pause(0.5)
+    }
+    while Input.idle < 3 { pause(0.2) }
+    let snapshot = ClipboardSnapshot()
+    let pointer = Input.pointer
+    guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
+    warmTheHarness()
+    for trigger in [Trigger.click, .hotkey] { await rowA1(app, trigger) }
+    Input.move(to: pointer)
+    snapshot.restore()
+}

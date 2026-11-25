@@ -204,6 +204,7 @@ case "a11-off": await withApp { rowA11($0, notificationsOn: false) }
 case "a3": await rowA3(hours: 6)
 case "a3-now":
     if Clipboard.slackDelta != nil { await rowA3Now() } else { print("no Slack copy on the clipboard") }
+case "a1-reduce-motion": await rowA1ReduceMotion(hours: 8)
 case "a4-safari": await rowA4Safari(hours: 6)
 case "a4-copied": await withApp { await rowRefusedAsCopied($0, trigger, row: "A4 \(arguments[1])", reason: arguments[2], glyph: false) }
 case "a5": await withApp { rowA5($0) }
