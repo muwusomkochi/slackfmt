@@ -38,6 +38,11 @@ function pickle(type: string, value: string): Buffer {
   return Buffer.concat([u32(payload.length), payload]);
 }
 
+function settleExpected(name: string, delta: string): void {
+  settle(`expected/${name}.delta.json`, delta);
+  settle(`expected/${name}.pickle`, pickle("slack/texty", delta));
+}
+
 const md = read("fixture.md");
 const html = read("fixture.html");
 
@@ -80,18 +85,18 @@ describe("fixtures", () => {
     settle("fixture-20k.md", md20k);
     settle("fixture-20k.html", html20k);
     settle("fixture-20k.delta.json", delta20k);
-    settle("expected/fixture-20k-md.delta.json", await reference(md20k));
-    settle("expected/fixture-20k-html.delta.json", await reference(html20k));
-    settle("expected/fixture-20k-delta.delta.json", await reference(delta20k));
+    settleExpected("fixture-20k-md", await reference(md20k));
+    settleExpected("fixture-20k-html", await reference(html20k));
+    settleExpected("fixture-20k-delta", await reference(delta20k));
   });
 
   it("the RTF fixtures, from the HTML NSAttributedString writes", async () => {
     for (const name of ["fixture-20k", "a17"]) {
       expect(existsSync(join(fixtures, `${name}.rtf`)), `${name}.rtf`).toBe(true);
-      settle(`expected/${name}-rtf.delta.json`, await reference(read(`${name}.rtf.html`), "html"));
+      settleExpected(`${name}-rtf`, await reference(read(`${name}.rtf.html`), "html"));
     }
     expect(readFileSync(join(fixtures, "fixture-20k.rtf")).length).toBeLessThanOrEqual(limit);
-    settle("expected/a17-plain.delta.json", await reference("plain wins"));
+    settleExpected("a17-plain", await reference("plain wins"));
   });
 
   it("A18's inputs", async () => {
@@ -111,7 +116,7 @@ describe("fixtures", () => {
     for (const [name, format, input] of inputs) {
       expect(detectFormat(input), name).toBe(format);
       settle(`a18/${name}.txt`, input);
-      settle(`expected/a18-${name}.delta.json`, await reference(input));
+      settleExpected(`a18-${name}`, await reference(input));
     }
     expect(words(196).length).toBe(196);
     expect(words(197).length).toBe(197);

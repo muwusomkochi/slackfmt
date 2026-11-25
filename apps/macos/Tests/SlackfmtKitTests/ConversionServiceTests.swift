@@ -96,6 +96,15 @@ final class ConversionServiceTests: XCTestCase {
         XCTAssertEqual(destination.string(forType: .string), "his clipboard")
     }
 
+    func testASourceThatHoldsNoTextLeavesTheClipboardAsItWas() throws {
+        source.clearContents()
+        source.setString("<p><br></p>", forType: .html)
+        let before = destination.changeCount
+        let blank = "async () => ({ delta: '{\"ops\":[]}', html: '', plain: '' })"
+        XCTAssertEqual(try service(blank).convert(from: source, to: destination), .refused(.empty))
+        XCTAssertEqual(destination.changeCount, before)
+    }
+
     func testAConverterThatThrowsLeavesTheClipboardAsItWas() throws {
         put("hi")
         let before = destination.changeCount

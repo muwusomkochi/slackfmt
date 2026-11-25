@@ -18,15 +18,17 @@ public final class ConversionService {
         case .refused(let refusal):
             return .refused(refusal)
         case .source(let source):
-            guard let item = try? pasteboardItem(for: source) else { return .refused(.converterError) }
+            guard let conversion = try? conversion(of: source) else { return .refused(.converterError) }
+            // Markup can hold no characters of its own, and pasting nothing is worse than pasting what was copied (G2).
+            if conversion.plain.allSatisfy(\.isWhitespace) { return .refused(.empty) }
+            guard let item = try? pasteboardItem(for: conversion) else { return .refused(.converterError) }
             destination.clearContents()
             destination.writeObjects([item])
             return .converted
         }
     }
 
-    private func pasteboardItem(for source: Source) throws -> NSPasteboardItem {
-        let conversion = try conversion(of: source)
+    private func pasteboardItem(for conversion: Conversion) throws -> NSPasteboardItem {
         let html = #"<meta charset="utf-8">"# + conversion.html
         let item = NSPasteboardItem()
         item.setData(Pickle.encode([(PasteboardTypes.slackEntry, conversion.delta)]), forType: PasteboardTypes.customData)

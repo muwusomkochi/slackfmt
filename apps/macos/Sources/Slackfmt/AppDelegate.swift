@@ -2,24 +2,44 @@ import AppKit
 import SlackfmtKit
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
+    private let service: ConversionService
+    private let capsule = CapsulePanel()
+    private let notifications = Notifications()
     private var statusItem: StatusItemController!
-    private var service: ConversionService!
+    private var hotKey: HotKey!
+    private var servicesProvider: ServicesProvider!
+    private var isConverting = false
+
+    init(service: ConversionService) {
+        self.service = service
+    }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        service = ConversionService(converter: try! Converter(script: Self.script()))
-        statusItem = StatusItemController(onClick: { [unowned self] in convert(from: .general) })
-        DispatchQueue.main.async { [service] in service!.warmUp() }
-    }
+        let copy = { [unowned self] in convert(from: .general) }
+        let menu = StatusMenu(copy: copy, check: { [unowned self] in notifications.postOrAlert(FormatCheck(.general).message) })
+        statusItem = StatusItemController(menu: menu, onClick: copy)
+        hotKey = HotKey(action: copy)
+        servicesProvider = ServicesProvider(convert: { [unowned self] in convert(from: $0) })
+        NSApp.servicesProvider = servicesProvider
 
-    private func convert(from source: NSPasteboard) {
-        switch service.convert(from: source, to: .general) {
-        case .converted: statusItem.show(.done)
-        case .refused(let refusal): statusItem.show(.nothing(refusal))
+        if FirstRun.claim() {
+            LoginItem.set(true)
+            notifications.askThenPost(Strings.firstRun)
         }
+        DispatchQueue.main.async { [service] in service.warmUp() }
     }
 
-    private static func script() -> String {
-        let url = Bundle.main.url(forResource: "slackfmt", withExtension: "js")!
-        return try! String(contentsOf: url, encoding: .utf8)
+    /// AppKit's HTML reader can run the run loop, so a second trigger can arrive while one is being answered.
+    private func convert(from source: NSPasteboard) {
+        guard !isConverting else { return }
+        isConverting = true
+        defer { isConverting = false }
+        switch service.convert(from: source, to: .general) {
+        case .converted:
+            statusItem.show(.done)
+            capsule.present()
+        case .refused(let refusal):
+            statusItem.show(.nothing(refusal))
+        }
     }
 }

@@ -8,6 +8,8 @@
 	<string>Slackfmt</string>
 	<key>CFBundleExecutable</key>
 	<string>Slackfmt</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.anoraq.slackfmt</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -26,6 +28,28 @@
 	<string>14.0</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>Copy for Slack</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>copyForSlack</string>
+			<key>NSPortName</key>
+			<string>Slackfmt</string>
+			<key>NSRequiredContext</key>
+			<dict/>
+			<key>NSSendTypes</key>
+			<array>
+				<string>public.html</string>
+				<string>public.rtf</string>
+				<string>public.utf8-plain-text</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
