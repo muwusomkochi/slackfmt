@@ -1,0 +1,943 @@
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live
+> - then upload
+
+---
+
+Run `scripts/pack decision-panels` from ~/Development/skills.
+
+```sh
+scripts/pack decision-panels
+```
+
+***
+
+![team cover](https://example.com/cover.png)
+![](https://example.com/no-alt.png)
+**Skills update**
+Panel cards fix landed (s140)\
+pick sits below the pills now  
+and the gap under the heading is _wider_ and ~~tighter~~ fixed
+
+- [precedent](https://github.com/muwusomkochi/precedent) synced
+  - reader cut at 54fdad2
+- [ ] upload the decision-panels cut
+- [x] ds-workflow seal
+
+3. third step keeps its number
+4. fourth follows
+
+> Upload only after the test panel:
+> - render it live

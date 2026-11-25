@@ -1,0 +1,31 @@
+<P><STRONG>Skills update</STRONG><BR>
+Panel cards fix landed (s140)<BR>
+pick sits below the pills now<BR>
+and the gap under the heading is <EM>wider</EM> and <DEL>tighter</DEL> fixed</P>
+<UL>
+<LI><A href="https://github.com/muwusomkochi/precedent">precedent</A> synced
+<UL>
+<LI>reader cut at 54fdad2</LI>
+</UL>
+</LI>
+<LI><INPUT type="checkbox" disabled> upload the decision-panels cut</LI>
+<LI><INPUT type="checkbox" checked disabled> ds-workflow seal</LI>
+</UL>
+<OL start="3">
+<LI>third step keeps its number</LI>
+<LI>fourth follows</LI>
+</OL>
+<BLOCKQUOTE>
+<P>Upload only after the test panel:</P>
+<UL>
+<LI>render it live</LI>
+<LI>then upload</LI>
+</UL>
+</BLOCKQUOTE>
+<HR>
+<P>Run <CODE>scripts/pack decision-panels</CODE> from ~/Development/skills.</P>
+<PRE><CODE>scripts/pack decision-panels
+</CODE></PRE>
+<HR>
+<P><IMG src="https://example.com/cover.png" alt="team cover"><BR>
+<IMG src="https://example.com/no-alt.png" alt=""></P>
