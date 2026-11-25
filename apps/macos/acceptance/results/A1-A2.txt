@@ -1,15 +1,15 @@
 == A1 by click
 FAIL state log: done from +0.1 s through +0.75 s: done, idle
 ok   state log: idle by +1.3 s: idle
-note state log (ms after the trigger): status done +102.6; capsule shown +110.7; status idle +1108.1; capsule hidden +1441.3
+note state log (ms after the trigger): status done +112.0; capsule shown +116.2; status idle +1117.7; capsule hidden +1453.9
 ok   screenshot at +0.1 s shows V16's checkmark: checkmark 0.73, number 0.17, nosign 0.13
 ok   capsule shows at +0.2 s
 ok   capsule is gone at +1.6 s
 ok   capsule is 36 pt high: 36.0
 ok   capsule is centred on the pointer's screen: 863.5 on a screen centred at 864.0
 ok   capsule's bottom edge is 72 pt above the visible frame's bottom: 72.0
-note capsule last on screen at +1430.5 ms
-note fades: 20 of 99 capsule samples between 0 and 1
+note capsule last on screen at +1460.8 ms
+note fades: 25 of 116 capsule samples between 0 and 1
 note screens attached: 1
 ok   changeCount moved
 ok   pickle bytes equal the reference: 3084 bytes

@@ -50,11 +50,12 @@ public final class ConversionService {
 extension ConversionService {
     /// Runs the whole path a few times, a turn of the run loop apart, so AppKit's HTML reader is loaded and JavaScriptCore has
     /// compiled the converter before his first click.
-    public func warmUp(_ rounds: Int = 12) {
+    public func warmUp(_ rounds: Int = 40) {
         guard rounds > 0 else { return }
-        if let conversion = try? converter.convert(Self.sample, format: .detect) {
-            _ = try? RichText.rtf(fromHTML: conversion.html)
+        _ = NSPasteboard.general.types
+        if let conversion = try? converter.convert(Self.sample, format: .detect), let rtf = try? RichText.rtf(fromHTML: conversion.html) {
             _ = try? converter.convert(conversion.html, format: .html)
+            _ = NSPasteboardItem().setData(rtf, forType: .rtf)
         }
         DispatchQueue.main.async { [self] in warmUp(rounds - 1) }
     }

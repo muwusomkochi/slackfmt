@@ -1,0 +1,7 @@
+10 of 10 conversions carried the canary
+output /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/A731BA0C-CE65-47CA-B2E5-1C7B6383093B.out /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/4C7ED5A7-925E-490F-8A00-A200287CF156.err
+throw case: changeCount unchanged true; status nothing Couldn't convert this
+output /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/16F2F03B-3F84-453C-8A77-1F29E2C4B913.out /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/slackfmt-accept/FECB66D4-7D69-4C0B-85EE-779837F4F0CF.err
+ok   /Users/muwusomkochi/Library/Containers/com.anoraq.slackfmt: absent (1 files; 0 unreadable)
+ok   /var/folders/mp/3djf_fyx255c4_d5twyc_jb00000gn/T/: absent (21760 files; 0 unreadable)
+ok   /Users/muwusomkochi/Library/Caches: absent (222913 files; 0 unreadable)

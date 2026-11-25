@@ -1,0 +1,6 @@
+== A17 by click
+ok   HTML, RTF and plain text: fixture-html.delta.json
+ok   RTF and plain text: expected/a17-rtf.delta.json
+ok   HTML and plain text: fixture-html.delta.json
+ok   plain text only: expected/a17-plain.delta.json
+A17 by click PASSED: 4 of 4 checks

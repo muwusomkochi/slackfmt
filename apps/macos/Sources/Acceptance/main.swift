@@ -140,7 +140,7 @@ case "latency":
             guard let start = trigger.fire(app) else { return }
             usleep(1_800_000)
             let moments = app.entries.filter { $0.time >= start }.map { "\($0.text) +\(format($0.time - start))" }
-            print("run \(run): \(moments.joined(separator: "; "))")
+            print("run \(run): posted \(Input.posted.map { "+" + format($0 - start) }); \(moments.joined(separator: "; "))")
         }
     }
 case "x9-write":

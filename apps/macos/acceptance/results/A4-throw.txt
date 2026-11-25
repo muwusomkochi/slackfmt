@@ -1,0 +1,7 @@
+== A4 fixture.md with --test-throw by click
+ok   state log: nothing ("Couldn't convert this") from +0.1 s through +1.25 s: nothing Couldn't convert this
+ok   state log: idle by +1.8 s: idle
+ok   tooltip: Couldn't convert this
+ok   changeCount unchanged: 1402 -> 1402
+ok   no capsule
+A4 fixture.md with --test-throw by click PASSED: 5 of 5 checks

@@ -7,6 +7,8 @@ func now() -> Double {
 
 enum Input {
     private static let source = CGEventSource(stateID: .hidSystemState)
+    /// When the last posted click's down and up had each been handed to the system.
+    static var posted: [Double] = []
 
     static func move(to point: CGPoint) {
         CGEvent(mouseEventSource: source, mouseType: .mouseMoved, mouseCursorPosition: point, mouseButton: .left)?.post(tap: .cghidEventTap)
@@ -20,7 +22,10 @@ enum Input {
         let events = [down, up].map { CGEvent(mouseEventSource: source, mouseType: $0, mouseCursorPosition: point, mouseButton: button) }
         for event in events { event?.flags = flags }
         let start = now()
-        for event in events { event?.post(tap: .cghidEventTap) }
+        posted = events.map { event in
+            event?.post(tap: .cghidEventTap)
+            return now()
+        }
         return start
     }
 
