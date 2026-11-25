@@ -96,6 +96,12 @@ final class ConversionServiceTests: XCTestCase {
         XCTAssertEqual(destination.string(forType: .string), "his clipboard")
     }
 
+    func testAWriteThePasteboardRefusesIsNotCalledDone() throws {
+        put("hi")
+        let refusing = RefusingPasteboard()
+        XCTAssertEqual(try service().convert(from: source, to: refusing), .refused(.converterError))
+    }
+
     func testASourceThatHoldsNoTextLeavesTheClipboardAsItWas() throws {
         source.clearContents()
         source.setString("<p><br></p>", forType: .html)
@@ -112,4 +118,8 @@ final class ConversionServiceTests: XCTestCase {
         XCTAssertEqual(destination.changeCount, before)
         XCTAssertEqual(destination.string(forType: .string), "his clipboard")
     }
+}
+
+private final class RefusingPasteboard: PasteboardDestination {
+    func replaceContents(with item: NSPasteboardItem) -> Bool { false }
 }

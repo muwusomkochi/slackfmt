@@ -110,6 +110,41 @@ case "a9":
         await rowA9Refused(app, "200,001 code units selected", String(repeating: "plain words\n", count: 16_667).prefix(200_001).description, "Too long to convert")
     }
 case "a9-throw": await withApp(["--test-throw"]) { await rowA9Refused($0, "fixture.md with --test-throw", Fixtures.text("fixture.md"), "Couldn't convert this") }
+case "glyph-probe":
+    await withApp { app in
+        for (name, text) in [("nothing", "  "), ("done", "made-up words")] {
+            Clipboard.put(plain: text)
+            pause(0.4)
+            guard let start = trigger.fire(app), let frame = lastFrame else { return }
+            while now() - start < 100 { usleep(1_000) }
+            if let image = await Glyph.capture(frame) {
+                Glyph.save(image, "\(arguments[1])/\(name).png")
+                print("\(name): \(Glyph.scores(image).map { "\($0.name) \(String(format: "%.2f", $0.score))" }.joined(separator: ", "))")
+            }
+            pause(2.2)
+        }
+        if let frame = StatusItem.frame(app.pid), let image = await Glyph.capture(frame) {
+            Glyph.save(image, "\(arguments[1])/idle.png")
+            print("idle: \(Glyph.scores(image).map { "\($0.name) \(String(format: "%.2f", $0.score))" }.joined(separator: ", "))")
+        }
+    }
+case "press-probe":
+    await withApp { app in
+        // VoiceOver presses with its own keys held: Control and Option.
+        for (name, flags) in [("a press", CGEventFlags([])), ("a press with Control and Option held", CGEventFlags([.maskControl, .maskAlternate]))] {
+            Clipboard.put(plain: "made-up words")
+            pause(0.4)
+            let codes = flags.isEmpty ? [] : [kVK_Control, kVK_Option]
+            for code in codes { CGEvent(keyboardEventSource: nil, virtualKey: CGKeyCode(code), keyDown: true)?.post(tap: .cghidEventTap) }
+            pause(0.2)
+            let start = now()
+            if let item = StatusItem.element(app.pid) { AX.press(item) }
+            pause(1.8)
+            for code in codes { CGEvent(keyboardEventSource: nil, virtualKey: CGKeyCode(code), keyDown: false)?.post(tap: .cghidEventTap) }
+            print("\(name): \(app.entries.filter { $0.time >= start }.map { "\($0.text) +\(format($0.time - start))" }.joined(separator: "; "))")
+            Menus.cancel()
+        }
+    }
 case "menu-probe":
     await withApp { app in
         Clipboard.put(plain: "made-up words")

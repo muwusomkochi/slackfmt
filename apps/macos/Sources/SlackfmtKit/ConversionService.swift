@@ -5,6 +5,19 @@ public enum Outcome: Equatable {
     case refused(Refusal)
 }
 
+/// Where a conversion is written: the general pasteboard.
+public protocol PasteboardDestination {
+    /// Clears the pasteboard and writes the item; false when the pasteboard didn't take it.
+    func replaceContents(with item: NSPasteboardItem) -> Bool
+}
+
+extension NSPasteboard: PasteboardDestination {
+    public func replaceContents(with item: NSPasteboardItem) -> Bool {
+        clearContents()
+        return writeObjects([item])
+    }
+}
+
 /// "Convert" in the PRD's sense: read a source pasteboard, write the general one.
 public final class ConversionService {
     public let converter: Converter
@@ -13,7 +26,7 @@ public final class ConversionService {
         self.converter = converter
     }
 
-    public func convert(from source: NSPasteboard, to destination: NSPasteboard) -> Outcome {
+    public func convert(from source: NSPasteboard, to destination: PasteboardDestination) -> Outcome {
         switch PasteboardReader.read(source) {
         case .refused(let refusal):
             return .refused(refusal)
@@ -21,20 +34,27 @@ public final class ConversionService {
             guard let conversion = try? conversion(of: source) else { return .refused(.converterError) }
             // Markup can hold no characters of its own, and pasting nothing is worse than pasting what was copied (G2).
             if conversion.plain.allSatisfy(\.isWhitespace) { return .refused(.empty) }
-            guard let item = try? pasteboardItem(for: conversion) else { return .refused(.converterError) }
-            destination.clearContents()
-            destination.writeObjects([item])
+            guard let item = try? pasteboardItem(for: conversion), destination.replaceContents(with: item) else {
+                return .refused(.converterError)
+            }
             return .converted
         }
     }
 
+    private struct NotHeld: Error {}
+
     private func pasteboardItem(for conversion: Conversion) throws -> NSPasteboardItem {
         let html = #"<meta charset="utf-8">"# + conversion.html
+        let contents: [(Data, NSPasteboard.PasteboardType)] = [
+            (Pickle.encode([(PasteboardTypes.slackEntry, conversion.delta)]), PasteboardTypes.customData),
+            (Data(html.utf8), .html),
+            (try RichText.rtf(fromHTML: html), .rtf),
+            (Data(conversion.plain.utf8), .string),
+        ]
         let item = NSPasteboardItem()
-        item.setData(Pickle.encode([(PasteboardTypes.slackEntry, conversion.delta)]), forType: PasteboardTypes.customData)
-        item.setData(Data(html.utf8), forType: .html)
-        item.setData(try RichText.rtf(fromHTML: html), forType: .rtf)
-        item.setData(Data(conversion.plain.utf8), forType: .string)
+        for (data, type) in contents {
+            guard item.setData(data, forType: type) else { throw NotHeld() }
+        }
         return item
     }
 

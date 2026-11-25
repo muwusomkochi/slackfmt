@@ -12,7 +12,12 @@ enum Glyph {
         return try? await SCScreenshotManager.captureImage(in: rect)
     }
 
-    /// Each symbol's overlap (intersection over union) with the screenshot's glyph, best first.
+    static func save(_ image: CGImage, _ path: String) {
+        try? NSBitmapImageRep(cgImage: image).representation(using: .png, properties: [:])?.write(to: URL(fileURLWithPath: path))
+    }
+
+    /// How well each symbol matches the screenshot's glyph, best first: the share of each one's pixels that lie within a pixel of
+    /// the other's, since a thin stroke that lands half a pixel off overlaps little of itself.
     static func scores(_ image: CGImage) -> [(name: String, score: Double)] {
         let seen = mask(image)
         return names.map { name in (name, best(seen, mask(reference(name)))) }.sorted { $0.score > $1.score }
@@ -59,20 +64,28 @@ enum Glyph {
     }
 
     private static func best(_ a: [Bool], _ b: [Bool]) -> Double {
+        func near(_ mask: [Bool], _ x: Int, _ y: Int) -> Bool {
+            for ny in max(0, y - 1)...min(side - 1, y + 1) {
+                for nx in max(0, x - 1)...min(side - 1, x + 1) where mask[ny * side + nx] { return true }
+            }
+            return false
+        }
+        func covered(_ these: [Bool], by those: [Bool], _ dx: Int, _ dy: Int) -> Double {
+            var total = 0, hits = 0
+            for y in 0..<side {
+                for x in 0..<side where these[y * side + x] {
+                    total += 1
+                    let (sx, sy) = (x + dx, y + dy)
+                    if sx >= 0, sy >= 0, sx < side, sy < side, near(those, sx, sy) { hits += 1 }
+                }
+            }
+            return total == 0 ? 0 : Double(hits) / Double(total)
+        }
         var score = 0.0
         for dy in -4...4 {
             for dx in -4...4 {
-                var both = 0, either = 0
-                for y in 0..<side {
-                    for x in 0..<side {
-                        let (sx, sy) = (x + dx, y + dy)
-                        let p = a[y * side + x]
-                        let q = sx >= 0 && sy >= 0 && sx < side && sy < side && b[sy * side + sx]
-                        if p && q { both += 1 }
-                        if p || q { either += 1 }
-                    }
-                }
-                if either > 0 { score = max(score, Double(both) / Double(either)) }
+                let (p, q) = (covered(a, by: b, dx, dy), covered(b, by: a, -dx, -dy))
+                if p + q > 0 { score = max(score, 2 * p * q / (p + q)) }
             }
         }
         return score

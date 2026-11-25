@@ -36,14 +36,17 @@ final class Notifications: NSObject, UNUserNotificationCenterDelegate {
     }
 
     private func alert(_ body: String) {
+        guard !isAlerting else { return }
         let alert = NSAlert()
         alert.messageText = "Slackfmt"
         alert.informativeText = body
         alert.addButton(withTitle: "OK")
         isAlerting = true
-        defer { isAlerting = false }
         NSApp.activate()
         alert.runModal()
+        isAlerting = false
+        // The app has no window to keep the focus for.
+        NSApp.hide(nil)
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {

@@ -91,15 +91,14 @@ final class StatusItemController: NSObject {
         ])
     }
 
+    /// A press by VoiceOver arrives with no mouse event of its own, and with VoiceOver's keys held (Option among them), so the
+    /// keys count only for a click. macOS 27 hands a status item its click without modifier flags, so the live ones are read.
     @objc private func clicked() {
-        // macOS 27 hands a status item its event without modifier flags, so the keys held now are read too.
-        let event = NSApp.currentEvent
-        let flags = NSEvent.modifierFlags.union(event?.modifierFlags ?? [])
-        if event?.type == .rightMouseUp || flags.contains(.option) {
-            openMenu()
-        } else {
-            onClick()
+        let click = NSApp.currentEvent.flatMap { event in
+            [.leftMouseUp, .rightMouseUp].contains(event.type) && ProcessInfo.processInfo.systemUptime - event.timestamp < 1 ? event : nil
         }
+        let opens = click.map { $0.type == .rightMouseUp || NSEvent.modifierFlags.union($0.modifierFlags).contains(.option) } ?? false
+        opens ? openMenu() : onClick()
     }
 
     /// The menu is attached only while it's open, so a plain click converts.

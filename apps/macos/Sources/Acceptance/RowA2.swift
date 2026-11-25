@@ -37,7 +37,7 @@ private func checkHTML(_ report: Report, _ html: String) {
     has("bullet list <ul><li>", "/html/body/ul/li/a", ["precedent"])
     has("nested list inside its <li>", "/html/body/ul/li/ul/li", ["reader cut at 54fdad2"])
     has("task items' text starts with V14", "/html/body/ul/li[starts-with(normalize-space(.), '☐') or starts-with(normalize-space(.), '☑')]", ["☐ upload the decision-panels cut", "☑ ds-workflow seal"])
-    has("ordered list past 1 as a paragraph starting \"n. \"", "//p[starts-with(normalize-space(.), '3. ')]", ["3. third step keeps its number 4. fourth follows"])
+    has("ordered list past 1 as paragraphs starting \"n. \"", "//p[starts-with(normalize-space(.), '3. ') or starts-with(normalize-space(.), '4. ')]", ["3. third step keeps its number", "4. fourth follows"])
     has("no <ol> for it", "//ol", [])
     has("quote <blockquote>", "//blockquote/p", ["Upload only after the test panel:"])
     has("the quote's list as <ul>", "//blockquote/ul/li", ["render it live", "then upload"])

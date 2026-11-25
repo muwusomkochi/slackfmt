@@ -42,7 +42,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard !isConverting else { return }
         isConverting = true
         defer { isConverting = false }
-        switch service.convert(from: source, to: .general) {
+        switch service.convert(from: source, to: NSPasteboard.general) {
         case .converted:
             statusItem.show(.done)
             capsule.present()

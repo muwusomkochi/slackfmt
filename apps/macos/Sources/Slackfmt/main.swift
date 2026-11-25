@@ -18,7 +18,7 @@ if arguments.contains("--reset-first-run") {
 }
 
 if arguments.contains("--convert-now") {
-    switch makeService().convert(from: .general, to: .general) {
+    switch makeService().convert(from: .general, to: NSPasteboard.general) {
     case .converted: exit(0)
     case .refused(.converterError): exit(1)
     case .refused: exit(2)
