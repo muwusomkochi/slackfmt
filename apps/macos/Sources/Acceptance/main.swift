@@ -57,12 +57,30 @@ func timeClicks(_ path: String, runs: Int) {
     print("his clipboard put back: \(NSPasteboard.general.types?.count ?? 0) types")
 }
 
+/// X9: Slack's own quoted-list form (X4's copied shape, made-up text). The plain text says so if Slack reads it instead.
+func writeX9() {
+    let delta = #"{"ops":[{"insert":"Packing for the lake"},{"insert":"\n","attributes":{"blockquote":true}},{"insert":"Blue kayak"},{"insert":"\n","attributes":{"list":"bullet","border":1}},{"insert":"Two paddles"},{"insert":"\n","attributes":{"list":"bullet","border":1}}]}"#
+    let before = NSPasteboard.general.changeCount
+    let after = Clipboard.put([
+        PasteboardTypes.customData: Pickle.encode([(PasteboardTypes.slackEntry, delta)]),
+        .string: Data("X9: Slack read the plain text, not the pickle".utf8),
+    ])
+    print("x9-write: changeCount \(before) -> \(after)")
+    print("slack/texty read back: \(Clipboard.slackDelta ?? "none")")
+}
+
+func isX9OnTheClipboard() -> Bool { Clipboard.slackDelta?.contains("Packing for the lake") == true }
+
 switch arguments.first {
+case "x9-write":
+    writeX9()
+case "x9-check":
+    print("changeCount \(NSPasteboard.general.changeCount); X9's pickle still on the clipboard: \(isX9OnTheClipboard())")
 case "time-clicks":
     timeClicks(arguments[1], runs: Int(arguments[2])!)
 case "idle":
     print(format(Input.idle))
 default:
-    print("usage: slackfmt-accept time-clicks <file> <runs> | idle")
+    print("usage: slackfmt-accept time-clicks <file> <runs> | x9-write | x9-check | idle")
     exit(64)
 }

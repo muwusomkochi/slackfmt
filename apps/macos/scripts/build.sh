@@ -1,6 +1,6 @@
 #!/bin/bash
 # Builds and signs build/Slackfmt.app by V12: arm64, macOS 14 or later, App Sandbox, hardened runtime with allow-jit.
-# IDENTITY defaults to the SHA-1 of "Apple Development: hello@muwuso.com (F7GB63XQ29)", as his Linesman app's build does.
+# IDENTITY defaults to the SHA-1 of the Apple Development certificate his other Mac app is signed with.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

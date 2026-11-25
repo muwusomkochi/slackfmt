@@ -2,7 +2,7 @@ X10: does JavaScriptCore keep its JIT in the sandboxed app? Passed, 2026-11-24 1
 
 App: apps/macos at the commit that adds this file, built by scripts/build.sh and installed to /Applications by scripts/install.sh.
   codesign -d --entitlements: com.apple.security.app-sandbox true, com.apple.security.cs.allow-jit true
-  codesign -dv: CodeDirectory flags=0x10000(runtime); Authority=Apple Development: hello@muwuso.com (F7GB63XQ29); arm64
+  codesign -dv: CodeDirectory flags=0x10000(runtime); an Apple Development authority; arm64
   vmmap: "JS JIT Generated Code" regions present
 Machine: macOS 27.2.1 (26B131), Apple Silicon, one screen (1728 x 1117).
 Input: fixture-20k.md, Appendix A at precedent 28c01f7 repeated and cut at a line end, 19,985 characters.
