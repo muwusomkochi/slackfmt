@@ -1,10 +1,17 @@
 A12: each line's test was committed failing before its fix. All pass on main and on their own branch (A13.txt).
 
-R24 hard breaks              test f8257d0, fix ba88e62, packages/core/tests/hard-breaks.test.ts (a backslash, two spaces, <br>)
+R24 hard breaks              test f8257d0, fix ba88e62 (then more cases, 6e8c2f4: 9 of them fail without the fix), packages/core/tests/hard-breaks.test.ts (a backslash and two spaces, each in a paragraph, a quote and a list item; <br>)
 R25, R34 images              test 791732b, fix 7a6f16c (then test d3a14f0, fix 3833ebe: a table cell), packages/core/tests/images.test.ts (with alt, without)
 R26 thematic breaks          test 1dd0f3f, fix 9b047c7, packages/core/tests/thematic-breaks.test.ts (---, ***, <hr>)
 R27 ordered list start       test 7ca4b1d, fix 6c53bd1, packages/core/tests/ordered-list-start.test.ts (from 3)
 R28 task lists               test ad1e200, fix f00e2d9, packages/core/tests/task-lists.test.ts (open, done)
 R29 lists inside quotes      test 07bd88c, fix 8ccfbfb, packages/core/tests/quoted-lists.test.ts
 R37 HTML strikethrough       test 9712f17, fix a10c337 (then test b789fe2, fix 534ef4e: tildes, neighbours, blocks), packages/core/tests/html-strikethrough.test.ts (<del>, <s>, <strike>)
-A18's second input           test 3365f0b, fix 009fb87, packages/core/tests/bare-ops-array.test.ts
+R38 marks set in CSS         test 641547d, fix 0ad674a (then test a8c7833, fix 3bcdee4: tildes, nested marks), packages/core/tests/css-marks.test.ts (a Docs-style copy with bold, italic and strike inside <b style="font-weight:normal">)
+R39 no head text             test d94b01f, fix 652a1e6, packages/core/tests/html-head-text.test.ts (a Word-style copy with title and style text in its head)
+R40 raw HTML blocks          test d03efa5, fix 8f0e013, packages/core/tests/raw-html-blocks.test.ts
+R41 HTML italics             test cc03c6b, fix 979b4b9, packages/core/tests/html-italics.test.ts (inside a word); changes what upstream's "converts italic" expects, in the fix's own commit
+R42 bare ops array           test 3365f0b, fix 009fb87, packages/core/tests/bare-ops-array.test.ts
+R43 split ordered lists      test f244e3e, fix 8cdaf39, packages/core/tests/split-ordered-lists.test.ts (split by a code block)
+R44 plain pre                test bfb54d5, fix 5ed8811, packages/core/tests/plain-pre.test.ts (a plain <pre> beside other text)
+Where the fixes meet         packages/core/tests/fixes-together.test.ts, on main only

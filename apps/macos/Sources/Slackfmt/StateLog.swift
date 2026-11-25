@@ -1,7 +1,7 @@
 import Foundation
 
-/// V21's `--state-log`: each status item state and the capsule's shown and hidden moments, on standard output, with a
-/// monotonic time in ms. Never clipboard content.
+/// V21's `--state-log`: each status item state, the capsule's shown and hidden moments and macOS's Services calls (R4's
+/// trigger for F3), on standard output, with a monotonic time in ms. Never clipboard content.
 enum StateLog {
     static let isOn = CommandLine.arguments.contains("--state-log")
 

@@ -49,4 +49,33 @@ final class BundleTests: XCTestCase {
             XCTAssertEqual(try converter.convert(read(input), format: format).delta, try read("expected/\(expected).delta.json"), input)
         }
     }
+
+    /// R38, R39, R41, R43 and R44, on the engine the app runs, as the core tests expect them (A18 holds R40 and R42).
+    func testRev7sLinesConvertAsTheyDoInNode() throws {
+        let converter = try converter()
+        for (input, format, expected) in [
+            (
+                #"<b style="font-weight:normal;"><p><span style="font-weight:700">Bold</span><span style="font-weight:400"> and </span><span style="font-style:italic">italic</span> <span style="text-decoration:line-through">~struck</span></p></b>"#,
+                Converter.Format.html,
+                #"{"ops":[{"insert":"Bold","attributes":{"bold":true}},{"insert":" and "},{"insert":"italic","attributes":{"italic":true}},{"insert":" "},{"insert":"~struck","attributes":{"strike":true}},{"insert":"\n"}]}"#
+            ),
+            (
+                "<html><head><title>Title</title><style>p { color: red }</style></head><body><p>un<em>believ</em>able</p></body></html>",
+                .html,
+                #"{"ops":[{"insert":"un"},{"insert":"believ","attributes":{"italic":true}},{"insert":"able\n"}]}"#
+            ),
+            (
+                "<p>Run</p><pre>a\n  b</pre>",
+                .html,
+                #"{"ops":[{"insert":"Run\n\na"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"  b"},{"insert":"\n","attributes":{"code-block":true}}]}"#
+            ),
+            (
+                "1. one\n   ```\n   a\n   ```\n2. two",
+                .detect,
+                #"{"ops":[{"insert":"one"},{"insert":"\n","attributes":{"list":"ordered"}},{"insert":"a"},{"insert":"\n","attributes":{"code-block":true}},{"insert":"2. two\n"}]}"#
+            ),
+        ] {
+            XCTAssertEqual(try converter.convert(input, format: format).delta, expected, input)
+        }
+    }
 }

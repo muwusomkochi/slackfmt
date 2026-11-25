@@ -55,6 +55,16 @@ final class App {
         entries.last { $0.time <= time && $0.text.hasPrefix("status ") }.map { String($0.text.dropFirst("status ".count)) }
     }
 
+    /// When macOS called the app's service: R4's trigger for F3, after the source app's menu has closed.
+    func servicesCall(after time: Double) -> Double? {
+        let deadline = now() + 5_000
+        while now() < deadline {
+            if let call = entries.first(where: { $0.time >= time && $0.text == "services called" }) { return call.time }
+            usleep(2_000)
+        }
+        return nil
+    }
+
     struct Window {
         let layer: Int
         let bounds: CGRect

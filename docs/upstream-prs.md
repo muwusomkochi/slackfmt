@@ -2,20 +2,32 @@
 
 One branch per converter fix, each cut from upstream `551c592`, each with its test committed failing before its fix and a changeset. m030 opens these against `cauethenorio/slackfmt` `main`, after the Slack test. Nothing is opened yet.
 
-Every upstream test at `551c592` (101 in `packages/core`) is present and passes on every branch, and no branch changes one.
+Every upstream test at `551c592` (101 in `packages/core`) is present and passes on every branch. One branch changes one: `fix/html-italics` changes the output that "converts italic" in `packages/core/tests/html.test.ts` expects, in the same commit as its fix.
 
-Four branches touch the list code (`fix/ordered-list-start`, `fix/task-lists`, `fix/quoted-lists` in `markdown-to-delta.ts`; `fix/task-lists` and `fix/html-strikethrough` in `html.ts`), so the later ones need a rebase once an earlier one merges. This fork's `main` carries all of them merged: its merge commits show the resolution, and `packages/core/tests/fixes-together.test.ts` holds the cases where they meet.
+Some branches touch the same code, so the later ones need a rebase once an earlier one merges:
+
+- the list code in `markdown-to-delta.ts`: `fix/ordered-list-start`, `fix/task-lists`, `fix/quoted-lists`, `fix/split-ordered-lists`
+- the Turndown rules in `html.ts`: `fix/task-lists`, `fix/html-strikethrough`, `fix/html-italics`, `fix/html-head-text`, `fix/plain-pre`, `fix/css-marks`
+- the processor in `normalize.ts`: `fix/images`, `fix/raw-html-blocks`
+
+This fork's `main` carries all of them merged: its merge commits show the resolution, and `packages/core/tests/fixes-together.test.ts` holds the cases where they meet. Two branches differ once others are in: a nested list written as numbered text (`fix/ordered-list-start`) also splits the list it's in (`fix/split-ordered-lists`), and a numbered task (`fix/task-lists`) keeps its box after its number.
 
 | Branch | Failing test | Fix | Requirement |
 |---|---|---|---|
-| `fix/hard-breaks` | f8257d0 | ba88e62 | R24 |
+| `fix/hard-breaks` | f8257d0 | ba88e62, with more cases in 6e8c2f4 | R24 |
 | `fix/images` | 791732b, then d3a14f0 | 7a6f16c, then 3833ebe | R25, R34 |
 | `fix/thematic-breaks` | 1dd0f3f | 9b047c7 | R26 |
 | `fix/ordered-list-start` | 7ca4b1d | 6c53bd1 | R27 |
 | `fix/task-lists` | ad1e200 | f00e2d9 | R28 |
 | `fix/quoted-lists` | 07bd88c | 8ccfbfb | R29 |
 | `fix/html-strikethrough` | 9712f17, then b789fe2 | a10c337, then 534ef4e | R37 |
-| `fix/bare-ops-array` | 3365f0b | 009fb87 | A18's second input |
+| `fix/css-marks` | 641547d, then a8c7833 | 0ad674a, then 3bcdee4 | R38 |
+| `fix/html-head-text` | d94b01f | 652a1e6 | R39 |
+| `fix/raw-html-blocks` | d03efa5 | 8f0e013 | R40 |
+| `fix/html-italics` | cc03c6b | 979b4b9 | R41 |
+| `fix/bare-ops-array` | 3365f0b | 009fb87 | R42 |
+| `fix/split-ordered-lists` | f244e3e | 8cdaf39 | R43 |
+| `fix/plain-pre` | bfb54d5 | 5ed8811 | R44 |
 
 R30 is the regression guard above. R31 (HTML without a browser DOM) needed no converter change: core at `551c592` already converts HTML in a bare JavaScript engine when it's bundled with Turndown's own DOM.
 
@@ -97,6 +109,72 @@ Title: fix(core): convert a bare ops array
 
 ```
 The CLI's detection calls a bare JSON array a Delta, but the Delta parser only read { ops: [...] } and threw "ops is not iterable". It now reads either.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+## fix/css-marks
+
+Title: fix(core): keep marks set in CSS
+
+```
+Google Docs, and other editors, set marks in CSS rather than tags, so their bold, italic and strikethrough were lost. Google Docs also wraps a whole copy in <b style="font-weight:normal">, so all of it came out bold.
+
+Text whose style sets a font weight of bold or 600 and up, an italic or oblique font style, or a line-through is now bold, italic or struck. An element whose style sets a lighter weight adds no bold, whatever its tag.
+
+This adds rehype-stringify, the counterpart of the rehype-parse core already has: the marks are worked out on the parsed HTML, then handed to Turndown. HTML with no style attribute skips the step.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+## fix/html-head-text
+
+Title: fix(core): leave out text inside head, style, script and title
+
+```
+HTML with a <head> (Word copies one) put its title and its stylesheet's text in the message. Text inside <head>, <style>, <script> and <title> is now left out.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+## fix/raw-html-blocks
+
+Title: fix(core): keep a raw HTML block's text
+
+```
+A raw HTML block in Markdown was dropped, text and all. Its text is now kept as plain paragraphs, with the tags stripped. Inline HTML is unchanged: its tags are dropped and its text was already kept.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+## fix/html-italics
+
+Title: fix(core): write HTML italics with an asterisk
+
+```
+Turndown writes italics with underscores, which Markdown doesn't read inside a word, so "un<em>believ</em>able" came out as "un_believ_able". They're now written with asterisks.
+
+This changes what "converts italic" in html.test.ts expects ("*hello*" rather than "_hello_").
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+## fix/split-ordered-lists
+
+Title: fix(core): keep an ordered list's count after a block splits it
+
+```
+Slack's Delta can't hold a code block inside a list item, so an ordered list with one between its items starts again at 1 after it. The items after such a block are now numbered text, from where the count left off. An unsplit list is still a list.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+## fix/plain-pre
+
+Title: fix(core): keep the text around a plain pre
+
+```
+HTML with a <pre> that has no <code> was converted to that <pre>'s text alone, and the rest of the copy was lost. It's now read that way only when the <pre> holds all of the copy's text. Otherwise the whole copy is converted, and the <pre> becomes a code block among the rest.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```

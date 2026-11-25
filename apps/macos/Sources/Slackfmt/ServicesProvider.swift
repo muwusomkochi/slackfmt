@@ -9,6 +9,7 @@ final class ServicesProvider: NSObject {
     }
 
     @objc func copyForSlack(_ board: NSPasteboard, userData: String?, error: AutoreleasingUnsafeMutablePointer<NSString?>) {
+        StateLog.write("services called")
         convert(board)
     }
 }
