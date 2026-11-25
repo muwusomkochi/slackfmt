@@ -159,6 +159,40 @@ case "notify-probe":
             if !windows.isEmpty || !mine.isEmpty { print("+\(format(now() - start)): center windows \(windows.count) \(windows.map { AX.string($0, "AXTitle") ?? "?" }), app windows \(mine.count)") }
         }
     }
+case "vo-probe":
+    func voiceOverIsOn() -> Bool {
+        output("/usr/bin/osascript", ["-l", "JavaScript", "-e", "ObjC.import('AppKit'); $.NSWorkspace.sharedWorkspace.voiceOverEnabled"])
+            .trimmingCharacters(in: .whitespacesAndNewlines) == "true"
+    }
+    print("waiting for VoiceOver")
+    while !voiceOverIsOn() { pause(0.5) }
+    print("VoiceOver is on; waiting for 15 s of stillness")
+    while Input.idle < 15 { pause(0.2) }
+    let held = ClipboardSnapshot()
+    for how in arguments[2].split(separator: ",").map(String.init) {
+        for later in ["YES"] {
+            guard voiceOverIsOn(), let app = App(["-hasRunBefore", "YES", "-announceFrom", how, "-announceLater", later]) else { continue }
+            warmTheHarness()
+            pause(5)
+            Clipboard.put(plain: "made-up words")
+            pause(1)
+            guard let start = Trigger.hotkey.fire(app) else { continue }
+            var shots = 0
+            while now() - start < 4_000 {
+                let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []
+                for window in windows where (window[kCGWindowOwnerName as String] as? String) == "VoiceOver" {
+                    guard let bounds = CGRect(dictionaryRepresentation: window[kCGWindowBounds as String] as! CFDictionary), bounds.width < 1_000,
+                          let number = window[kCGWindowNumber as String] as? Int else { continue }
+                    shots += 1
+                    _ = output("/usr/sbin/screencapture", ["-x", "-o", "-l\(number)", "\(arguments[1])/\(how)-\(later)-\(shots).png"])
+                }
+                pause(0.3)
+            }
+            print("\(how) later=\(later): \(app.entries.filter { $0.time >= start && $0.text.hasPrefix("status done") }.map { "done +" + format($0.time - start) }.first ?? "no state"); caption pictures \(shots)")
+        }
+    }
+    held.restore()
+    print("finished")
 case "menu-probe":
     await withApp { app in
         Clipboard.put(plain: "made-up words")

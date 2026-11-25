@@ -15,7 +15,7 @@ final class App {
         errors = "\(folder)/\(UUID().uuidString).err"
         let open = Process()
         open.executableURL = URL(fileURLWithPath: "/usr/bin/open")
-        open.arguments = ["-n", "-g", "--stdout", log, "--stderr", errors, "/Applications/Slackfmt.app", "--args"] + flags + ["--state-log"]
+        open.arguments = ["-n", "-g", "--stdout", log, "--stderr", errors, ProcessInfo.processInfo.environment["SLACKFMT_APP"] ?? "/Applications/Slackfmt.app", "--args"] + flags + ["--state-log"]
         try? open.run()
         open.waitUntilExit()
         let deadline = now() + 10_000
