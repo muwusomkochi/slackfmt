@@ -92,7 +92,7 @@ func reduceMotionIsOn() -> Bool {
         .trimmingCharacters(in: .whitespacesAndNewlines) == "true"
 }
 
-/// A16: each state's announcement, by the hotkey, once he has VoiceOver on. He listens; a picture of VoiceOver's caption panel is kept.
+/// A16: each state's announcement, by click, once he has VoiceOver on. He listens; a picture of VoiceOver's caption panel is kept.
 func rowA16(hours: Double, folder: String) async {
     func voiceOverIsOn() -> Bool {
         output("/usr/bin/osascript", ["-l", "JavaScript", "-e", "ObjC.import('AppKit'); $.NSWorkspace.sharedWorkspace.voiceOverEnabled"])
@@ -129,7 +129,8 @@ func rowA16(hours: Double, folder: String) async {
             if contents.isEmpty { NSPasteboard.general.clearContents() } else { Clipboard.put(contents) }
         }
         pause(0.6)
-        guard let start = Trigger.hotkey.fire(app) else { return }
+        // By click, as A16 says (F1 stands for F2 and F3): the hotkey holds VoiceOver's own keys, and VoiceOver takes it.
+        guard let start = Trigger.click.fire(app) else { return print("\(index). \(name): not run, the status item wasn't on screen") }
         var shots = 0
         while now() - start < 4_500 {
             let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []

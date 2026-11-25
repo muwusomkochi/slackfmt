@@ -52,6 +52,11 @@ final class CapsulePanel: NSPanel {
         let view = CapsuleView(text: Strings.done)
         super.init(contentRect: NSRect(origin: .zero, size: view.fittingSize), styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
         contentView = view
+        // VoiceOver would read the capsule's own words for a refusal too. The panel's title is what it speaks.
+        for child in [view] + view.subviews + view.subviews.flatMap(\.subviews) {
+            child.setAccessibilityElement(false)
+            child.setAccessibilityChildren([])
+        }
         level = .statusBar
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         ignoresMouseEvents = true
@@ -73,6 +78,7 @@ final class CapsulePanel: NSPanel {
         setAccessibilitySubrole(.systemDialog)
         setAccessibilityTitle(message)
         setAccessibilityLabel(message)
+        setAccessibilityChildren([])
         if !isVisible {
             alphaValue = 0
             orderFrontRegardless()

@@ -1,13 +1,19 @@
-A16: in progress. Judge: Muwuso.
+A16: not passed yet. Judge: Muwuso.
 
-R22: VoiceOver reads "Copy for Slack" at the status item. He answered "Copy for Slack" (2026-11-25, about 1:09 am AST); VoiceOver's caption
-panel at that moment reads "Copy for Slack, status menu".
+R22: passes. VoiceOver reads "Copy for Slack" at the status item. He answered "Copy for Slack" (2026-11-25, about 1:09 am AST); VoiceOver's
+caption panel at that moment reads "Copy for Slack, status menu".
 
-R23: not passing as first built. With VoiceOver on, no announcement was spoken for any state (first run, 1:02 am). Tried since, each with
-one conversion and VoiceOver's caption panel recorded:
-  announcementRequested from the app, the status item's button, its window, the capsule panel: nothing spoken
-  announcementRequested from the app while it was activated for a moment: nothing spoken (the app hands focus back at once)
-  the capsule panel as a system dialog, with a windowCreated notification: the caption reads "application Copied for Slack"
-  a value change and a title change on the status item: not tried, VoiceOver was off by then
-So announcements now go through the capsule panel as a system dialog, only while VoiceOver is on; for a refusal the panel is put up at
-alpha 0, unseen. To be run again with him.
+R23: open. What was run, each with VoiceOver's caption panel recorded:
+1. 1:02 am, 12 cases by hotkey, announcementRequested from the app: 11 states showed, nothing spoken.
+2. 1:09 am, one conversion each, announcementRequested from the app, the status item's button, its window, the capsule panel: nothing spoken.
+3. 1:13 am, one conversion each: from the app while activated for a moment, nothing spoken (the app hands focus back at once); the capsule
+   panel as a system dialog with a windowCreated notification, spoken, caption "application Copied for Slack". A value change and a title
+   change on the status item weren't tried, VoiceOver was off by then.
+4. 1:20 am, 12 cases by hotkey, the capsule as a system dialog. He answered "All 12", but the record can't bear that out:
+   cases 5 to 8 and 12 show no state, so they never ran. The captions show VoiceOver's verbosity menus there: the hotkey, Control-Option-
+   Command-V, holds VoiceOver's own keys, and VoiceOver took it.
+   Cases 2, 3, 9, 10 and 11 were spoken with their own string ("Nothing converted: Already Slack format, system dialogue", and so on).
+   Cases 2, 9 and 11 were also preceded by "application Copied for Slack", the unseen capsule's own label: wrong for a refusal. Case 4 spoke
+   only that label. Case 1's string isn't in the captions (Grammarly's alert was speaking).
+Since then: the capsule's label is hidden from VoiceOver, so only the state's string is left to speak, and A16 runs by click (F1), as the
+row says. To be run again with him.
