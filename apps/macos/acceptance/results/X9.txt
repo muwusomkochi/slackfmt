@@ -1,0 +1,10 @@
+X9: does a Delta in Slack's own quoted-list form paste back into Slack as a list inside a quote? Passed, 2026-11-24.
+
+Written by slackfmt-accept x9-write at 10:13 pm AST: one pasteboard item, org.chromium.web-custom-data holding one pickle (V3)
+whose one entry, slack/texty, is
+  {"ops":[{"insert":"Packing for the lake"},{"insert":"\n","attributes":{"blockquote":true}},{"insert":"Blue kayak"},{"insert":"\n","attributes":{"list":"bullet","border":1}},{"insert":"Two paddles"},{"insert":"\n","attributes":{"list":"bullet","border":1}}]}
+(made-up text), and a public.utf8-plain-text line that says so if Slack reads it instead. Read back and equal before the paste.
+
+Muwuso pasted it into a Slack desktop message box, unsent, and answered the X9 card: "List inside the quote".
+
+So D1's quoted half is Slack's form: each line of a quoted list carries its list attribute and border: 1, with no blockquote attribute.
