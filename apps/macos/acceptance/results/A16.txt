@@ -17,3 +17,7 @@ R23: open. What was run, each with VoiceOver's caption panel recorded:
    only that label. Case 1's string isn't in the captions (Grammarly's alert was speaking).
 Since then: the capsule's label is hidden from VoiceOver, so only the state's string is left to speak, and A16 runs by click (F1), as the
 row says. To be run again with him.
+5. 3:43 pm, 25 Nov, 12 cases by click on the build at b04f249. All 12 states showed. He answered "Ran it, some missing". The captions show
+   cases 1 to 6 spoken, each with its own string ("application, Nothing converted: Images can't be converted, system dialogue"), and no
+   refusal saying "Copied for Slack". Case 7's only caption is "VoiceOver off", so VoiceOver was off for 7 to 12. Those six are to be run
+   again with him.

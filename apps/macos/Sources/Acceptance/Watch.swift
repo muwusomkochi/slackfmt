@@ -93,7 +93,7 @@ func reduceMotionIsOn() -> Bool {
 }
 
 /// A16: each state's announcement, by click, once he has VoiceOver on. He listens; a picture of VoiceOver's caption panel is kept.
-func rowA16(hours: Double, folder: String) async {
+func rowA16(hours: Double, folder: String, from first: Int = 1) async {
     func voiceOverIsOn() -> Bool {
         output("/usr/bin/osascript", ["-l", "JavaScript", "-e", "ObjC.import('AppKit'); $.NSWorkspace.sharedWorkspace.voiceOverEnabled"])
             .trimmingCharacters(in: .whitespacesAndNewlines) == "true"
@@ -142,13 +142,13 @@ func rowA16(hours: Double, folder: String) async {
             }
             pause(0.3)
         }
-        print("\(index). \(name): \(app.entries.filter { $0.time >= start && $0.text.hasPrefix("status") }.map(\.text).first ?? "no state")")
+        print("\(index). \(name): VoiceOver \(voiceOverIsOn() ? "on" : "off"); \(app.entries.filter { $0.time >= start && $0.text.hasPrefix("status") }.map(\.text).first ?? "no state")")
         pause(1)
     }
     guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
     warmTheHarness()
     pause(4)
-    for (index, item) in cases.enumerated() { run(app, index + 1, item.0, item.1) }
+    for (index, item) in cases.enumerated() where index + 1 >= first { run(app, index + 1, item.0, item.1) }
     guard let throwing = App(["-hasRunBefore", "YES", "--test-throw"]) else { return print("the app didn't launch") }
     pause(6)
     run(throwing, cases.count + 1, "A4 fixture.md with --test-throw", text(Fixtures.text("fixture.md")))
