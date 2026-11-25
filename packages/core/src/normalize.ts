@@ -124,11 +124,30 @@ const remarkHtmlBlocksToText: Plugin<[], Root> = () => (tree) => {
   visit(tree);
 };
 
+/**
+ * Remark plugin that keeps a hard break before an inline tag.
+ * remark-stringify swaps a line end before one for a space, unless something sits between them.
+ */
+const remarkBreaksBeforeTags: Plugin<[], Root> = () => (tree) => {
+  const visit = (parent: Nodes) => {
+    if (!("children" in parent)) return;
+    const children = parent.children as Nodes[];
+    parent.children = children.flatMap((node, index) =>
+      node.type === "break" && children[index + 1]?.type === "html"
+        ? [node, { type: "text", value: "" }]
+        : [node],
+    ) as typeof parent.children;
+    for (const node of parent.children) visit(node);
+  };
+  visit(tree);
+};
+
 const processor = unified()
   .use(remarkParse)
   .use(remarkGfm)
   .use(remarkInlineImageReferences)
   .use(remarkHtmlBlocksToText)
+  .use(remarkBreaksBeforeTags)
   .use(remarkHeadingsToBold)
   .use(remarkTablesToCodeBlocks)
   .use(remarkStringify, {
