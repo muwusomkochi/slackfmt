@@ -166,9 +166,10 @@ function processNode(
       // Slack's Delta has no start number, and Slack itself copies such a list as numbered text.
       const numbered = start !== 1;
       node.children.forEach((item, index) => {
+        const box = item.checked == null ? "" : item.checked ? "☑ " : "☐ ";
         if (numbered) {
           const lineAttrs: BlockAttrs = blockAttrs.blockquote ? { blockquote: true } : {};
-          processListItem(item.children, ops, lineAttrs, listDepth, `${start + index}. `);
+          processListItem(item.children, ops, lineAttrs, listDepth, `${start + index}. ${box}`);
           return;
         }
         const listType = node.ordered ? "ordered" : "bullet";
@@ -176,7 +177,7 @@ function processNode(
         if (listDepth > 0) {
           itemBlockAttrs.indent = listDepth;
         }
-        processListItem(item.children, ops, itemBlockAttrs, listDepth);
+        processListItem(item.children, ops, itemBlockAttrs, listDepth, box);
       });
       break;
     }
