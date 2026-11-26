@@ -32,7 +32,13 @@ The <pre> and the <code>:
   - The <code> holds one run of text with no element inside it, and no syntax-highlighting spans.
   - The <code>'s text equals public.utf8-plain-text character for character. The draft holds no <, > or &, so the copy shows no
     entity, and how Claude escapes those isn't shown.
-  - The language label Claude shows on the block is on the pasteboard in no type. What the block's header showed him is asked on this
-    run's panel and added here.
+  - The language label Claude shows on the block is on the pasteboard in no type. Asked what the block showed him, he answered on this
+    run's R45 panel, card 1: "The block's label said markdown (A)". So Claude showed a label and left it out of the copy.
 
 So the copy is the shape R45 names: one <pre> holding a <code> that holds all of the copy's text, the <code> naming no language.
+
+What followed, on the same panel. Upstream's test "converts code block" (packages/core/tests/html.test.ts at 551c592) gives the converter
+<pre><code>const x = 1;</code></pre>, this same shape, and expects a code block, so R45 as written passes 100 of V6's 101 tests. Card 2,
+his answer: "I want R45 narrowed so all 101 tests pass (C)". As built: a whole-copy <pre><code> naming Markdown or plain text is read as
+Markdown; one naming no language is read as Markdown only when its text holds Markdown's own marks; one naming another language stays a
+code block. R45's words in the PRD still read as rev 11 has them, and the narrowing is the hub's to write into the next revision.
