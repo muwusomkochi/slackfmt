@@ -1,0 +1,38 @@
+R45 capture: what a copy made by hand out of a Claude code block puts on the pasteboard. 2026-11-26, build run 3, before any code.
+
+Muwuso opened a Claude reply holding a draft for Slack in a code block, in the Claude desktop app, selected the text inside the block by
+hand and pressed Cmd-C. Read at 4:53 pm AST, changeCount 3538, every type with its data. The draft's words are swapped for made-up text
+below. The sizes are the real copy's.
+
+One pasteboard item, four types, in this order:
+  public.html                              5,895 bytes
+  public.utf8-plain-text                   5,849 bytes (5,844 characters, 43 lines, no trailing newline, no CR, no non-breaking space)
+  org.chromium.internal.source-rfh-token   24 bytes, opaque, not kept
+  org.chromium.source-url                  105 bytes: https://claude.ai/chat/<chat id>?artifact=<artifact id>, the ids not kept
+
+public.html, whole, with made-up text in the draft's place (bold lines, a line of names split by middle dots, a paragraph, "- " items
+holding inline code and links, as the draft has them):
+
+<meta charset='utf-8'><pre><code>**Garden club's spring notes: seedlings, tools and a two-day plant sale**
+For members · Seeds/Starts team, Tool shed, Sale table
+
+The club's seedling trays moved to the south bench this week, and the sale is set for the first weekend of May.
+
+**Done**
+- Tomato starts are potted on in the greenhouse, `bench/south/a1` to `bench-a4`, with labels on each tray. [Tray list, week 3](https://example.com/garden/trays?week=3) · [Photos](https://example.com/garden/photos?week=3)
+- The tool shed has a new rack, so `rakes/long-handle` and `hoes-short` hang by the door. [Shed map](https://example.com/garden/shed)
+
+**Still open**
+- Sale table prices: herbs at two for five, tomatoes at three each. [Price sheet](https://example.com/garden/prices)</code></pre>
+
+The <pre> and the <code>:
+  - The HTML is Chromium's <meta charset='utf-8'>, then one <pre> holding one <code>, and nothing else: five tags in all.
+  - Neither carries an attribute: no class, no data attribute, no style, no language. Chromium's own copy of a selection writes inline
+    styles on what it copies, so this HTML is Claude's own.
+  - The <code> holds one run of text with no element inside it, and no syntax-highlighting spans.
+  - The <code>'s text equals public.utf8-plain-text character for character. The draft holds no <, > or &, so the copy shows no
+    entity, and how Claude escapes those isn't shown.
+  - The language label Claude shows on the block is on the pasteboard in no type. What the block's header showed him is asked on this
+    run's panel and added here.
+
+So the copy is the shape R45 names: one <pre> holding a <code> that holds all of the copy's text, the <code> naming no language.
