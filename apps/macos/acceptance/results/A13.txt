@@ -14,3 +14,7 @@ fix/html-italics 979b4b9: 105 tests, 0 failing; 101 of V6's 101 names present; u
 fix/bare-ops-array 009fb87: 102 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
 fix/split-ordered-lists 8cdaf39: 109 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
 fix/plain-pre 7412476: 109 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
+
+Rerun on main, 2026-11-25 (build run 2; the fix branches didn't move):
+V6 551c592: 101 tests, 101 passing
+main 46a61f2: 279 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: ['M', 'packages/core/tests/html.test.ts']
