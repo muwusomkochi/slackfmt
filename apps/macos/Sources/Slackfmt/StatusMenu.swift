@@ -38,7 +38,10 @@ final class StatusMenu: NSMenu, NSMenuDelegate {
         launchAtLogin.state = LoginItem.isOn ? .on : .off
     }
 
-    @objc private func copyForSlack() { copy() }
+    @objc private func copyForSlack() {
+        StateLog.write("menu action called")
+        copy()
+    }
     @objc private func checkFormat() { check() }
     @objc private func toggleLaunchAtLogin() { LoginItem.set(!LoginItem.isOn) }
     @objc private func quit() { NSApp.terminate(nil) }
