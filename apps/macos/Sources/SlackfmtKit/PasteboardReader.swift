@@ -2,12 +2,12 @@ import AppKit
 
 /// Why nothing was converted, in the order V25 picks when more than one applies.
 public enum Refusal: CaseIterable {
-    case image, file, slackFormat, empty, tooLong, converterError
+    case file, image, slackFormat, empty, tooLong, converterError
 
     public var message: String {
         switch self {
-        case .image: "Images can't be converted"
         case .file: "Files can't be converted"
+        case .image: "Images can't be converted"
         case .slackFormat: "Already Slack format"
         case .empty: "Clipboard is empty"
         case .tooLong: "Too long to convert"
@@ -39,8 +39,8 @@ public enum PasteboardReader {
 
     public static func read(_ board: NSPasteboard) -> Reading {
         let types = Set((board.pasteboardItems ?? []).flatMap(\.types) + (board.types ?? []))
-        if !types.isDisjoint(with: PasteboardTypes.images) { return .refused(.image) }
         if types.contains(.fileURL) { return .refused(.file) }
+        if !types.isDisjoint(with: PasteboardTypes.images) { return .refused(.image) }
         if holdsSlackFormat(board, types) { return .refused(.slackFormat) }
         guard let source = firstSource(board, types) else { return .refused(.empty) }
         let text = source.text

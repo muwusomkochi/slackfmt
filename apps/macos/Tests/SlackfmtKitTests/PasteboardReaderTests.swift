@@ -98,9 +98,9 @@ final class PasteboardReaderTests: XCTestCase {
 
     func testPicksTheFirstRefusalThatApplies() {
         put([.png: Data([0]), .fileURL: Data("file:///tmp/x".utf8), PasteboardTypes.customData: slackCopy])
-        XCTAssertEqual(refusal(), .image)
-        put([.fileURL: Data("file:///tmp/x".utf8), PasteboardTypes.customData: slackCopy, .string: Data(" ".utf8)])
         XCTAssertEqual(refusal(), .file)
+        put([.png: Data([0]), PasteboardTypes.customData: slackCopy, .string: Data(" ".utf8)])
+        XCTAssertEqual(refusal(), .image)
         put([PasteboardTypes.customData: slackCopy, .string: Data(" ".utf8)])
         XCTAssertEqual(refusal(), .slackFormat)
     }
@@ -127,8 +127,8 @@ final class PasteboardReaderTests: XCTestCase {
 
     func testEveryRefusalCarriesItsStringFromThePRD() {
         XCTAssertEqual(Refusal.allCases.map(\.message), [
-            "Images can't be converted",
             "Files can't be converted",
+            "Images can't be converted",
             "Already Slack format",
             "Clipboard is empty",
             "Too long to convert",
