@@ -9,8 +9,9 @@ Some branches touch the same code, so the later ones need a rebase once an earli
 - the list code in `markdown-to-delta.ts`: `fix/ordered-list-start`, `fix/task-lists`, `fix/quoted-lists`, `fix/split-ordered-lists`
 - the Turndown rules in `html.ts`: `fix/task-lists`, `fix/html-strikethrough`, `fix/html-italics`, `fix/html-head-text`, `fix/plain-pre`, `fix/css-marks`
 - the processor in `normalize.ts`: `fix/images`, `fix/raw-html-blocks`
+- the whole-copy `<pre>` in `html.ts`: `fix/plain-pre`, `fix/pre-code-markdown`
 
-This fork's `main` carries all of them merged: its merge commits show the resolution, and `packages/core/tests/fixes-together.test.ts` holds the cases where they meet. Two branches differ once others are in: a nested list written as numbered text (`fix/ordered-list-start`) also splits the list it's in (`fix/split-ordered-lists`), and a numbered task (`fix/task-lists`) keeps its box after its number.
+This fork's `main` carries all of them merged: its merge commits show the resolution, and `packages/core/tests/fixes-together.test.ts` holds the cases where they meet. Two branches differ once others are in: a nested list written as numbered text (`fix/ordered-list-start`) also splits the list it's in (`fix/split-ordered-lists`), and a numbered task (`fix/task-lists`) keeps its box after its number. A third shares a check: `fix/pre-code-markdown` carries its own test for "all of the copy's text", and on `main` it uses the one `fix/plain-pre` adds, so a head's text is left out and an image or rule beside the `<pre>` keeps it a code block.
 
 | Branch | Failing test | Fix | Requirement |
 |---|---|---|---|
@@ -28,6 +29,7 @@ This fork's `main` carries all of them merged: its merge commits show the resolu
 | `fix/bare-ops-array` | 3365f0b | 009fb87 | R42 |
 | `fix/split-ordered-lists` | f244e3e | 8cdaf39 | R43 |
 | `fix/plain-pre` | bfb54d5, then 2c1eb63 | 5ed8811, then 7412476 | R44 |
+| `fix/pre-code-markdown` | b47a943 | 86700f1 | R45 |
 
 R30 is the regression guard above. R31 (HTML without a browser DOM) needed no converter change: core at `551c592` already converts HTML in a bare JavaScript engine when it's bundled with Turndown's own DOM.
 
@@ -175,6 +177,20 @@ Title: fix(core): keep the text around a plain pre
 
 ```
 HTML with a <pre> that has no <code> was converted to that <pre>'s text alone, and the rest of the copy was lost. It's now read that way only when the <pre> holds all of the copy's text. Otherwise the whole copy is converted, and the <pre> becomes a code block among the rest. An image or a rule beside it counts as more than its text.
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+## fix/pre-code-markdown
+
+Title: fix(core): read a whole-copy pre code holding Markdown as Markdown
+
+```
+A Markdown draft copied by hand out of a chat's code block arrives as one <pre> holding one <code>, and it came out as one code block of raw Markdown.
+
+When such a <pre><code> holds all of the copy's text, it's now read as the copy's Markdown source if its class names Markdown or plain text (language-markdown, md, plaintext, plain, text or txt), or if it names no language and its text holds Markdown's own marks: a heading, bold, italics, strikethrough, inline code, a labelled link, a list, a quote, a rule, a table, an image or a fence. One naming another language stays a code block, and so does one with no language and none of those marks, so "converts code block" passes unchanged. Indented lines, raw tags and bare URLs don't count as marks, since code holds them too.
+
+Code with no language named that does hold such marks (a "# comment" line, "__init__") is read as Markdown. Beside other text, a <pre><code> is a code block as before.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 ```
