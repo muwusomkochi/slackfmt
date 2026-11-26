@@ -176,4 +176,32 @@ describe("fixes that meet", () => {
       ),
     );
   });
+
+  it("reads a whole-copy pre code as Markdown past a head's title and style", async () => {
+    const html =
+      "<html><head><title>a page</title><style>pre{}</style></head><body><pre><code>**Done**\n\n- one</code></pre></body></html>";
+    expect(await convert(html, { format: "html" })).toBe(
+      delta(
+        { insert: "Done", attributes: { bold: true } },
+        { insert: "\n\none" },
+        { insert: "\n", attributes: { list: "bullet" } },
+      ),
+    );
+  });
+
+  it("keeps a pre code holding Markdown as a code block beside an image", async () => {
+    const html =
+      '<pre><code>**Done**\n\n- one</code></pre><p><img src="https://example.com/p.png" alt="pic"></p>';
+    expect(await convert(html, { format: "html" })).toBe(
+      delta(
+        { insert: "**Done**" },
+        { insert: "\n\n", attributes: { "code-block": true } },
+        { insert: "- one" },
+        { insert: "\n", attributes: { "code-block": true } },
+        { insert: "\n" },
+        { insert: "pic", attributes: { link: "https://example.com/p.png" } },
+        { insert: "\n" },
+      ),
+    );
+  });
 });
