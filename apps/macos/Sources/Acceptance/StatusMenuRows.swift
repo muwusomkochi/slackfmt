@@ -73,17 +73,51 @@ func rowA10Menu(_ app: App) async {
     }
     report.finish()
 
-    let copy = Report("A10 Copy for Slack in the menu (A1's checks)")
-    let before = Clipboard.put(plain: Fixtures.text("fixture.md"))
-    usleep(300_000)
-    if let items = StatusMenuDriver.open(app, .rightClick), let start = StatusMenuDriver.choose(items, "Copy for Slack") {
-        await checkDone(copy, app, start: start, reduceMotion: NSWorkspace.shared.accessibilityDisplayShouldReduceMotion)
-        copy.check(NSPasteboard.general.changeCount > before, "changeCount moved")
+    await rowA10MenuCopy(app, runs: 20)
+}
+
+/// Copy for Slack chosen from the menu, each run timed from the item's action call (R4, R35), with the menu's close logged beside it.
+func rowA10MenuCopy(_ app: App, runs: Int) async {
+    lastFrame = StatusItem.frame(app.pid)
+    _ = app.capsuleNumber
+    var conversions: [Double] = []
+    var closes: [Double] = []
+    var done: [Double] = []
+    var passed = 0
+    for run in 1...runs {
+        let copy = Report("A10 Copy for Slack in the menu, run \(run) (A1's checks)")
+        let before = Clipboard.put(plain: Fixtures.text("fixture.md"))
+        usleep(300_000)
+        guard let items = StatusMenuDriver.open(app, .rightClick), let chosen = StatusMenuDriver.choose(items, "Copy for Slack") else {
+            copy.check(false, "the menu opened")
+            copy.finish()
+            continue
+        }
+        async let changed = Task.detached { Clipboard.waitForChange(after: before, timeout: 5_000) }.value
+        guard let call = app.menuActionCall(after: chosen) else {
+            copy.check(false, "the menu item called its action")
+            copy.finish()
+            continue
+        }
+        copy.note("menu close, from the choice to the action call: \(format(call - chosen)) ms")
+        await checkDone(copy, app, start: call, reduceMotion: NSWorkspace.shared.accessibilityDisplayShouldReduceMotion)
+        let end = await changed
+        copy.check(NSPasteboard.general.changeCount > before, "changeCount moved", end.map { "+\(format($0 - call)) ms after the action call" } ?? "no change")
         checkPasteboard(copy, pickle: Fixtures.data("fixture.pickle"), delta: Fixtures.text("fixture.delta.json"))
-    } else {
-        copy.check(false, "the menu opened")
+        copy.finish()
+        if copy.failures == 0 { passed += 1 }
+        closes.append(call - chosen)
+        if let end { conversions.append(end - call) }
+        if let shown = app.entries.first(where: { $0.time >= call && $0.text == "status done" }) { done.append(shown.time - call) }
+        pause(1.0)
     }
-    copy.finish()
+    let summary = Report("A10 Copy for Slack in the menu, \(runs) runs")
+    summary.note("runs, action call to changeCount (ms): \(conversions.map(format).joined(separator: ", "))")
+    summary.note("menu close before each action call (ms): \(closes.map(format).joined(separator: ", "))")
+    summary.note("done shown after the action call (ms): \(done.map(format).joined(separator: ", "))")
+    summary.check(passed == runs, "every run passes A1's checks", "\(passed) of \(runs)")
+    summary.check(conversions.count == runs && median(conversions) <= 300, "median within 300 ms of the action call", conversions.isEmpty ? "no runs" : "median \(format(median(conversions))) ms, min \(format(conversions.min()!)), max \(format(conversions.max()!))")
+    summary.finish()
 }
 
 func rowA10Quit() {

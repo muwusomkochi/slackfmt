@@ -56,10 +56,15 @@ final class App {
     }
 
     /// When macOS called the app's service: R4's trigger for F3, after the source app's menu has closed.
-    func servicesCall(after time: Double) -> Double? {
+    func servicesCall(after time: Double) -> Double? { logged("services called", after: time) }
+
+    /// When the menu's Copy for Slack called its action: R4's trigger for R35, after the menu has closed.
+    func menuActionCall(after time: Double) -> Double? { logged("menu action called", after: time) }
+
+    private func logged(_ line: String, after time: Double) -> Double? {
         let deadline = now() + 5_000
         while now() < deadline {
-            if let call = entries.first(where: { $0.time >= time && $0.text == "services called" }) { return call.time }
+            if let call = entries.first(where: { $0.time >= time && $0.text == line }) { return call.time }
             usleep(2_000)
         }
         return nil
