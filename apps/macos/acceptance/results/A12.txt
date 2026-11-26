@@ -14,6 +14,7 @@ R41 HTML italics             test cc03c6b, fix 979b4b9, packages/core/tests/html
 R42 bare ops array           test 3365f0b, fix 009fb87, packages/core/tests/bare-ops-array.test.ts
 R43 split ordered lists      test f244e3e, fix 8cdaf39, packages/core/tests/split-ordered-lists.test.ts (split by a code block)
 R44 plain pre                test bfb54d5, fix 5ed8811 (then test 2c1eb63, fix 7412476: an image beside it, a style inside it), packages/core/tests/plain-pre.test.ts (a plain <pre> beside other text)
+R45 pre code Markdown        test b47a943, fix 86700f1, packages/core/tests/pre-code-markdown.test.ts (a whole-copy <pre><code> holding Markdown, as copied by hand out of a Claude code block: naming no language, Markdown and plain text; one naming python stays a code block); built narrowed on his card of 2026-11-26, so one naming no language and holding none of Markdown's marks stays a code block too (R45-capture.txt)
 Where the fixes meet         packages/core/tests/fixes-together.test.ts, on main only
 
 Rerun on main 46a61f2, 2026-11-25 (build run 2; packages/core unchanged since c73edec), each line's test file in the core suite:
@@ -33,3 +34,22 @@ R43 split ordered lists      packages/core/tests/split-ordered-lists.test.ts: 8 
 R44 plain pre                packages/core/tests/plain-pre.test.ts: 8 of 8 passing
 Where the fixes meet         packages/core/tests/fixes-together.test.ts: 14 of 14 passing
 whole core suite: 279 of 279 passing, 0 failing
+
+Rerun on main 3f2c40c, 2026-11-26 (build run 3; R45 merged at 2987280), each line's test file in the core suite:
+R24 hard breaks              packages/core/tests/hard-breaks.test.ts: 11 of 11 passing
+R25, R34 images              packages/core/tests/images.test.ts: 7 of 7 passing
+R26 thematic breaks          packages/core/tests/thematic-breaks.test.ts: 4 of 4 passing
+R27 ordered list start       packages/core/tests/ordered-list-start.test.ts: 11 of 11 passing
+R28 task lists               packages/core/tests/task-lists.test.ts: 7 of 7 passing
+R29 lists inside quotes      packages/core/tests/quoted-lists.test.ts: 7 of 7 passing
+R37 HTML strikethrough       packages/core/tests/html-strikethrough.test.ts: 16 of 16 passing
+R38 marks set in CSS         packages/core/tests/css-marks.test.ts: 31 of 31 passing
+R39 no head text             packages/core/tests/html-head-text.test.ts: 5 of 5 passing
+R40 raw HTML blocks          packages/core/tests/raw-html-blocks.test.ts: 8 of 8 passing
+R41 HTML italics             packages/core/tests/html-italics.test.ts: 4 of 4 passing
+R42 bare ops array           packages/core/tests/bare-ops-array.test.ts: 1 of 1 passing
+R43 split ordered lists      packages/core/tests/split-ordered-lists.test.ts: 8 of 8 passing
+R44 plain pre                packages/core/tests/plain-pre.test.ts: 8 of 8 passing
+R45 pre code Markdown        packages/core/tests/pre-code-markdown.test.ts: 7 of 7 passing (new; 4 of the 7 failed at b47a943, before the fix)
+Where the fixes meet         packages/core/tests/fixes-together.test.ts: 16 of 16 passing (2 new, where R45 meets R39 and R44)
+whole core suite: 288 of 288 passing, 0 failing

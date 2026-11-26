@@ -12,3 +12,7 @@ Test Case '-[SlackfmtKitTests.BundleTests testA14FixtureHTMLConvertsWithoutABrow
 	 Executed 2 tests, with 0 failures (0 unexpected) in 0.005 (0.005) seconds
 	 Executed 53 tests, with 0 failures (0 unexpected) in 1.864 (1.871) seconds
 	 Executed 53 tests, with 0 failures (0 unexpected) in 1.864 (1.872) seconds
+
+main 3f2c40c, 2026-11-26 (build run 3): swift test, BundleTests on build/slackfmt.js bundled by scripts/build.sh at 3f2c40c
+Test Case '-[SlackfmtKitTests.BundleTests testA14FixtureHTMLConvertsWithoutABrowserDOM]' passed (0.061 seconds).
+	 Executed 53 tests, with 0 failures (0 unexpected)

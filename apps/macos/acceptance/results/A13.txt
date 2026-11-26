@@ -18,3 +18,9 @@ fix/plain-pre 7412476: 109 tests, 0 failing; 101 of V6's 101 names present; upst
 Rerun on main, 2026-11-25 (build run 2; the fix branches didn't move):
 V6 551c592: 101 tests, 101 passing
 main 46a61f2: 279 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: ['M', 'packages/core/tests/html.test.ts']
+
+Rerun on main and the new branch, 2026-11-26 (build run 3; the other fix branches didn't move):
+V6 551c592: 101 tests, 101 passing
+main 3f2c40c: 288 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: ['M', 'packages/core/tests/html.test.ts']
+fix/pre-code-markdown 86700f1: 108 tests, 0 failing; 101 of V6's 101 names present; upstream test files changed: none
+R45 changes no upstream test: html.test.ts differs from V6 by R41's "converts italic" alone, as before, and "converts code block" passes as upstream wrote it.

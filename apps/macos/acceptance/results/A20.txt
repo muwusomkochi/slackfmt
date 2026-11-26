@@ -1,0 +1,39 @@
+A20, the hand-copy half (R45): a Claude draft copied by hand out of Claude's code block, the # clicked, pasted into Slack desktop beside the
+same copy pasted plain. 2026-11-26, build run 3. By A20's row: passed, on his answers below. The copy-button half was run before this
+build and is in the engagement record, not here.
+
+The app: built from main 3f2c40c (R45 merged at 2987280), installed in /Applications and running with no test flag. Its bundle's sha256 is
+2a817cf6c5a66cda4641ae93e8a2feca8cfda13ff02c9114f31dbc41038904ae.
+
+What he did, once the build was installed: opened the same Claude reply in the Claude desktop app, selected the text inside its code block by hand and
+pressed Cmd-C; pasted it into the message box of the Slack DM with himself (the plain paste); clicked the #; pasted again in the same DM.
+Nothing was sent. The draft is the one R45-capture.txt describes, his own words, kept out of this file.
+
+His answers, on this run's A20 panel, read at 5:46 pm AST, verbatim:
+  1 plain paste:     "The plain paste showed formatted text (B)"
+  2 slackfmt paste:  "Slackfmt's paste showed every line formatted with no raw markers (A)"
+  3 plain beats (did the plain paste format any line that Slackfmt's paste left plain?), in his own words:
+                     "Couldnt see the difference Ill add some screengrabs"
+and with two screengrabs of the Slack message box: "Ive attached both - do you see any formatting differences?"
+
+Read off his two screengrabs in this session (they aren't kept on the fork):
+  - Both show the whole draft formatted: the title and the three section heads in bold, the items as bullets, the 11 inline code runs and
+    the 8 or 9 links in view each as Slack's own inline code and link. Neither shows an asterisk, a backtick, a bracket or a bare URL.
+  - Nothing is formatted in one and plain in the other.
+  - One difference: one screengrab has an empty line between each bold section head and its bullets, and the other has none. The draft
+    has none (a head, then its first "- " item on the next line), and a blank line before each head, which both keep.
+  - Which screengrab is which wasn't said. The converter writes one line break after each of the draft's bold heads (below), so the one
+    with no empty line after a head is read here as Slackfmt's paste and the one with the empty line as Slack's plain paste. That is this
+    session's reading, not his word.
+
+What the # wrote wasn't read back: by 5:46 pm the clipboard held his screengrab (public.png and a file URL). Instead, the installed
+app's bundle, run in a JSContext on the hand copy captured at 4:53 pm (the same draft, R45-capture.txt), gives a Delta of 111 ops with
+9 bold runs, 16 inline code runs, 16 links and 21 bullet items, no code-block line, equal to the draft's text read as Markdown. Each of
+the 8 bold section heads is followed by one line break, and the title by one.
+
+So, by A20's row for the hand copy: every line shows formatted with no raw marker (his answer 2), and no line the plain paste formats
+is plain in Slackfmt's paste (the screengrabs; he saw no difference). Before R45 this same copy pasted as one grey code block of raw
+Markdown (his report of 26 Nov, which opened rev 11).
+
+For E1, which is his to rule: on this draft the plain paste is formatted too, so Slackfmt's paste doesn't beat it by more than the
+spacing after the section heads.
