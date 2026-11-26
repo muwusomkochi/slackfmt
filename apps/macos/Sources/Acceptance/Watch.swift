@@ -11,8 +11,16 @@ func waitForCopy(_ what: String, hours: Double, _ matches: () -> Bool) -> Bool {
         guard NSPasteboard.general.changeCount != seen else { continue }
         seen = NSPasteboard.general.changeCount
         guard matches() else { continue }
-        while Input.idle < 2 { pause(0.2) }
-        return NSPasteboard.general.changeCount == seen
+        // Safari's Copy Image writes the pasteboard more than once, so the copy counts once it has held still for 2 s.
+        var settled = now()
+        while now() - settled < 2_000 || Input.idle < 2 {
+            pause(0.2)
+            guard NSPasteboard.general.changeCount != seen else { continue }
+            seen = NSPasteboard.general.changeCount
+            settled = now()
+            print("note the pasteboard changed again: changeCount \(seen)")
+        }
+        return matches()
     }
     return false
 }
@@ -50,18 +58,19 @@ private func checkSlackCopy(_ app: App) async {
     Input.move(to: pointer)
 }
 
-/// A4's Safari case, on his own Copy Image.
-func rowA4Safari(hours: Double) async {
+/// A4's Safari and Chromium cases, on his own Copy Image. A Chromium browser adds its own org.chromium types; Safari doesn't.
+func rowA4Browser(chromium: Bool, hours: Double) async {
     guard let app = App(["-hasRunBefore", "YES"]) else { return print("the app didn't launch") }
     warmTheHarness()
     let images: Set<NSPasteboard.PasteboardType> = PasteboardTypes.images
-    guard waitForCopy("an image copied in Safari", hours: hours, {
+    let browser = chromium ? "a Chromium browser" : "Safari"
+    guard waitForCopy("an image copied in \(browser)", hours: hours, {
         let types = NSPasteboard.general.types ?? []
-        return !images.isDisjoint(with: types) && !types.contains { $0.rawValue.hasPrefix("org.chromium") }
+        return !images.isDisjoint(with: types) && types.contains { $0.rawValue.hasPrefix("org.chromium") } == chromium
     }) else { return print("no image came") }
     let pointer = Input.pointer
     for trigger in [Trigger.click, .hotkey] {
-        await rowRefusedAsCopied(app, trigger, row: "A4 an image copied from Safari", reason: "Images can't be converted", glyph: false)
+        await rowRefusedAsCopied(app, trigger, row: "A4 an image copied from \(browser)", reason: "Images can't be converted", glyph: false)
     }
     Input.move(to: pointer)
 }

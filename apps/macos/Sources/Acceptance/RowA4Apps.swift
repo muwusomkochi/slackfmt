@@ -1,7 +1,7 @@
 import AppKit
 import Carbon.HIToolbox
 
-/// A4's copies from real apps. Finder puts the file's icon, as public.tiff, beside its file URL, so V25 picks the image.
+/// A4's copies from real apps. Finder puts the file's icon, as public.tiff, beside its file URL, and V25 picks the file.
 func rowA4Apps(_ app: App, _ trigger: Trigger, only: String) async {
     let image = NSTemporaryDirectory() + "slackfmt-accept/made-up-image.png"
     let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 64, pixelsHigh: 64, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
@@ -35,7 +35,7 @@ func rowA4Apps(_ app: App, _ trigger: Trigger, only: String) async {
     let text = NSTemporaryDirectory() + "slackfmt-accept/made-up.txt"
     try? "made-up text\n".write(toFile: text, atomically: true, encoding: .utf8)
     for (name, bundle, open, close, reason) in [
-        ("a text file copied in Finder", "com.apple.finder", ["-R", text], true, "Images can't be converted"),
+        ("a text file copied in Finder", "com.apple.finder", ["-R", text], true, "Files can't be converted"),
         ("an image copied from Preview", "com.apple.Preview", ["-a", "Preview", image], true, "Images can't be converted"),
     ] where name.contains(only) {
         guard copy(bundle, open, close: close) else {

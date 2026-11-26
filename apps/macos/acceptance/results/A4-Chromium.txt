@@ -1,10 +1,10 @@
-waiting for an image
+waiting for an image copied in a Chromium browser
 == A4 an image copied from a Chromium browser by click
 note types: public.png, Apple PNG pasteboard type, public.html, Apple HTML pasteboard type, org.chromium.internal.source-rfh-token, org.chromium.source-url, public.tiff, NeXT TIFF v4.0 pasteboard type
 ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Images can't be converted
-ok   changeCount unchanged: 2394 -> 2394
+ok   changeCount unchanged: 3447 -> 3447
 ok   no capsule
 A4 an image copied from a Chromium browser by click PASSED: 5 of 5 checks
 == A4 an image copied from a Chromium browser by hotkey
@@ -12,6 +12,6 @@ note types: public.png, Apple PNG pasteboard type, public.html, Apple HTML paste
 ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
 ok   state log: idle by +1.8 s: idle
 ok   tooltip: Images can't be converted
-ok   changeCount unchanged: 2394 -> 2394
+ok   changeCount unchanged: 3447 -> 3447
 ok   no capsule
 A4 an image copied from a Chromium browser by hotkey PASSED: 5 of 5 checks

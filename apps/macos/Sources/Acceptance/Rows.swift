@@ -23,7 +23,7 @@ func rowA4(_ app: App, _ trigger: Trigger) async {
 
     await refused("spaces and newlines only", "Clipboard is empty", [.string: Data(" \n  \n\t ".utf8)])
     await refused("HTML and image types, as Safari's Copy Image writes", "Images can't be converted", [.html: Data("<img src=\"https://example.com/a.png\">".utf8), tiff: image, png: image])
-    await refused("an image and a file URL together", "Images can't be converted", [png: image, .fileURL: file])
+    await refused("an image and a file URL together", "Files can't be converted", [png: image, .fileURL: file])
     await refused("200,001 code units", "Too long to convert", [.string: Data(String(repeating: "a", count: 200_001).utf8)])
 
     let longest = Report("A4 exactly 200,000 code units by \(trigger.rawValue)")

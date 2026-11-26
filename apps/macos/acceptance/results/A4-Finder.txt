@@ -1,9 +1,9 @@
 note Finder's menu item: Copy “made-up.txt”
 == A4 a text file copied in Finder by click
 note types: public.file-url, CorePasteboardFlavorType 0x6675726C, dyn.ah62d4rv4gu8y6y4grf0gn5xbrzw1gydcr7u1e3cytf2gn, NSFilenamesPboardType, dyn.ah62d4rv4gu8yc6durvwwaznwmuuha2pxsvw0e55bsmwca7d3sbwu, Apple URL pasteboard type, com.apple.finder.noderef, fndf, public.utf16-external-plain-text, CorePasteboardFlavorType 0x75743136, public.utf8-plain-text, NSStringPboardType, com.apple.icns, CorePasteboardFlavorType 0x69636E73, public.tiff, NeXT TIFF v4.0 pasteboard type
-ok   state log: nothing ("Images can't be converted") from +0.1 s through +1.25 s: nothing Images can't be converted
+ok   state log: nothing ("Files can't be converted") from +0.1 s through +1.25 s: nothing Files can't be converted
 ok   state log: idle by +1.8 s: idle
-ok   tooltip: Images can't be converted
-ok   changeCount unchanged: 3312 -> 3312
+ok   tooltip: Files can't be converted
+ok   changeCount unchanged: 3419 -> 3419
 ok   no capsule
 A4 a text file copied in Finder by click PASSED: 5 of 5 checks

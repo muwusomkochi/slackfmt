@@ -273,7 +273,8 @@ case "a3-now":
     if Clipboard.slackDelta != nil { await rowA3Now() } else { print("no Slack copy on the clipboard") }
 case "a1-reduce-motion": await rowA1ReduceMotion(hours: 8)
 case "a16": await rowA16(hours: 8, folder: arguments[1], from: arguments.count > 2 ? Int(arguments[2])! : 1)
-case "a4-safari": await rowA4Safari(hours: 6)
+case "a4-safari": await rowA4Browser(chromium: false, hours: 6)
+case "a4-chromium": await rowA4Browser(chromium: true, hours: 6)
 case "a4-copied": await withApp { await rowRefusedAsCopied($0, trigger, row: "A4 \(arguments[1])", reason: arguments[2], glyph: false) }
 case "a5": await withApp { rowA5($0) }
 case "a5-signing": rowA5Signing()
