@@ -22,9 +22,9 @@ Read off his two screengrabs in this session (they aren't kept on the fork):
   - Nothing is formatted in one and plain in the other.
   - One difference: one screengrab has an empty line between each bold section head and its bullets, and the other has none. The draft
     has none (a head, then its first "- " item on the next line), and a blank line before each head, which both keep.
-  - Which screengrab is which wasn't said. The converter writes one line break after each of the draft's bold heads (below), so the one
-    with no empty line after a head is read here as Slackfmt's paste and the one with the empty line as Slack's plain paste. That is this
-    session's reading, not his word.
+  - Which is which, asked after: he sent the screengrab with no empty line after a head again, with "this was slackfmts". So Slackfmt's
+    paste keeps the draft's single line break after each bold head, and Slack's plain paste puts an empty line there. That matches the
+    converter, which writes one line break after each of the draft's bold heads (below).
 
 What the # wrote wasn't read back: by 5:46 pm the clipboard held his screengrab (public.png and a file URL). Instead, the installed
 app's bundle, run in a JSContext on the hand copy captured at 4:53 pm (the same draft, R45-capture.txt), gives a Delta of 111 ops with
