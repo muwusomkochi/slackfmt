@@ -64,6 +64,39 @@ func writeX9() {
 
 func isX9OnTheClipboard() -> Bool { Clipboard.slackDelta?.contains("Packing for the lake") == true }
 
+/// X11: Slack's own heading, table and divider forms, as his Slack copy in the build handback shows them (made-up text),
+/// written by the app's own pickle writer, then read back.
+let x11Delta = #"{"ops":[{"insert":"Big heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"Smaller heading"},{"attributes":{"header":2},"insert":"\n"},{"attributes":{"slackopaqueblock":true},"insert":{"slackopaqueblock":{"block":{"type":"table","rows":[[{"type":"raw_text","text":"Row"},{"type":"raw_text","text":"Result"}],[{"type":"raw_text","text":"A1"},{"type":"raw_text","text":"pass"}]]}}}},{"attributes":{"slackhorizontalrule":true},"insert":{"slackhorizontalrule":true}},{"insert":"Text after the divider."}]}"#
+let x11Plain = "Slackfmt test (X11): Slack read this plain text, not Slackfmt's pickle"
+
+func writeX11(bytesTo path: String?) {
+    let pickle = Pickle.encode([(PasteboardTypes.slackEntry, x11Delta)])
+    let before = NSPasteboard.general.changeCount
+    let after = Clipboard.put([PasteboardTypes.customData: pickle, .string: Data(x11Plain.utf8)])
+    print("x11-write: changeCount \(before) -> \(after); one item: \(NSPasteboard.general.pasteboardItems?.count ?? 0)")
+    checkX11()
+    if let path, let data = NSPasteboard.general.data(forType: PasteboardTypes.customData) {
+        try! data.write(to: URL(fileURLWithPath: path))
+        print("pickle as read back written to \(path)")
+    }
+}
+
+func checkX11() {
+    let board = NSPasteboard.general
+    print("types: \(board.types?.map(\.rawValue).joined(separator: ", ") ?? "none")")
+    guard let data = board.data(forType: PasteboardTypes.customData) else { return print("no org.chromium.web-custom-data") }
+    let expected = Pickle.encode([(PasteboardTypes.slackEntry, x11Delta)])
+    print("pickle: \(data.count) bytes; equal to the writer's bytes: \(data == expected)")
+    let entries = (try? Pickle.decode(data)) ?? []
+    print("entries: \(entries.map(\.type).joined(separator: ", "))")
+    let texty = entries.first { $0.type == PasteboardTypes.slackEntry }?.value
+    print("slack/texty equals the Delta: \(texty == x11Delta)")
+    let parsed = texty.flatMap { try? JSONSerialization.jsonObject(with: Data($0.utf8)) as? [String: Any] }
+    print("slack/texty parses as JSON with \((parsed?["ops"] as? [Any])?.count ?? 0) ops")
+    print("plain text: \(board.string(forType: .string) == x11Plain ? "the test line" : "something else")")
+    print("Check Slack's format would read: \(FormatCheck(board).message)")
+}
+
 /// Runs a row with his clipboard and pointer put back after, once he's left the Mac alone for a few seconds.
 func withHisMac(_ body: () async -> Void) async {
     let deadline = now() + 240_000
@@ -279,6 +312,11 @@ case "latency":
     }
 case "x9-write":
     writeX9()
+case "x11-write":
+    writeX11(bytesTo: arguments.count > 1 ? arguments[1] : nil)
+case "x11-check":
+    print("changeCount \(NSPasteboard.general.changeCount)")
+    checkX11()
 case "x9-check":
     print("changeCount \(NSPasteboard.general.changeCount); X9's pickle still on the clipboard: \(isX9OnTheClipboard())")
 case "time-clicks":
@@ -288,6 +326,6 @@ case "toggle-voiceover":
 case "idle":
     print(format(Input.idle))
 default:
-    print("usage: slackfmt-accept a1|a4|a4-throw|a15|a17|a18|latency <runs> [--hotkey] | time-clicks <file> <runs> | x9-write | x9-check | idle")
+    print("usage: slackfmt-accept a1|a4|a4-throw|a15|a17|a18|latency <runs> [--hotkey] | time-clicks <file> <runs> | x9-write | x9-check | x11-write [bytes file] | x11-check | idle")
     exit(64)
 }

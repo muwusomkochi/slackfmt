@@ -1,0 +1,17 @@
+X11: does Slack desktop paste its own heading, table and divider forms from a pickle Slackfmt writes? Passed, 2026-11-25.
+
+Written by slackfmt-accept x11-write between 8:13 and 8:21 pm AST with the app's own pickle writer (SlackfmtKit Pickle.encode, V3): one pasteboard item,
+org.chromium.web-custom-data holding one 1,064-byte pickle whose one entry, slack/texty, is
+  {"ops":[{"insert":"Big heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"Smaller heading"},{"attributes":{"header":2},"insert":"\n"},{"attributes":{"slackopaqueblock":true},"insert":{"slackopaqueblock":{"block":{"type":"table","rows":[[{"type":"raw_text","text":"Row"},{"type":"raw_text","text":"Result"}],[{"type":"raw_text","text":"A1"},{"type":"raw_text","text":"pass"}]]}}}},{"attributes":{"slackhorizontalrule":true},"insert":{"slackhorizontalrule":true}},{"insert":"Text after the divider."}]}
+(Slack's own forms, laid out as his Slack copy in the build handback shows them, made-up text), and a public.utf8-plain-text line,
+"Slackfmt test (X11): Slack read this plain text, not Slackfmt's pickle". Read back before the paste: the pickle equal to the writer's
+bytes; read again by a separate V3 reader, a payload size of 1,060, one entry, zero padding, and slack/texty equal to the Delta byte for
+byte, 7 ops; sha256 ad35ba3a9bddaad18a17bfdd5bacf4e826e3d8bd6bd2beef8922346de5b1bc51.
+
+Muwuso pasted it into a Slack desktop DM with himself, unsent, and answered the X11 card: "Two headings showed (A), A table showed (B),
+A divider showed (C), Only text showed (D)".
+He selected and copied what pasted, chose Check Slack's format in the # menu, and answered: "It said Slack's format still matches (A)".
+Slack's copy of the pasted message, read off the clipboard, carries the same slack/texty as the Delta above, byte for byte.
+
+So, by X11's row: passed. Slack pasted its own heading, table and divider from Slackfmt's pickle, and the check reads "Slack's format still
+matches". He picked D, "Only text showed", beside A to C; what D names is asked in the handback, and it doesn't change the row.
