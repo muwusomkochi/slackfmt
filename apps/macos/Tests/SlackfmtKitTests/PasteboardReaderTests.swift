@@ -81,6 +81,11 @@ final class PasteboardReaderTests: XCTestCase {
         XCTAssertEqual(refusal(), .file)
     }
 
+    func testRefusesAFinderFileCopyAsAFile() {
+        put([.fileURL: Data("file:///tmp/made-up.txt".utf8), .tiff: Data([0]), .string: Data("made-up.txt".utf8)])
+        XCTAssertEqual(refusal()?.message, "Files can't be converted")
+    }
+
     func testRefusesAnImageOrFileOnAnyItem() {
         let text = NSPasteboardItem()
         text.setString("hi", forType: .string)
